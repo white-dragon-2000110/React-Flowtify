@@ -1428,12 +1428,12 @@ const Home: React.FC = () => {
 
 
   const integrationsPreview = [
-    { name: 'Slack', logo: '/svg/slack-icon.svg', description: 'Team communication' },
-    { name: 'Notion', logo: '/svg/notion-icon.svg', description: 'Knowledge management' },
-    { name: 'Salesforce', logo: '/svg/salesforce-icon.svg', description: 'CRM integration' },
-    { name: 'Zapier', logo: '/svg/zapier-icon.svg', description: 'Workflow automation' },
-    { name: 'HubSpot', logo: '/svg/hubspot-icon.svg', description: 'Marketing automation' },
-    { name: 'Asana', logo: '/svg/asana-icon.svg', description: 'Project management' }
+    { name: 'LinkedIn', logo: '/svg/linkedin-icon.svg', description: 'Professional networking' },
+    { name: 'WhatsApp', logo: '/svg/whatsapp-icon.svg', description: 'Business messaging' },
+    { name: 'Instagram', logo: '/svg/instagram-icon.svg', description: 'Social media marketing' },
+    { name: 'Facebook', logo: '/svg/facebook-icon.svg', description: 'Community engagement' },
+    { name: 'Calendly', logo: '/svg/calendly-icon.svg', description: 'Meeting scheduling' },
+    { name: 'Slack', logo: '/svg/slack-icon.svg', description: 'Team communication' }
   ];
 
   return (
@@ -1516,7 +1516,7 @@ const Home: React.FC = () => {
           </motion.div>
 
           <motion.h1
-            className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent"
+            className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent h-[110px]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -2200,7 +2200,7 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent h-[60px]">
               {t('home.integrationsPreview.title')}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -2213,29 +2213,40 @@ const Home: React.FC = () => {
             <div className="lg:w-2/3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {integrationsPreview.map((integration, index) => (
-              <motion.div
-                key={integration.name}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                    className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group hover:shadow-2xl hover:shadow-purple-500/20 hover:border-purple-500/50 transition-all duration-300 h-full flex flex-col"
-                    whileHover={{ y: -5 }}
+                             integration.name === 'WhatsApp' ? (
+                 // Special 3D Flip Card for WhatsApp
+                 <motion.div
+                   key={integration.name}
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   className="relative h-full perspective-1000"
+                   style={{ transformStyle: 'preserve-3d' }}
+                   whileHover={{ rotateY: 180 }}
+                   transition={{ 
+                     duration: 0.8, 
+                     ease: "easeInOut" 
+                   }}
+                 >
+                  {/* Front Side */}
+                  <motion.div
+                    className="absolute inset-0 bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 flex flex-col"
+                    style={{ backfaceVisibility: 'hidden' }}
                   >
                     <div className="text-center mb-4 flex-grow">
-                      <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <div className="flex justify-center mb-4 transition-transform duration-300">
                         <img 
                           src={integration.logo} 
                           alt={`${integration.name} logo`}
                           className="w-16 h-16 object-contain"
                         />
-                </div>
-                      <h3 className="text-xl font-semibold mb-3 text-purple-300 group-hover:text-purple-200 transition-colors">
-                  {integration.name}
-                </h3>
+                      </div>
+                      <h3 className="text-xl font-semibold mb-3 text-purple-300 transition-colors">
+                        {integration.name}
+                      </h3>
                       <p className="text-gray-300 leading-relaxed">
-                  {integration.description}
-                </p>
+                        {integration.description}
+                      </p>
                     </div>
                     
                     {/* Integration Features */}
@@ -2261,13 +2272,119 @@ const Home: React.FC = () => {
                     
                     {/* Connect Button */}
                     <motion.button
-                      className="w-full mt-6 px-4 py-2 border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm group-hover:bg-purple-600 group-hover:text-white group-hover:border-purple-600"
+                      className="w-full mt-6 px-4 py-2 border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       Connect {integration.name}
                     </motion.button>
-              </motion.div>
+                  </motion.div>
+
+                  {/* Back Side with Video */}
+                  <motion.div
+                    className="absolute inset-0 bg-gray-800/80 backdrop-blur-sm border border-purple-500/50 rounded-2xl overflow-hidden"
+                    style={{ 
+                      backfaceVisibility: 'hidden',
+                      transform: 'rotateY(180deg)'
+                    }}
+                  >
+                    <video
+                      className="w-full h-full object-cover"
+                      autoPlay
+                      muted
+                      playsInline
+                      onEnded={(e) => {
+                        // Add 2 second delay before restarting video
+                        const video = e.target as HTMLVideoElement;
+                        setTimeout(() => {
+                          video.currentTime = 0;
+                          video.play();
+                        }, 2000);
+                      }}
+                    >
+                      <source src="/video/whatsapp.webm" type="video/webm" />
+                      Your browser does not support the video tag.
+                    </video>
+                    
+                    {/* Video Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-900/70 via-purple-900/50 to-gray-900/70" />
+                    
+                    {/* Video Content Overlay */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                      <div className="bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full p-4 mb-6">
+                        <img 
+                          src={integration.logo} 
+                          alt={`${integration.name} logo`}
+                          className="w-12 h-12 object-contain"
+                        />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4 text-white">
+                        WhatsApp Integration
+                      </h3>
+                      <p className="text-purple-200 leading-relaxed">
+                        Experience seamless business messaging automation
+                      </p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ) : (
+                // Regular Card for other integrations
+                <motion.div
+                  key={integration.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 group hover:shadow-2xl hover:shadow-purple-500/20 hover:border-purple-500/50 transition-all duration-300 h-full flex flex-col"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="text-center mb-4 flex-grow">
+                    <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <img 
+                        src={integration.logo} 
+                        alt={`${integration.name} logo`}
+                        className="w-16 h-16 object-contain"
+                      />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3 text-purple-300 group-hover:text-purple-200 transition-colors">
+                      {integration.name}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      {integration.description}
+                    </p>
+                  </div>
+                  
+                  {/* Integration Features */}
+                  <div className="mt-6 pt-6 border-t border-gray-700/50">
+                    <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide">
+                      Key Features
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="text-sm text-gray-400 flex items-center">
+                        <span className="text-purple-400 mr-2 text-lg">✓</span>
+                        Seamless integration
+                      </li>
+                      <li className="text-sm text-gray-400 flex items-center">
+                        <span className="text-purple-400 mr-2 text-lg">✓</span>
+                        Real-time sync
+                      </li>
+                      <li className="text-sm text-gray-400 flex items-center">
+                        <span className="text-purple-400 mr-2 text-lg">✓</span>
+                        Secure connection
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  {/* Connect Button */}
+                  <motion.button
+                    className="w-full mt-6 px-4 py-2 border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm group-hover:bg-purple-600 group-hover:text-white group-hover:border-purple-600"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Connect {integration.name}
+                  </motion.button>
+                </motion.div>
+              )
             ))}
               </div>
             </div>
@@ -2326,32 +2443,7 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <motion.button
-              onClick={() => {
-                const integrationsSection = document.getElementById('integrations');
-                if (integrationsSection) {
-                  const headerHeight = 64; // h-16 = 64px
-                  const elementPosition = integrationsSection.offsetTop - headerHeight;
-                  window.scrollTo({
-                    top: elementPosition,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-              className="inline-block px-8 py-3 text-lg border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {t('home.integrationsPreview.viewAll')}
-            </motion.button>
-          </motion.div>
+
         </div>
       </section>
 

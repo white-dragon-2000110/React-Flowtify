@@ -40,7 +40,7 @@ const FAQs: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-center text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+          <h1 className="h-[150px] text-center text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
             {t('faqs.title')}
           </h1>
           <p className="text-center text-xl text-gray-300 max-w-3xl mx-auto">
