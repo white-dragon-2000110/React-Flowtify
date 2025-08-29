@@ -27,9 +27,9 @@ const Footer: React.FC = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <img src="/logo.png" alt="Flowtify" className="w-[85px] h-[85px] object-contain" />
+              <img src="/logo_h.png" alt="Flowtify" className="absolute w-[300px] h-[300px] object-contain" />
             </div>
-            <p className="text-gray-300 mb-6 max-w-md">
+            <p className="text-gray-300 mb-6 max-w-md mt-16">
               Streamline your workflow with intelligent automation. Boost productivity, 
               reduce errors, and focus on what matters most.
             </p>

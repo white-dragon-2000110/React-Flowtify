@@ -1445,10 +1445,17 @@ const Home: React.FC = () => {
           src="/video/home.webm"
           onLoad={() => {}}
           autoPlay
-          loop
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-30"
+          onEnded={(e) => {
+            // Add 2 second delay before restarting video
+            const video = e.target as HTMLVideoElement;
+            setTimeout(() => {
+              video.currentTime = 0;
+              video.play();
+            }, 2000);
+          }}
         />
         
         {/* Glowing Background Elements */}
@@ -1711,7 +1718,7 @@ const Home: React.FC = () => {
                     <video
                       className="absolute inset-0 w-full h-full object-cover opacity-105 group-hover:opacity-100 transition-all duration-300"
                       autoPlay
-                      loop
+
                       muted
                       playsInline
                       style={{
@@ -1789,7 +1796,6 @@ const Home: React.FC = () => {
                     <video
                       className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-100 transition-all duration-300"
                       autoPlay
-                      loop
                       muted
                       playsInline
                       style={{ 
@@ -1800,8 +1806,8 @@ const Home: React.FC = () => {
                         // Add 2 second delay before restarting video
                         const video = e.target as HTMLVideoElement;
                         setTimeout(() => {
-                        video.currentTime = 0;
-                        video.play();
+                          video.currentTime = 0;
+                          video.play();
                         }, 2000);
                       }}
                     >
@@ -1977,7 +1983,7 @@ const Home: React.FC = () => {
                     <video
                       className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:opacity-100 transition-all duration-300"
                       autoPlay
-                      loop
+
                       muted
                       playsInline
                       style={{ 
@@ -2279,7 +2285,7 @@ const Home: React.FC = () => {
                 <video
                   className="absolute inset-0 w-full h-full object-cover"
                   autoPlay
-                  loop
+            
                   muted
                   playsInline
                   style={{
@@ -2355,7 +2361,7 @@ const Home: React.FC = () => {
         <video
           className="absolute inset-0 w-full h-full object-cover opacity-70"
           autoPlay
-          loop
+    
           muted
           playsInline
           style={{

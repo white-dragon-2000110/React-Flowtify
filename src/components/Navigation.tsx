@@ -63,7 +63,7 @@ const Navigation: React.FC = () => {
             onClick={() => scrollToSection('home')}
             className="flex items-center space-x-2"
           >
-            <img src="/logo.png" alt="Flowtify" className="w-[85px] h-[85px] object-contain" />
+            <img src="/logo_h.png" alt="Flowtify" className="w-[250px] h-[250px] object-contain" />
           </button>
 
           {/* Desktop Navigation */}

@@ -39,10 +39,10 @@ const Login: React.FC = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
                      <Link to="/" className="flex items-center justify-center mb-8">
-             <img src="/logo.png" alt="Flowtify" className="w-[120px] h-[120px] object-contain" />
+             <img src="/logo_h.png" alt="Flowtify" className="w-[300px] h-[300px] absolute object-contain" />
            </Link>
           
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-white mb-4 mt-[64px]">
             Welcome Back
           </h2>
           <p className="text-xl text-gray-300">

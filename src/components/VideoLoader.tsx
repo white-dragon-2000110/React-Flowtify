@@ -9,7 +9,7 @@ interface VideoLoaderProps {
   loop?: boolean;
   muted?: boolean;
   playsInline?: boolean;
-  onEnded?: () => void;
+  onEnded?: (e: React.SyntheticEvent<HTMLVideoElement>) => void;
   [key: string]: any;
 }
 
