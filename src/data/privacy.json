@@ -1,0 +1,40 @@
+{
+  "title": "Privacy Policy",
+  "lastUpdated": "August 28, 2025",
+  "version": "2.1",
+  "summary": "This Privacy Policy describes how Flowtify AI collects, uses, and protects your personal information when you use our services.",
+  "pdfUrl": "/documents/privacy-policy-bilingual.pdf",
+  "sections": [
+    {
+      "key": "information-collection",
+      "title": "Information We Collect",
+      "content": "We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support. This may include your name, email address, company information, and usage data."
+    },
+    {
+      "key": "how-we-use",
+      "title": "How We Use Your Information",
+      "content": "We use the information we collect to provide, maintain, and improve our services, to communicate with you, and to develop new features. We also use it to ensure the security of our platform and comply with legal obligations."
+    },
+    {
+      "key": "information-sharing",
+      "title": "Information Sharing",
+      "content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this policy. We may share information with service providers who assist us in operating our platform."
+    },
+    {
+      "key": "data-security",
+      "title": "Data Security",
+      "content": "We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+    },
+    {
+      "key": "your-rights",
+      "title": "Your Rights",
+      "content": "You have the right to access, correct, or delete your personal information. You can also object to or restrict certain processing of your data. Contact us to exercise these rights."
+    }
+  ],
+  "contactInfo": {
+    "title": "Contact Us About Privacy",
+    "email": "privacy@flowtify.ai",
+    "address": "123 Innovation Drive, Tech City, TC 12345",
+    "phone": "+1 (555) 123-4567"
+  }
+} 

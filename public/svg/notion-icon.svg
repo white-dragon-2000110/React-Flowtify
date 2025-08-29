@@ -1,0 +1,10 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Notion Logo Base -->
+  <rect x="16" y="16" width="32" height="32" rx="4" fill="#000000"/>
+  
+  <!-- Notion "N" -->
+  <path d="M24 24 L24 40 L28 40 L32 32 L36 40 L40 40 L40 24 L36 24 L32 32 L28 24 Z" fill="white"/>
+  
+  <!-- Notion Corner Accent -->
+  <path d="M16 16 L20 16 L20 20 L16 20 Z" fill="#FF0000"/>
+</svg> 

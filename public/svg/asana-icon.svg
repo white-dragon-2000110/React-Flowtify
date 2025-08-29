@@ -1,0 +1,13 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Asana Logo -->
+  <circle cx="32" cy="32" r="24" fill="#F06A6A"/>
+  
+  <!-- Asana "A" -->
+  <path d="M24 44 L32 20 L40 44 L36 44 L34 38 L30 38 L28 44 Z M31 34 L33 34 L32 30 Z" fill="white"/>
+  
+  <!-- Asana Dots -->
+  <circle cx="20" cy="20" r="3" fill="white"/>
+  <circle cx="44" cy="20" r="3" fill="white"/>
+  <circle cx="20" cy="44" r="3" fill="white"/>
+  <circle cx="44" cy="44" r="3" fill="white"/>
+</svg> 

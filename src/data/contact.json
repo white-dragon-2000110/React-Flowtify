@@ -1,0 +1,116 @@
+{
+  "title": "Contact Us",
+  "description": "Get in touch with our team. We're here to help you succeed with workflow automation.",
+  "contactInfo": {
+    "title": "Get in Touch",
+    "items": [
+      {
+        "key": "address",
+        "icon": "📍",
+        "label": "Address",
+        "value": "123 Innovation Drive, Tech City, TC 12345",
+        "description": "Visit our headquarters for in-person meetings and demonstrations."
+      },
+      {
+        "key": "email",
+        "icon": "📧",
+        "label": "Email",
+        "value": "hello@flowtify.ai",
+        "description": "Send us a message anytime. We typically respond within 2 hours during business hours."
+      },
+      {
+        "key": "phone",
+        "icon": "📞",
+        "label": "Phone",
+        "value": "+1 (555) 123-4567",
+        "description": "Call us Monday-Friday, 9 AM - 6 PM EST for immediate assistance."
+      },
+      {
+        "key": "support",
+        "icon": "🆘",
+        "label": "Support",
+        "value": "support@flowtify.ai",
+        "description": "Technical support available 24/7 for all customers."
+      }
+    ]
+  },
+  "departments": {
+    "title": "Contact by Department",
+    "items": [
+      {
+        "key": "sales",
+        "name": "Sales Team",
+        "email": "sales@flowtify.ai",
+        "description": "Learn about our solutions and pricing plans.",
+        "responseTime": "Within 1 hour"
+      },
+      {
+        "key": "support",
+        "name": "Technical Support",
+        "email": "support@flowtify.ai",
+        "description": "Get help with technical issues and implementation.",
+        "responseTime": "Within 2 hours"
+      },
+      {
+        "key": "partnerships",
+        "name": "Partnerships",
+        "email": "partnerships@flowtify.ai",
+        "description": "Explore partnership opportunities and integrations.",
+        "responseTime": "Within 24 hours"
+      },
+      {
+        "key": "press",
+        "name": "Press & Media",
+        "email": "press@flowtify.ai",
+        "description": "Media inquiries and press releases.",
+        "responseTime": "Within 4 hours"
+      }
+    ]
+  },
+  "officeHours": {
+    "title": "Office Hours",
+    "schedule": [
+      {
+        "day": "Monday - Friday",
+        "hours": "9:00 AM - 6:00 PM EST",
+        "status": "Open"
+      },
+      {
+        "day": "Saturday",
+        "hours": "10:00 AM - 2:00 PM EST",
+        "status": "Limited Support"
+      },
+      {
+        "day": "Sunday",
+        "hours": "Closed",
+        "status": "Emergency Support Only"
+      }
+    ]
+  },
+  "socialMedia": {
+    "title": "Follow Us",
+    "platforms": [
+      {
+        "key": "twitter",
+        "name": "Twitter",
+        "handle": "@flowtify_ai",
+        "url": "https://twitter.com/flowtify_ai",
+        "icon": "🐦"
+      },
+      {
+        "key": "linkedin",
+        "name": "LinkedIn",
+        "handle": "Flowtify AI",
+        "url": "https://linkedin.com/company/flowtify-ai",
+        "icon": "💼"
+      },
+      {
+        "key": "youtube",
+        "name": "YouTube",
+        "handle": "Flowtify AI",
+        "url": "https://youtube.com/@flowtify-ai",
+        "icon": "📺"
+      }
+    ]
+  }
+} 

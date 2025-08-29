@@ -1,0 +1,82 @@
+{
+  "title": "Integrations",
+  "description": "Connect with your favorite tools and platforms seamlessly",
+  "categories": [
+    {
+      "name": "Communication",
+      "integrations": [
+        {
+          "key": "slack",
+          "icon": "💬",
+          "name": "Slack",
+          "description": "Automate notifications, create channels, and manage workflows directly from Slack.",
+          "features": ["Message automation", "Channel management", "Bot responses", "File sharing"]
+        },
+        {
+          "key": "teams",
+          "icon": "👥",
+          "name": "Microsoft Teams",
+          "description": "Integrate workflows with Teams for seamless collaboration and communication.",
+          "features": ["Meeting automation", "File management", "Channel updates", "Bot integration"]
+        }
+      ]
+    },
+    {
+      "name": "Productivity",
+      "integrations": [
+        {
+          "key": "notion",
+          "icon": "📝",
+          "name": "Notion",
+          "description": "Automate database updates, page creation, and content management in Notion.",
+          "features": ["Database automation", "Page templates", "Content sync", "Workflow tracking"]
+        },
+        {
+          "key": "asana",
+          "icon": "✅",
+          "name": "Asana",
+          "description": "Streamline project management with automated task creation and status updates.",
+          "features": ["Task automation", "Project tracking", "Team collaboration", "Progress monitoring"]
+        }
+      ]
+    },
+    {
+      "name": "Automation",
+      "integrations": [
+        {
+          "key": "zapier",
+          "icon": "⚡",
+          "name": "Zapier",
+          "description": "Extend your automation capabilities with Zapier's extensive app ecosystem.",
+          "features": ["Multi-app workflows", "Trigger automation", "Data transformation", "Scheduled actions"]
+        },
+        {
+          "key": "ifttt",
+          "icon": "🔗",
+          "name": "IFTTT",
+          "description": "Create powerful conditional workflows with If This Then That automation.",
+          "features": ["Conditional logic", "Applet creation", "Social media automation", "IoT integration"]
+        }
+      ]
+    },
+    {
+      "name": "Business",
+      "integrations": [
+        {
+          "key": "salesforce",
+          "icon": "☁️",
+          "name": "Salesforce",
+          "description": "Automate CRM processes, lead management, and sales workflows.",
+          "features": ["Lead automation", "Opportunity tracking", "Contact management", "Sales analytics"]
+        },
+        {
+          "key": "hubspot",
+          "icon": "🎯",
+          "name": "HubSpot",
+          "description": "Streamline marketing automation and customer relationship management.",
+          "features": ["Email automation", "Lead nurturing", "Contact segmentation", "Campaign tracking"]
+        }
+      ]
+    }
+  ]
+} 

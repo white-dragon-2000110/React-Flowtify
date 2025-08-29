@@ -1,0 +1,86 @@
+{
+  "title": "Frequently Asked Questions",
+  "description": "Find answers to common questions about Flowtify AI",
+  "categories": [
+    {
+      "name": "General",
+      "faqs": [
+        {
+          "key": "what",
+          "question": "What is Flowtify?",
+          "answer": "Flowtify is an AI-powered workflow automation platform that helps businesses streamline their processes, reduce manual tasks, and improve productivity through intelligent automation."
+        },
+        {
+          "key": "how",
+          "question": "How does Flowtify work?",
+          "answer": "Flowtify uses machine learning algorithms to analyze your workflow patterns, identify automation opportunities, and create intelligent workflows that adapt and improve over time."
+        },
+        {
+          "key": "benefits",
+          "question": "What are the main benefits?",
+          "answer": "Key benefits include 80% reduction in manual tasks, improved accuracy, faster processing times, cost savings, and the ability to focus on strategic work instead of repetitive tasks."
+        }
+      ]
+    },
+    {
+      "name": "Pricing & Plans",
+      "faqs": [
+        {
+          "key": "pricing",
+          "question": "What are the pricing plans?",
+          "answer": "We offer flexible pricing starting at $29/month for small teams, $99/month for growing businesses, and custom enterprise plans. All plans include core features and support."
+        },
+        {
+          "key": "trial",
+          "question": "Do you offer a free trial?",
+          "answer": "Yes! We offer a 14-day free trial with full access to all features. No credit card required to start your trial."
+        },
+        {
+          "key": "cancellation",
+          "question": "Can I cancel anytime?",
+          "answer": "Absolutely. You can cancel your subscription at any time with no penalties or hidden fees."
+        }
+      ]
+    },
+    {
+      "name": "Support & Training",
+      "faqs": [
+        {
+          "key": "support",
+          "question": "What support do you offer?",
+          "answer": "We provide 24/7 customer support via chat, email, and phone. Plus, comprehensive documentation, video tutorials, and dedicated onboarding for enterprise customers."
+        },
+        {
+          "key": "training",
+          "question": "Is training included?",
+          "answer": "Yes, we provide comprehensive training for all users, including live webinars, on-demand courses, and personalized training sessions for enterprise customers."
+        },
+        {
+          "key": "onboarding",
+          "question": "How long does onboarding take?",
+          "answer": "Most teams are up and running within 1-2 weeks. Our onboarding process includes setup assistance, workflow design consultation, and team training."
+        }
+      ]
+    },
+    {
+      "name": "Technical",
+      "faqs": [
+        {
+          "key": "security",
+          "question": "How secure is Flowtify?",
+          "answer": "We use bank-level security with SOC 2 compliance, end-to-end encryption, and regular security audits. Your data is protected with enterprise-grade security measures."
+        },
+        {
+          "key": "integrations",
+          "question": "What integrations do you support?",
+          "answer": "We support 200+ integrations including popular tools like Slack, Notion, Salesforce, HubSpot, and many more. We also offer custom API integrations."
+        },
+        {
+          "key": "scalability",
+          "question": "Can Flowtify scale with my business?",
+          "answer": "Yes, Flowtify is designed to scale from small teams to enterprise organizations. Our platform handles millions of workflow executions daily."
+        }
+      ]
+    }
+  ]
+} 

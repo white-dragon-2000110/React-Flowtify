@@ -1,0 +1,17 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Executive Person Base -->
+  <circle cx="32" cy="20" r="12" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="2"/>
+  
+  <!-- Business Suit Body -->
+  <path d="M20 35 L44 35 L44 55 C44 58 41 60 38 60 L26 60 C23 60 20 58 20 55 Z" fill="#1F2937" stroke="#4B5563" stroke-width="1.5"/>
+  
+  <!-- Tie -->
+  <path d="M30 35 L34 35 L32 50 Z" fill="#8B5CF6" stroke="#A78BFA" stroke-width="0.5"/>
+  
+  <!-- Professional Glow Effect -->
+  <circle cx="32" cy="20" r="16" fill="none" stroke="#A78BFA" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Success Indicators -->
+  <circle cx="48" cy="15" r="3" fill="#10B981"/>
+  <circle cx="16" cy="15" r="3" fill="#10B981"/>
+</svg> 

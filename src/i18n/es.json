@@ -1,0 +1,509 @@
+{
+  "common": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "integrations": "Integraciones",
+    "faqs": "Preguntas Frecuentes",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "language": "Idioma",
+    "english": "Inglés",
+    "spanish": "Español",
+    "getStarted": "Comenzar",
+    "learnMore": "Saber Más",
+    "contactUs": "Contáctanos",
+    "login": "Iniciar Sesión"
+  },
+  "demo": {
+    "title": "Solicitar una Demo",
+    "subtitle": "Ve Flowtify en acción",
+    "description": "Obtén una demostración personalizada de cómo Flowtify puede transformar tus flujos de trabajo empresariales",
+    "form": {
+      "name": "Nombre Completo",
+      "email": "Correo del Trabajo",
+      "company": "Nombre de la Empresa",
+      "size": "Tamaño de la Empresa",
+      "useCase": "Caso de Uso Principal",
+      "submit": "Programar Demo",
+      "success": "¡Solicitud de demo enviada exitosamente!",
+      "error": "Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo."
+    },
+    "benefits": {
+      "title": "Lo que Obtendrás",
+      "items": [
+        "Demostración personalizada de flujo de trabajo",
+        "Preguntas y respuestas en vivo con nuestros expertos",
+        "Recomendaciones de soluciones personalizadas",
+        "Acceso a prueba gratuita",
+        "Hoja de ruta de implementación"
+      ]
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Flowtify AI",
+      "subtitle": "Optimiza tu Flujo de Trabajo con Automatización Inteligente",
+      "description": "Transforma tus procesos de negocio con automatización de flujo de trabajo impulsada por IA. Aumenta la productividad, reduce errores y enfócate en lo que más importa.",
+      "cta": "Comienza a Automatizar Hoy"
+    },
+    "features": {
+      "title": "¿Por qué Elegir Flowtify?",
+      "automation": {
+        "title": "Automatización Inteligente",
+        "description": "Automatiza tareas repetitivas con flujos de trabajo inteligentes que se adaptan a las necesidades de tu negocio."
+      },
+      "analytics": {
+        "title": "Analíticas Avanzadas",
+        "description": "Obtén información profunda sobre tus procesos con analíticas en tiempo real y métricas de rendimiento."
+      },
+      "integration": {
+        "title": "Integración Fácil",
+        "description": "Conecta sin problemas con tus herramientas y plataformas existentes para una experiencia de flujo de trabajo unificada."
+      },
+      "security": {
+        "title": "Seguridad Empresarial",
+        "description": "Seguridad de nivel bancario con control de acceso basado en roles y seguimiento completo de auditoría."
+      }
+    },
+    "servicesPreview": {
+      "title": "Nuestros Servicios Principales",
+      "subtitle": "Descubre cómo nuestras soluciones impulsadas por IA pueden transformar tus flujos de trabajo empresariales"
+    },
+    "integrationsPreview": {
+      "title": "Integraciones Populares",
+      "subtitle": "Conecta con las herramientas que ya usas y amas",
+      "viewAll": "Ver Todas las Integraciones"
+    },
+    "cta": {
+      "title": "¿Listo para Transformar tu Flujo de Trabajo?",
+      "subtitle": "Únete a miles de empresas que ya usan Flowtify para automatizar sus procesos"
+    }
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "description": "Soluciones integrales de automatización de flujo de trabajo adaptadas a las necesidades de tu negocio",
+    "workflow": {
+      "title": "Automatización de Flujo de Trabajo",
+      "description": "Diseña, automatiza y optimiza tus procesos de negocio con nuestro constructor de flujo de trabajo intuitivo.",
+      "features": [
+        "Diseñador de flujo de trabajo arrastrar y soltar",
+        "Lógica condicional y ramificación",
+        "Monitoreo de procesos en tiempo real",
+        "Analíticas de rendimiento e informes"
+      ]
+    },
+    "ai": {
+      "title": "Soluciones Impulsadas por IA",
+      "description": "Aprovecha la inteligencia artificial para hacer tus flujos de trabajo más inteligentes y eficientes.",
+      "features": [
+        "Optimización de aprendizaje automático",
+        "Analíticas predictivas",
+        "Procesamiento de lenguaje natural",
+        "Toma de decisiones inteligente"
+      ]
+    },
+    "integration": {
+      "title": "Integración de Sistemas",
+      "description": "Conecta todas tus herramientas y plataformas para un flujo de datos y automatización sin problemas.",
+      "features": [
+        "Conectores predefinidos",
+        "Integración de API personalizada",
+        "Sincronización de datos",
+        "Webhooks en tiempo real"
+      ]
+    },
+    "consulting": {
+      "title": "Servicios de Consultoría",
+      "description": "Orientación experta para transformar tus procesos de negocio y maximizar los beneficios de la automatización.",
+      "features": [
+        "Análisis y optimización de procesos",
+        "Consultoría de diseño de flujo de trabajo",
+        "Soporte de implementación",
+        "Capacitación y mejores prácticas"
+      ]
+    }
+  },
+  "integrations": {
+    "title": "Integraciones",
+    "description": "Conecta con tus herramientas y plataformas favoritas",
+    "categories": {
+      "communication": {
+        "name": "Herramientas de Comunicación",
+        "integrations": {
+          "slack": {
+            "name": "Slack",
+            "icon": "💬",
+            "description": "Automatiza notificaciones, crea canales y gestiona las comunicaciones del equipo.",
+            "features": [
+              "Publicación automática de mensajes",
+              "Gestión de canales",
+              "Notificaciones de usuarios",
+              "Automatización de compartir archivos"
+            ]
+          },
+          "teams": {
+            "name": "Microsoft Teams",
+            "icon": "👥",
+            "description": "Integra con Teams para colaboración sin problemas y automatización de flujo de trabajo.",
+            "features": [
+              "Automatización de canales del equipo",
+              "Programación de reuniones",
+              "Colaboración de archivos",
+              "Integración de bot de chat"
+            ]
+          }
+        }
+      },
+      "productivity": {
+        "name": "Plataformas de Productividad",
+        "integrations": {
+          "notion": {
+            "name": "Notion",
+            "icon": "📝",
+            "description": "Automatiza la creación de documentos, gestión de bases de datos y compartir conocimientos.",
+            "features": [
+              "Automatización de creación de páginas",
+              "Sincronización de bases de datos",
+              "Gestión de plantillas",
+              "Organización de contenido"
+            ]
+          },
+          "asana": {
+            "name": "Asana",
+            "icon": "✅",
+            "description": "Optimiza la gestión de proyectos con creación y actualización automática de tareas.",
+            "features": [
+              "Automatización de tareas",
+              "Plantillas de proyecto",
+              "Seguimiento de progreso",
+              "Colaboración del equipo"
+            ]
+          }
+        }
+      },
+      "automation": {
+        "name": "Plataformas de Automatización",
+        "integrations": {
+          "zapier": {
+            "name": "Zapier",
+            "icon": "🔗",
+            "description": "Conecta Flowtify con más de 5000 aplicaciones a través de la plataforma de automatización de Zapier.",
+            "features": [
+              "Flujos de trabajo multi-aplicación",
+              "Automatización de disparadores",
+              "Transformación de datos",
+              "Manejo de errores"
+            ]
+          },
+          "ifttt": {
+            "name": "IFTTT",
+            "icon": "⚡",
+            "description": "Crea applets poderosos que conectan Flowtify con tus servicios favoritos.",
+            "features": [
+              "Creación de applets",
+              "Lógica condicional",
+              "Disparadores multi-servicio",
+              "Acciones personalizadas"
+            ]
+          }
+        }
+      },
+      "business": {
+        "name": "Herramientas de Negocio",
+        "integrations": {
+          "salesforce": {
+            "name": "Salesforce",
+            "icon": "☁️",
+            "description": "Automatiza procesos de ventas, gestión de leads y flujos de trabajo de relación con clientes.",
+            "features": [
+              "Automatización de leads",
+              "Gestión de oportunidades",
+              "Sincronización de contactos",
+              "Analíticas de ventas"
+            ]
+          },
+          "hubspot": {
+            "name": "HubSpot",
+            "icon": "🎯",
+            "description": "Integra flujos de trabajo de marketing, ventas y servicio para automatización empresarial integral.",
+            "features": [
+              "Automatización de marketing",
+              "Nutrición de leads",
+              "Servicio al cliente",
+              "Integración de analíticas"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "faqs": {
+    "title": "Preguntas Frecuentes",
+    "description": "Encuentra respuestas a preguntas comunes sobre Flowtify y nuestros servicios",
+    "categories": {
+      "general": {
+        "name": "Preguntas Generales",
+        "faqs": {
+          "what": {
+            "question": "¿Qué es Flowtify?",
+            "answer": "Flowtify es una plataforma de automatización de flujo de trabajo impulsada por IA que ayuda a las empresas a optimizar sus procesos, reducir el trabajo manual y mejorar la productividad a través de automatización inteligente e integración."
+          },
+          "how": {
+            "question": "¿Cómo funciona?",
+            "answer": "Flowtify usa un constructor de flujo de trabajo visual donde puedes arrastrar y soltar elementos para crear procesos automatizados. Nuestro motor de IA luego optimiza estos flujos de trabajo y proporciona analíticas e información en tiempo real."
+          },
+          "benefits": {
+            "question": "¿Cuáles son los beneficios principales?",
+            "answer": "Los beneficios clave incluyen mayor productividad, menos errores, ejecución más rápida de procesos, mejor visibilidad de las operaciones, ahorro de costos y la capacidad de enfocarse en tareas estratégicas en lugar de trabajo repetitivo."
+          }
+        }
+      },
+      "pricing": {
+        "name": "Precios y Planes",
+        "faqs": {
+          "pricing": {
+            "question": "¿Cuáles son los planes de precios?",
+            "answer": "Ofrecemos planes de precios flexibles desde $29/mes para equipos pequeños, con soluciones empresariales disponibles para organizaciones más grandes. Todos los planes incluyen funciones principales con capacidades adicionales según tus necesidades."
+          },
+          "trial": {
+            "question": "¿Ofrecen una prueba gratuita?",
+            "answer": "¡Sí! Ofrecemos una prueba gratuita de 14 días con acceso completo a todas las funciones. No se requiere tarjeta de crédito para comenzar tu prueba, y puedes actualizar o cancelar en cualquier momento."
+          },
+          "cancellation": {
+            "question": "¿Puedo cancelar mi suscripción?",
+            "answer": "Absolutamente. Puedes cancelar tu suscripción en cualquier momento a través de la configuración de tu cuenta. No hay contratos a largo plazo ni tarifas de cancelación."
+          }
+        }
+      },
+      "support": {
+        "name": "Soporte y Capacitación",
+        "faqs": {
+          "support": {
+            "question": "¿Qué soporte ofrecen?",
+            "answer": "Proporcionamos soporte integral que incluye chat en vivo, soporte por correo electrónico, tutoriales en video, documentación y gerentes de éxito del cliente dedicados para clientes empresariales."
+          },
+          "training": {
+            "question": "¿Proporcionan capacitación?",
+            "answer": "Sí, ofrecemos sesiones de incorporación, seminarios web de capacitación y programas de capacitación personalizados para equipos. Nuestro equipo de éxito del cliente asegura que obtengas el máximo valor de Flowtify."
+          },
+          "onboarding": {
+            "question": "¿Qué incluye la incorporación?",
+            "answer": "La incorporación incluye configuración inicial, consultoría de diseño de flujo de trabajo, capacitación del equipo y soporte continuo para asegurar implementación y adopción exitosas."
+          }
+        }
+      },
+      "technical": {
+        "name": "Preguntas Técnicas",
+        "faqs": {
+          "security": {
+            "question": "¿Qué tan seguros están mis datos?",
+            "answer": "Implementamos medidas de seguridad de nivel empresarial que incluyen cumplimiento SOC 2, encriptación de extremo a extremo, auditorías de seguridad regulares y control de acceso basado en roles para proteger tus datos."
+          },
+          "integrations": {
+            "question": "¿Qué integraciones soportan?",
+            "answer": "Soportamos más de 100 integraciones incluyendo herramientas populares como Slack, Notion, Salesforce, HubSpot y muchas más. También ofrecemos integración de API personalizada para necesidades específicas."
+          },
+          "scalability": {
+            "question": "¿Puede escalar con mi negocio?",
+            "answer": "Sí, Flowtify está construido para escalar desde equipos pequeños hasta organizaciones empresariales. Nuestra plataforma maneja cargas de trabajo y usuarios aumentados sin degradación del rendimiento."
+          }
+        }
+      }
+    }
+  },
+
+  "contact": {
+    "title": "Contáctanos",
+    "description": "Ponte en contacto con nuestro equipo. Estamos aquí para ayudarte a tener éxito con Flowtify.",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "contactInfo": {
+      "title": "Información de Contacto",
+      "items": {
+        "address": {
+          "label": "Dirección de Oficina",
+          "value": "123 Innovation Drive, Tech City, TC 12345",
+          "icon": "📍",
+          "description": "Visítanos durante horario laboral"
+        },
+        "email": {
+          "label": "Consultas Generales",
+          "value": "hello@flowtify.com",
+          "icon": "✉️",
+          "description": "Responderemos dentro de 24 horas"
+        },
+        "phone": {
+          "label": "Soporte Telefónico",
+          "value": "+1 (555) 123-4567",
+          "icon": "📞",
+          "description": "Disponible durante horario laboral"
+        },
+        "support": {
+          "label": "Soporte Técnico",
+          "value": "support@flowtify.com",
+          "icon": "🛠️",
+          "description": "Asistencia técnica 24/7"
+        }
+      }
+    },
+    "officeHours": {
+      "title": "Horario de Oficina",
+      "schedule": {
+        "weekday": {
+          "day": "Lunes - Viernes",
+          "hours": "9:00 AM - 6:00 PM EST",
+          "status": "Abierto"
+        },
+        "saturday": {
+          "day": "Sábado",
+          "hours": "10:00 AM - 4:00 PM EST",
+          "status": "Soporte Limitado"
+        },
+        "sunday": {
+          "day": "Domingo",
+          "hours": "Cerrado",
+          "status": "Cerrado"
+        }
+      }
+    },
+    "socialMedia": {
+      "title": "Síguenos",
+      "platforms": {
+        "twitter": {
+          "handle": "@flowtify",
+          "url": "https://twitter.com/flowtify",
+          "icon": "🐦"
+        },
+        "linkedin": {
+          "handle": "Flowtify",
+          "url": "https://linkedin.com/company/flowtify",
+          "icon": "💼"
+        },
+        "youtube": {
+          "handle": "Flowtify",
+          "url": "https://youtube.com/@flowtify",
+          "icon": "📺"
+        }
+      }
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "summary": "Estamos comprometidos a proteger tu privacidad y asegurar la seguridad de tu información personal.",
+    "lastUpdated": "Diciembre 2024",
+    "version": "3.2",
+    "pdfUrl": "/documents/privacy-policy-bilingual.pdf",
+    "pdfEmbed": {
+      "title": "Política de Privacidad Completa (Bilingüe)",
+      "description": "Ver nuestra política de privacidad completa en inglés y español. El documento PDF contiene todos los términos de privacidad detallados y prácticas de manejo de datos.",
+      "documentTitle": "Política de Privacidad - Inglés y Español",
+      "documentSubtitle": "Documento de política de privacidad bilingüe integral",
+      "buttonText": "Ver Política Completa"
+    },
+    "sections": {
+      "information-collection": {
+        "title": "Información que Recopilamos",
+        "content": "Recopilamos información que nos proporcionas directamente, como cuando creas una cuenta, usas nuestros servicios o nos contactas para soporte. Esto puede incluir tu nombre, dirección de correo electrónico, información de la empresa y datos de uso."
+      },
+      "how-we-use": {
+        "title": "Cómo Usamos tu Información",
+        "content": "Usamos la información que recopilamos para proporcionar, mantener y mejorar nuestros servicios, comunicarnos contigo, asegurar la seguridad y cumplir con obligaciones legales. Nunca vendemos tu información personal a terceros."
+      },
+      "information-sharing": {
+        "title": "Compartir Información",
+        "content": "Podemos compartir tu información con proveedores de servicios que nos ayudan a operar nuestra plataforma, con tu consentimiento, o cuando lo requiera la ley. Mantenemos estándares estrictos de protección de datos con todos los socios."
+      },
+      "data-security": {
+        "title": "Seguridad de Datos",
+        "content": "Implementamos medidas de seguridad de nivel empresarial para proteger tu información personal, incluyendo encriptación, controles de acceso y auditorías de seguridad regulares. Tus datos se almacenan de forma segura y solo son accedidos por personal autorizado."
+      },
+      "your-rights": {
+        "title": "Tus Derechos",
+        "content": "Tienes derecho a acceder, corregir o eliminar tu información personal. También puedes optar por no recibir ciertas comunicaciones y solicitar portabilidad de datos. Contáctanos para ejercer estos derechos."
+      }
+    },
+    "contactInfo": {
+      "title": "Información de Contacto de Privacidad",
+      "email": "privacy@flowtify.com",
+      "address": "123 Innovation Drive, Tech City, TC 12345",
+      "phone": "+1 (555) 123-4567"
+    }
+  },
+  "terms": {
+    "title": "Términos de Servicio",
+    "summary": "Por favor lee estos términos cuidadosamente antes de usar nuestros servicios.",
+    "lastUpdated": "Diciembre 2024",
+    "version": "2.1",
+    "pdfUrl": "/documents/terms-of-service-bilingual.pdf",
+    "pdfEmbed": {
+      "title": "Términos de Servicio Completos (Bilingüe)",
+      "description": "Ver nuestros términos de servicio completos en inglés y español. El documento PDF contiene todos los términos legales detallados y condiciones.",
+      "documentTitle": "Términos de Servicio - Inglés y Español",
+      "documentSubtitle": "Documento de términos legales bilingüe integral",
+      "buttonText": "Ver Términos Completos"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "Aceptación de Términos",
+        "content": "Al acceder y usar los servicios de Flowtify, aceptas y acuerdas estar sujeto a los términos y disposiciones de este acuerdo."
+      },
+      "use-of-services": {
+        "title": "Uso de Servicios",
+        "content": "Puedes usar nuestros servicios solo para propósitos legales y de acuerdo con estos Términos. Acuerdas no usar los servicios de ninguna manera que viole cualquier ley o regulación federal, estatal, local o internacional aplicable."
+      },
+      "user-accounts": {
+        "title": "Cuentas de Usuario",
+        "content": "Cuando creas una cuenta con nosotros, debes proporcionar información que sea precisa, completa y actual en todo momento. Eres responsable de proteger la contraseña y de todas las actividades que ocurran bajo tu cuenta."
+      },
+      "intellectual-property": {
+        "title": "Derechos de Propiedad Intelectual",
+        "content": "El Servicio y su contenido original, características y funcionalidad son y seguirán siendo la propiedad exclusiva de Flowtify y sus licenciantes. El Servicio está protegido por derechos de autor, marcas comerciales y otras leyes."
+      },
+      "limitation-of-liability": {
+        "title": "Limitación de Responsabilidad",
+        "content": "En ningún caso Flowtify, ni sus directores, empleados, socios, agentes, proveedores o afiliados, será responsable por daños indirectos, incidentales, especiales, consecuentes o punitivos."
+      },
+      "termination": {
+        "title": "Terminación",
+        "content": "Podemos terminar o suspender tu cuenta y prohibir el acceso al Servicio inmediatamente, sin previo aviso o responsabilidad, bajo nuestra discreción exclusiva, por cualquier razón."
+      }
+    },
+    "contactInfo": {
+      "title": "Información de Contacto",
+      "email": "legal@flowtify.com",
+      "address": "123 Innovation Drive, Tech City, TC 12345",
+      "phone": "+1 (555) 123-4567"
+    }
+  },
+  "testimonials": {
+    "title": "Lo que Dicen Nuestros Clientes",
+    "subtitle": "Únete a miles de empresas satisfechas usando Flowtify",
+    "testimonial1": {
+      "name": "Sarah Johnson",
+      "role": "Directora de Operaciones",
+      "company": "TechCorp Solutions",
+      "avatar": "👩‍💼",
+      "quote": "Flowtify ha transformado nuestra eficiencia de flujo de trabajo. Hemos reducido los procesos manuales en un 80% y nuestro equipo puede enfocarse en lo que realmente importa.",
+      "rating": 5
+    },
+    "testimonial2": {
+      "name": "Michael Chen",
+      "role": "CTO",
+      "company": "InnovateLab",
+      "avatar": "👨‍💻",
+      "quote": "La automatización impulsada por IA es increíble. Flowtify aprende de nuestros procesos y mejora continuamente nuestros flujos de trabajo.",
+      "rating": 5
+    },
+    "testimonial3": {
+      "name": "Emily Rodriguez",
+      "role": "Gerente de Proyectos",
+      "company": "Growth Dynamics",
+      "avatar": "👩‍🎯",
+      "quote": "Configurar las integraciones fue perfecto. Conectamos todas nuestras herramientas en un día y vimos ganancias inmediatas de productividad.",
+      "rating": 5
+    }
+  }
+} 

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Salesforce Cloud -->
+  <path d="M16 32 C16 24 22 18 30 18 C38 18 44 24 44 32 C44 40 38 46 30 46 C22 46 16 40 16 32 Z" fill="#00A1E0"/>
+  
+  <!-- Salesforce Lightning -->
+  <path d="M28 26 L32 34 L28 38 L36 30 L32 26 Z" fill="#FF6B35"/>
+  
+  <!-- Cloud Elements -->
+  <circle cx="24" cy="28" r="2" fill="white" opacity="0.8"/>
+  <circle cx="36" cy="36" r="2" fill="white" opacity="0.8"/>
+  <circle cx="20" cy="40" r="2" fill="white" opacity="0.8"/>
+</svg> 

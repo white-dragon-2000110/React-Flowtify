@@ -1,0 +1,34 @@
+{
+  "title": "Our Services",
+  "description": "Comprehensive workflow automation solutions tailored to your business needs",
+  "services": [
+    {
+      "key": "workflow",
+      "icon": "⚡",
+      "title": "Workflow Automation",
+      "description": "Design, implement, and optimize automated workflows that streamline your business processes. Reduce manual tasks by up to 80%.",
+      "features": ["Visual workflow builder", "Conditional logic", "Error handling", "Performance monitoring"]
+    },
+    {
+      "key": "ai",
+      "icon": "🧠",
+      "title": "AI-Powered Solutions",
+      "description": "Leverage machine learning algorithms to make intelligent decisions, predict outcomes, and continuously improve your automation.",
+      "features": ["Predictive analytics", "Natural language processing", "Pattern recognition", "Adaptive learning"]
+    },
+    {
+      "key": "integration",
+      "icon": "🔗",
+      "title": "System Integration",
+      "description": "Connect all your business applications seamlessly. We support 200+ integrations including CRM, ERP, and productivity tools.",
+      "features": ["API management", "Data synchronization", "Real-time updates", "Custom connectors"]
+    },
+    {
+      "key": "consulting",
+      "icon": "💼",
+      "title": "Consulting Services",
+      "description": "Expert guidance from our workflow automation specialists to help you design and implement the perfect solution.",
+      "features": ["Process analysis", "Strategy planning", "Implementation support", "Training & optimization"]
+    }
+  ]
+} 

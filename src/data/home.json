@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "Flowtify AI",
+    "subtitle": "Streamline Your Workflow with Intelligent Automation",
+    "description": "Transform your business processes with AI-powered workflow automation. Boost productivity, reduce errors, and focus on what matters most.",
+    "cta": "Start Automating Today"
+  },
+  "features": {
+    "title": "Why Choose Flowtify?",
+    "items": [
+      {
+        "key": "automation",
+        "icon": "🤖",
+        "title": "Smart Automation",
+        "description": "AI-powered automation that learns and adapts to your workflow patterns."
+      },
+      {
+        "key": "analytics",
+        "icon": "📊",
+        "title": "Advanced Analytics",
+        "description": "Comprehensive insights into your workflow performance and optimization opportunities."
+      },
+      {
+        "key": "integration",
+        "icon": "🔗",
+        "title": "Easy Integration",
+        "description": "Seamlessly connect with your existing tools and platforms in minutes."
+      },
+      {
+        "key": "security",
+        "icon": "🔒",
+        "title": "Enterprise Security",
+        "description": "Bank-level security with SOC 2 compliance and end-to-end encryption."
+      }
+    ]
+  }
+} 
