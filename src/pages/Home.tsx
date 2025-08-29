@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import ServiceCard from '../components/ServiceCard';
 import Testimonials from '../components/Testimonials';
 import RequestDemoButton from '../components/RequestDemoButton';
+import VideoLoader from '../components/VideoLoader';
+import { useLoadingState } from '../hooks/useLoadingState';
 
 // Custom SVG Icon for Workflow Automation - Awesome Design
 const WorkflowAutomationIcon: React.FC = () => (
@@ -1312,6 +1314,7 @@ const ConsultingIcon: React.FC = () => (
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
+  const { addVideoToTrack, addDataToTrack } = useLoadingState();
   
   // Contact form state
   const [contactForm, setContactForm] = useState({
@@ -1378,6 +1381,19 @@ const Home: React.FC = () => {
     }
   };
 
+  // Simulate data loading
+  useEffect(() => {
+    // Add initial data loading promises
+    const dataPromises = [
+      new Promise<void>((resolve) => setTimeout(resolve, 800)), // Services data
+      new Promise<void>((resolve) => setTimeout(resolve, 1200)), // Integrations data
+      new Promise<void>((resolve) => setTimeout(resolve, 1000)), // Testimonials data
+      new Promise<void>((resolve) => setTimeout(resolve, 600)), // FAQs data
+    ];
+
+    dataPromises.forEach(promise => addDataToTrack(promise));
+  }, [addDataToTrack]);
+
   const servicesPreview = [
     {
       key: 'workflow',
@@ -1438,15 +1454,15 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
         {/* Background Video */}
-        <video
+        <VideoLoader
+          src="/video/home.webm"
+          onLoad={() => addVideoToTrack(Promise.resolve())}
           autoPlay
           loop
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-30"
-        >
-          <source src="/video/home.webm" type="video/webm" />
-        </video>
+        />
         
         {/* Glowing Background Elements */}
         <motion.div
@@ -1536,14 +1552,24 @@ const Home: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <RequestDemoButton size="lg" />
-            <motion.a
-              href="/contact"
+            <motion.button
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  const headerHeight = 64; // h-16 = 64px
+                  const elementPosition = contactSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
               className="px-8 py-4 text-xl border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               {t('common.contactUs')}
-            </motion.a>
+            </motion.button>
           </motion.div>
         </div>
       </section>
