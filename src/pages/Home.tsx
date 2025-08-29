@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import ServiceCard from '../components/ServiceCard';
 import Testimonials from '../components/Testimonials';
 import RequestDemoButton from '../components/RequestDemoButton';
 import VideoLoader from '../components/VideoLoader';
-import { useLoadingState } from '../hooks/useLoadingState';
 
 // Custom SVG Icon for Workflow Automation - Awesome Design
 const WorkflowAutomationIcon: React.FC = () => (
@@ -1314,7 +1313,6 @@ const ConsultingIcon: React.FC = () => (
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
-  const { addVideoToTrack, addDataToTrack } = useLoadingState();
   
   // Contact form state
   const [contactForm, setContactForm] = useState({
@@ -1381,18 +1379,7 @@ const Home: React.FC = () => {
     }
   };
 
-  // Simulate data loading
-  useEffect(() => {
-    // Add initial data loading promises
-    const dataPromises = [
-      new Promise<void>((resolve) => setTimeout(resolve, 800)), // Services data
-      new Promise<void>((resolve) => setTimeout(resolve, 1200)), // Integrations data
-      new Promise<void>((resolve) => setTimeout(resolve, 1000)), // Testimonials data
-      new Promise<void>((resolve) => setTimeout(resolve, 600)), // FAQs data
-    ];
 
-    dataPromises.forEach(promise => addDataToTrack(promise));
-  }, [addDataToTrack]);
 
   const servicesPreview = [
     {
@@ -1456,7 +1443,7 @@ const Home: React.FC = () => {
         {/* Background Video */}
         <VideoLoader
           src="/video/home.webm"
-          onLoad={() => addVideoToTrack(Promise.resolve())}
+          onLoad={() => {}}
           autoPlay
           loop
           muted
@@ -2105,7 +2092,17 @@ const Home: React.FC = () => {
                   description={service.description}
                   features={service.features}
                   ctaText={service.ctaText}
-                  onCtaClick={() => window.location.href = '/services'}
+                  onCtaClick={() => {
+                    const servicesSection = document.getElementById('services');
+                    if (servicesSection) {
+                      const headerHeight = 64; // h-16 = 64px
+                      const elementPosition = servicesSection.offsetTop - headerHeight;
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
                 />
               </motion.div>
             ))}
@@ -2330,14 +2327,24 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <motion.a
-              href="/integrations"
+            <motion.button
+              onClick={() => {
+                const integrationsSection = document.getElementById('integrations');
+                if (integrationsSection) {
+                  const headerHeight = 64; // h-16 = 64px
+                  const elementPosition = integrationsSection.offsetTop - headerHeight;
+                  window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
               className="inline-block px-8 py-3 text-lg border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               {t('home.integrationsPreview.viewAll')}
-            </motion.a>
+            </motion.button>
           </motion.div>
         </div>
       </section>

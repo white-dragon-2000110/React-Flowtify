@@ -11,34 +11,28 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Login from './pages/Login';
-import LoadingSpinner from './components/LoadingSpinner';
-import { useLoadingState } from './hooks/useLoadingState';
 
 function AppContent() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
-  const { isLoading, progress } = useLoadingState();
 
   return (
-    <>
-      <LoadingSpinner isLoading={isLoading} progress={progress} />
-      <div className="min-h-screen flex flex-col">
-        {!isLoginPage && <Navigation />}
-        <main className={!isLoginPage ? "flex-1 pt-16" : "flex-1"}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/integrations" element={<Integrations />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-          </Routes>
-        </main>
-        {!isLoginPage && <Footer />}
-      </div>
-    </>
+    <div className="min-h-screen flex flex-col">
+      {!isLoginPage && <Navigation />}
+      <main className={!isLoginPage ? "flex-1 pt-16" : "flex-1"}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/integrations" element={<Integrations />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+        </Routes>
+      </main>
+      {!isLoginPage && <Footer />}
+    </div>
   );
 }
 
