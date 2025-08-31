@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import ServiceCard from '../components/ServiceCard';
+
 import Testimonials from '../components/Testimonials';
 import RequestDemoButton from '../components/RequestDemoButton';
 import { Vortex } from '../components/Vortex';
