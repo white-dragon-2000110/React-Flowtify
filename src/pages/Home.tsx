@@ -8,6 +8,43 @@ import { Vortex } from '../components/Vortex';
 import Circle from '../components/Circle';
 import AnimatedBeam from '../components/AnimatedBeam';
 
+// Meteors Animation Component
+const Meteors = ({
+  number,
+  className,
+}: {
+  number?: number;
+  className?: string;
+}) => {
+  const meteors = new Array(number || 20).fill(true);
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {meteors.map((el, idx) => {
+        const meteorCount = number || 20;
+        // Calculate position to evenly distribute meteors across full section space
+        const position = (idx * (3000 / meteorCount)) - 1500; // Spread across 3000px range, centered
+
+        return (
+          <span
+            key={"meteor" + idx}
+            className={`animate-meteor-effect absolute h-1 w-1 rotate-[45deg] rounded-[9999px] bg-white shadow-[0_0_0_2px_#ffffff20] before:absolute before:top-1/2 before:h-[1px] before:w-[80px] before:-translate-y-[50%] before:transform before:bg-gradient-to-r before:from-[#ffffff] before:via-[#94a3b8] before:to-transparent before:content-[''] ${className || ''}`}
+            style={{
+              top: "-60px", // Start above the container
+              left: position + "px",
+              animationDelay: Math.random() * 10 + "s", // Random delay between 0-10s
+              animationDuration: Math.floor(Math.random() * (20 - 10) + 10) + "s", // Random duration between 10-20s
+            }}
+          ></span>
+        );
+      })}
+    </motion.div>
+  );
+};
+
 // Custom SVG Icon for Workflow Automation - Awesome Design
 const WorkflowAutomationIcon: React.FC = () => (
   <svg
@@ -48,16 +85,16 @@ const WorkflowAutomationIcon: React.FC = () => (
       transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
     >
       {/* Main Gear */}
-    <motion.circle
-      cx="32"
+      <motion.circle
+        cx="32"
         cy="32"
         r="16"
         fill="none"
         stroke="url(#gearGradient)"
         strokeWidth="2"
         strokeDasharray="2 2"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, delay: 1.2 }}
       />
 
@@ -1315,7 +1352,7 @@ const ConsultingIcon: React.FC = () => (
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
-  
+
   // Refs for circular layout
   const containerRef = useRef<HTMLDivElement>(null);
   const div1Ref = useRef<HTMLDivElement>(null);
@@ -1325,7 +1362,7 @@ const Home: React.FC = () => {
   const div5Ref = useRef<HTMLDivElement>(null);
   const div6Ref = useRef<HTMLDivElement>(null);
   const div7Ref = useRef<HTMLDivElement>(null);
-  
+
   // Contact form state
   const [contactForm, setContactForm] = useState({
     name: '',
@@ -1333,7 +1370,7 @@ const Home: React.FC = () => {
     subject: '',
     message: ''
   });
-  
+
   const [contactErrors, setContactErrors] = useState({
     name: '',
     email: '',
@@ -1343,13 +1380,13 @@ const Home: React.FC = () => {
 
   // Modal state for Workflow Automation card
   const [showWorkflowModal, setShowWorkflowModal] = useState(false);
-  
+
   // Modal state for AI-Powered Solutions card
   const [showAISolutionsModal, setShowAISolutionsModal] = useState(false);
-  
+
   // Modal state for System Integration card
   const [showSystemIntegrationModal, setShowSystemIntegrationModal] = useState(false);
-  
+
   // Modal state for Consulting Services card
   const [showConsultingModal, setShowConsultingModal] = useState(false);
 
@@ -1363,7 +1400,7 @@ const Home: React.FC = () => {
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Reset errors
     const newErrors = {
       name: '',
@@ -1371,12 +1408,12 @@ const Home: React.FC = () => {
       subject: '',
       message: ''
     };
-    
+
     // Validation
     if (!contactForm.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!contactForm.email.trim()) {
       newErrors.email = 'Email is required';
     } else {
@@ -1385,17 +1422,17 @@ const Home: React.FC = () => {
         newErrors.email = 'Please enter a valid email address';
       }
     }
-    
+
     if (!contactForm.subject.trim()) {
       newErrors.subject = 'Subject is required';
     }
-    
+
     if (!contactForm.message.trim()) {
       newErrors.message = 'Message is required';
     }
-    
+
     setContactErrors(newErrors);
-    
+
     // If no errors, handle submission
     if (!Object.values(newErrors).some(error => error)) {
       console.log('Contact form submitted:', contactForm);
@@ -1636,7 +1673,32 @@ const Home: React.FC = () => {
         {/* Simple Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 via-purple-900/20 to-gray-800/50" />
 
-        <div className="container-custom relative z-10">
+        {/* Meteors Animation Background - Covering Full Section Space */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-50 w-full h-full">
+          <Meteors number={80} className="opacity-80" />
+        </div>
+
+        {/* Meteor Animation Styles */}
+        <style>{`
+          @keyframes meteor-effect {
+            0% {
+              transform: rotate(45deg) translateX(0);
+              opacity: 1;
+            }
+            70% {
+              opacity: 1;
+            }
+                            100% {
+                  transform: rotate(45deg) translateX(3000px);
+                  opacity: 0;
+                }
+          }
+          .animate-meteor-effect {
+            animation: meteor-effect linear infinite;
+          }
+        `}</style>
+
+        <div className="container-custom relative z-10 mb-[100px]">
 
 
           <motion.div
@@ -1649,7 +1711,7 @@ const Home: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
               {t('home.servicesPreview.title')}
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-[100px]">
               {t('home.servicesPreview.subtitle')}
             </p>
           </motion.div>
@@ -1676,9 +1738,12 @@ const Home: React.FC = () => {
                 <source src="/video/ourservice.webm" type="video/webm" />
                 Your browser does not support the video tag.
               </video>
+
+
+
               {/* Gradient Line */}
               <div className="absolute right-5 top-0 h-px w-1/2 bg-gradient-to-l from-transparent via-purple-400/30 via-10% to-transparent" />
-              
+
               {/* Main Component */}
               <div className="flex h-full w-full flex-row justify-between gap-16 max-w-lg items-center">
                 <div className="flex flex-col justify-center gap-4">
@@ -1704,7 +1769,7 @@ const Home: React.FC = () => {
                       />
                     </svg>
                   </Circle>
-                  
+
                   {/* Div 2 - AI-Powered Solutions */}
                   <Circle ref={div2Ref}>
                     <svg
@@ -1722,7 +1787,7 @@ const Home: React.FC = () => {
                         stroke="#fff"
                         strokeWidth="3"
                       />
-                      
+
                       {/* Brain Folds */}
                       <path
                         d="M35 40 Q45 35 55 40 Q65 45 75 40 Q85 35 95 40"
@@ -1745,7 +1810,7 @@ const Home: React.FC = () => {
                         strokeWidth="2"
                         opacity="0.8"
                       />
-                      
+
                       {/* AI Circuit Lines */}
                       <path
                         d="M20 30 L40 30 L40 40 L60 40 L60 50 L80 50 L80 60 L100 60"
@@ -1754,7 +1819,7 @@ const Home: React.FC = () => {
                         strokeWidth="2"
                         opacity="0.7"
                       />
-                      
+
                       {/* Data Nodes */}
                       <circle cx="20" cy="30" r="3" fill="#fff" opacity="0.9" />
                       <circle cx="40" cy="30" r="3" fill="#fff" opacity="0.9" />
@@ -1764,18 +1829,18 @@ const Home: React.FC = () => {
                       <circle cx="80" cy="50" r="3" fill="#fff" opacity="0.9" />
                       <circle cx="80" cy="60" r="3" fill="#fff" opacity="0.9" />
                       <circle cx="100" cy="60" r="3" fill="#fff" opacity="0.9" />
-                      
+
                       {/* Central Processing Unit */}
                       <circle cx="60" cy="55" r="8" fill="#fff" opacity="0.3" />
                       <circle cx="60" cy="55" r="5" fill="#fff" />
-                      
+
                       {/* AI Text */}
                       <text x="60" y="110" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">
                         AI
                       </text>
                     </svg>
                   </Circle>
-                  
+
                   {/* Div 3 - System Integration */}
                   <Circle ref={div3Ref}>
                     <svg
@@ -1789,7 +1854,7 @@ const Home: React.FC = () => {
                     >
                       {/* Main System Box */}
                       <rect x="20" y="20" width="80" height="60" rx="8" fill="none" stroke="#fff" strokeWidth="3" />
-                      
+
                       {/* Connection Points */}
                       <circle cx="15" cy="35" r="3" fill="#fff" />
                       <circle cx="15" cy="50" r="3" fill="#fff" />
@@ -1797,7 +1862,7 @@ const Home: React.FC = () => {
                       <circle cx="105" cy="35" r="3" fill="#fff" />
                       <circle cx="105" cy="50" r="3" fill="#fff" />
                       <circle cx="105" cy="65" r="3" fill="#fff" />
-                      
+
                       {/* Connection Lines */}
                       <path d="M15 35 L20 35" stroke="#fff" strokeWidth="2" />
                       <path d="M15 50 L20 50" stroke="#fff" strokeWidth="2" />
@@ -1805,37 +1870,37 @@ const Home: React.FC = () => {
                       <path d="M100 35 L105 35" stroke="#fff" strokeWidth="2" />
                       <path d="M100 50 L105 50" stroke="#fff" strokeWidth="2" />
                       <path d="M100 65 L105 65" stroke="#fff" strokeWidth="2" />
-                      
+
                       {/* Internal Components */}
                       <rect x="30" y="30" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
                       <rect x="70" y="30" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
                       <rect x="30" y="55" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
                       <rect x="70" y="55" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
-                      
+
                       {/* Central Hub */}
                       <circle cx="60" cy="50" r="8" fill="#fff" opacity="0.2" />
                       <circle cx="60" cy="50" r="5" fill="#fff" />
-                      
+
                       {/* Data Flow Arrows */}
                       <path d="M50 50 L45 50" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
                       <path d="M70 50 L75 50" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
                       <path d="M60 40 L60 35" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
                       <path d="M60 60 L60 65" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
-                      
+
                       {/* Arrow Markers */}
                       <defs>
                         <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                           <polygon points="0 0, 10 3.5, 0 7" fill="#fff" />
                         </marker>
                       </defs>
-                      
+
                       {/* Integration Text */}
                       <text x="60" y="100" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">
                         INTEGRATION
                       </text>
                     </svg>
                   </Circle>
-                  
+
                   {/* Div 4 - Consulting Services */}
                   <Circle ref={div4Ref}>
                     <svg
@@ -1849,28 +1914,28 @@ const Home: React.FC = () => {
                     >
                       {/* Professional Person */}
                       <circle cx="60" cy="35" r="15" fill="#fff" />
-                      
+
                       {/* Business Suit */}
                       <path d="M45 50 L75 50 L75 85 L45 85 Z" fill="#fff" />
                       <path d="M50 50 L70 50 L70 75 L50 75 Z" fill="#fff" opacity="0.3" />
-                      
+
                       {/* Tie */}
                       <path d="M58 50 L62 50 L60 85 Z" fill="#fff" opacity="0.8" />
-                      
+
                       {/* Briefcase */}
                       <rect x="35" y="70" width="50" height="25" rx="3" fill="none" stroke="#fff" strokeWidth="2" />
                       <rect x="40" y="75" width="40" height="15" fill="#fff" opacity="0.3" />
                       <path d="M45 70 L45 65 L55 65 L55 70" fill="none" stroke="#fff" strokeWidth="2" />
-                      
+
                       {/* Charts and Graphs */}
                       <rect x="25" y="25" width="20" height="15" rx="2" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7" />
                       <path d="M30 35 L35 32 L40 35 L45 30" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7" />
-                      
+
                       <rect x="75" y="25" width="20" height="15" rx="2" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7" />
                       <rect x="78" y="28" width="4" height="9" fill="#fff" opacity="0.7" />
                       <rect x="84" y="30" width="4" height="7" fill="#fff" opacity="0.7" />
                       <rect x="90" y="32" width="4" height="5" fill="#fff" opacity="0.7" />
-                      
+
                       {/* Consulting Text */}
                       <text x="60" y="110" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">
                         CONSULTING
@@ -1878,7 +1943,7 @@ const Home: React.FC = () => {
                     </svg>
                   </Circle>
                 </div>
-                
+
                 <div className="flex flex-col justify-center">
                   {/* Div 6 - Central AI Card */}
                   <Circle ref={div6Ref}>
@@ -1906,7 +1971,7 @@ const Home: React.FC = () => {
                     </svg>
                   </Circle>
                 </div>
-                
+
                 <div className="flex flex-col justify-center">
                   {/* Div 7 - User */}
                   <Circle ref={div7Ref}>
@@ -1930,9 +1995,9 @@ const Home: React.FC = () => {
               </div>
 
               {/* Animated Beams */}
-              <AnimatedBeam 
-                containerRef={containerRef} 
-                fromRef={div1Ref} 
+              <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div1Ref}
                 toRef={div6Ref}
                 curvature={20}
                 gradientStartColor="#ffaa40"
@@ -1942,9 +2007,9 @@ const Home: React.FC = () => {
                 intendedWidth={800}
                 intendedHeight={434}
               />
-              <AnimatedBeam 
-                containerRef={containerRef} 
-                fromRef={div2Ref} 
+              <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div2Ref}
                 toRef={div6Ref}
                 curvature={15}
                 gradientStartColor="#40ffaa"
@@ -1954,9 +2019,9 @@ const Home: React.FC = () => {
                 intendedWidth={800}
                 intendedHeight={434}
               />
-              <AnimatedBeam 
-                containerRef={containerRef} 
-                fromRef={div3Ref} 
+              <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div3Ref}
                 toRef={div6Ref}
                 curvature={25}
                 gradientStartColor="#ff40aa"
@@ -1966,9 +2031,9 @@ const Home: React.FC = () => {
                 intendedWidth={800}
                 intendedHeight={434}
               />
-              <AnimatedBeam 
-                containerRef={containerRef} 
-                fromRef={div4Ref} 
+              <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div4Ref}
                 toRef={div6Ref}
                 curvature={18}
                 gradientStartColor="#aa40ff"
@@ -1978,9 +2043,9 @@ const Home: React.FC = () => {
                 intendedWidth={800}
                 intendedHeight={434}
               />
-              <AnimatedBeam 
-                containerRef={containerRef} 
-                fromRef={div5Ref} 
+              <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div5Ref}
                 toRef={div6Ref}
                 curvature={22}
                 gradientStartColor="#ff9c40"
@@ -1990,9 +2055,9 @@ const Home: React.FC = () => {
                 intendedWidth={800}
                 intendedHeight={434}
               />
-              <AnimatedBeam 
-                containerRef={containerRef} 
-                fromRef={div6Ref} 
+              <AnimatedBeam
+                containerRef={containerRef}
+                fromRef={div6Ref}
                 toRef={div7Ref}
                 curvature={30}
                 reverse={true}
@@ -2009,191 +2074,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Services Cards Section */}
-      <section className="section-padding bg-gray-900 relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/5 to-gray-900" />
-        
-        {/* Floating Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            className="absolute top-20 left-20 w-2 h-2 bg-purple-400/30 rounded-full"
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute top-40 right-32 w-1 h-1 bg-blue-400/40 rounded-full"
-            animate={{
-              y: [0, 15, 0],
-              opacity: [0.4, 0.9, 0.4],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-purple-500/25 rounded-full"
-            animate={{
-              y: [0, -25, 0],
-              opacity: [0.2, 0.7, 0.2],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </div>
-
-        <div className="container-custom relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {servicesPreview.map((service, index) => (
-              <motion.div
-                key={service.key}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative group"
-              >
-                {/* Animated Card Background */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0, 0.3, 0]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                
-                {/* Main Card */}
-                <motion.div
-                  className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-gray-700/30 rounded-3xl p-6 h-full group-hover:border-purple-500/50 group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Animated Border Glow */}
-                  <motion.div
-                    className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    animate={{
-                      backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  />
-                  
-                  {/* Icon Container with Glow */}
-                  <div className="relative mb-6">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0, 0.3, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    />
-                    <div className="relative flex justify-center">
-                      <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-purple-400/30 group-hover:border-purple-400/50 transition-all duration-300">
-                        <div className="text-2xl group-hover:scale-110 transition-transform duration-300">
-                          {service.icon}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Title with Gradient */}
-                  <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                    {service.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
-                    {service.description}
-                  </p>
-                  
-                  {/* Features */}
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
-                      Key Features
-                    </h4>
-                    <ul className="space-y-2">
-                      {service.features.slice(0, 3).map((feature, featureIndex) => (
-                        <motion.li 
-                          key={featureIndex}
-                          className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: featureIndex * 0.1 }}
-                        >
-                          <motion.span 
-                            className="mr-3 text-purple-400 group-hover:text-purple-300 transition-colors duration-300"
-                            whileHover={{ scale: 1.2, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            ✓
-                          </motion.span>
-                          {feature}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* CTA Button */}
-                  <motion.button
-                    className="relative w-full px-6 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
-                    onClick={() => window.location.href = '/services'}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {/* Button Glow Effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      animate={{
-                        x: ['-100%', '100%']
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                    />
-                    
-                    {/* Button Text */}
-                    <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
-                      {service.ctaText}
-                    </span>
-                  </motion.button>
-                  
-                  {/* Bottom Glow Line */}
-                  <motion.div
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
-                    whileHover={{ width: '75%' }}
-                  />
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Integrations Preview Section */}
       <section id="integrations" className="section-padding bg-gray-900 relative overflow-hidden">
@@ -2220,269 +2101,269 @@ const Home: React.FC = () => {
             {/* Left Side - Integration Cards Grid */}
             <div className="lg:w-2/3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {integrationsPreview.map((integration, index) => (
-                             integration.name === 'WhatsApp' ? (
-                 // Special Card for WhatsApp (without video)
-                 <motion.div
-                   key={integration.name}
-                   initial={{ opacity: 0, y: 30 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                   className="relative group"
-                 >
-                  {/* Animated Card Background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      opacity: [0, 0.3, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                  
-                  {/* Main Card */}
-                  <motion.div
-                    className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-purple-500/50 rounded-3xl p-6 h-full group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Animated Border Glow */}
+                {integrationsPreview.map((integration, index) => (
+                  integration.name === 'WhatsApp' ? (
+                    // Special Card for WhatsApp (without video)
                     <motion.div
-                      className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      animate={{
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                    />
-                    
-                    <div className="text-center mb-4 flex-grow relative z-10">
-                      <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <img 
-                          src={integration.logo} 
-                          alt={`${integration.name} logo`}
-                          className="w-16 h-16 object-contain"
-                        />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                        {integration.name}
-                      </h3>
-                      <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
-                        {integration.description}
-                      </p>
-                    </div>
-                    
-                    {/* Integration Features */}
-                    <div className="mt-6 pt-6 border-t border-gray-700/50 relative z-10">
-                      <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
-                        Key Features
-                      </h4>
-                      <ul className="space-y-2">
-                        <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                          <motion.span 
-                            className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                            whileHover={{ scale: 1.2, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            ✓
-                          </motion.span>
-                          Seamless integration
-                        </li>
-                        <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                          <motion.span 
-                            className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                            whileHover={{ scale: 1.2, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            ✓
-                          </motion.span>
-                          Real-time sync
-                        </li>
-                        <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                          <motion.span 
-                            className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                            whileHover={{ scale: 1.2, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            ✓
-                          </motion.span>
-                          Secure connection
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    {/* Enhanced Connect Button */}
-                    <motion.button
-                      className="relative w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      key={integration.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="relative group"
                     >
-                      {/* Button Glow Effect */}
+                      {/* Animated Card Background */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                         animate={{
-                          x: ['-100%', '100%']
+                          scale: [1, 1.05, 1],
+                          opacity: [0, 0.3, 0]
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 4,
                           repeat: Infinity,
-                          ease: "linear"
+                          ease: "easeInOut"
                         }}
                       />
-                      
-                      {/* Button Text */}
-                      <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
-                        Connect {integration.name}
-                      </span>
-                    </motion.button>
-                    
-                    {/* Bottom Glow Line */}
-                    <motion.div
-                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
-                      whileHover={{ width: '75%' }}
-                    />
-                  </motion.div>
-                </motion.div>
-              ) : (
-                // Regular Card for other integrations
-                <motion.div
-                  key={integration.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="relative group"
-                >
-                  {/* Animated Card Background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                    animate={{
-                      scale: [1, 1.05, 1],
-                      opacity: [0, 0.3, 0]
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                  
-                  {/* Main Card */}
-                  <motion.div
-                    className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-6 h-full group-hover:border-purple-500/50 group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Animated Border Glow */}
-                    <motion.div
-                      className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      animate={{
-                        backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                    />
-                    
-                    <div className="text-center mb-4 flex-grow relative z-10">
-                      <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <img 
-                          src={integration.logo} 
-                          alt={`${integration.name} logo`}
-                          className="w-16 h-16 object-contain"
-                        />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                        {integration.name}
-                      </h3>
-                      <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
-                        {integration.description}
-                      </p>
-                    </div>
-                    
-                    {/* Integration Features */}
-                    <div className="mt-6 pt-6 border-t border-gray-700/50 relative z-10">
-                      <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
-                        Key Features
-                      </h4>
-                      <ul className="space-y-2">
-                        <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                          <motion.span 
-                            className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                            whileHover={{ scale: 1.2, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            ✓
-                          </motion.span>
-                          Seamless integration
-                        </li>
-                        <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                          <motion.span 
-                            className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                            whileHover={{ scale: 1.2, rotate: 5 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            ✓
-                          </motion.span>
-                          Real-time sync
-                        </li>
-                        <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                                                     <motion.span 
-                             className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                             whileHover={{ scale: 1.2, rotate: 5 }}
-                             transition={{ duration: 0.2 }}
-                           >
-                             ✓
-                           </motion.span>
-                          Secure connection
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    {/* Enhanced Connect Button */}
-                    <motion.button
-                      className="relative w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      {/* Button Glow Effect */}
+
+                      {/* Main Card */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-purple-500/50 rounded-3xl p-6 h-full group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Animated Border Glow */}
+                        <motion.div
+                          className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          animate={{
+                            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        />
+
+                        <div className="text-center mb-4 flex-grow relative z-10">
+                          <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <img
+                              src={integration.logo}
+                              alt={`${integration.name} logo`}
+                              className="w-16 h-16 object-contain"
+                            />
+                          </div>
+                          <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                            {integration.name}
+                          </h3>
+                          <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                            {integration.description}
+                          </p>
+                        </div>
+
+                        {/* Integration Features */}
+                        <div className="mt-6 pt-6 border-t border-gray-700/50 relative z-10">
+                          <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
+                            Key Features
+                          </h4>
+                          <ul className="space-y-2">
+                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
+                              <motion.span
+                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                ✓
+                              </motion.span>
+                              Seamless integration
+                            </li>
+                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
+                              <motion.span
+                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                ✓
+                              </motion.span>
+                              Real-time sync
+                            </li>
+                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
+                              <motion.span
+                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                ✓
+                              </motion.span>
+                              Secure connection
+                            </li>
+                          </ul>
+                        </div>
+
+                        {/* Enhanced Connect Button */}
+                        <motion.button
+                          className="relative w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {/* Button Glow Effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            animate={{
+                              x: ['-100%', '100%']
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                          />
+
+                          {/* Button Text */}
+                          <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
+                            Connect {integration.name}
+                          </span>
+                        </motion.button>
+
+                        {/* Bottom Glow Line */}
+                        <motion.div
+                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
+                          whileHover={{ width: '75%' }}
+                        />
+                      </motion.div>
+                    </motion.div>
+                  ) : (
+                    // Regular Card for other integrations
+                    <motion.div
+                      key={integration.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="relative group"
+                    >
+                      {/* Animated Card Background */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                         animate={{
-                          x: ['-100%', '100%']
+                          scale: [1, 1.05, 1],
+                          opacity: [0, 0.3, 0]
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 4,
                           repeat: Infinity,
-                          ease: "linear"
+                          ease: "easeInOut"
                         }}
                       />
-                      
-                      {/* Button Text */}
-                      <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
-                        Connect {integration.name}
-                      </span>
-                    </motion.button>
-                    
-                    {/* Bottom Glow Line */}
-                    <motion.div
-                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
-                      whileHover={{ width: '75%' }}
-                    />
-                  </motion.div>
-                </motion.div>
-              )
-            ))}
+
+                      {/* Main Card */}
+                      <motion.div
+                        className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-6 h-full group-hover:border-purple-500/50 group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Animated Border Glow */}
+                        <motion.div
+                          className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          animate={{
+                            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        />
+
+                        <div className="text-center mb-4 flex-grow relative z-10">
+                          <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <img
+                              src={integration.logo}
+                              alt={`${integration.name} logo`}
+                              className="w-16 h-16 object-contain"
+                            />
+                          </div>
+                          <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
+                            {integration.name}
+                          </h3>
+                          <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                            {integration.description}
+                          </p>
+                        </div>
+
+                        {/* Integration Features */}
+                        <div className="mt-6 pt-6 border-t border-gray-700/50 relative z-10">
+                          <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
+                            Key Features
+                          </h4>
+                          <ul className="space-y-2">
+                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
+                              <motion.span
+                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                ✓
+                              </motion.span>
+                              Seamless integration
+                            </li>
+                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
+                              <motion.span
+                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                ✓
+                              </motion.span>
+                              Real-time sync
+                            </li>
+                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
+                              <motion.span
+                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
+                                whileHover={{ scale: 1.2, rotate: 5 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                ✓
+                              </motion.span>
+                              Secure connection
+                            </li>
+                          </ul>
+                        </div>
+
+                        {/* Enhanced Connect Button */}
+                        <motion.button
+                          className="relative w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          {/* Button Glow Effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            animate={{
+                              x: ['-100%', '100%']
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                          />
+
+                          {/* Button Text */}
+                          <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
+                            Connect {integration.name}
+                          </span>
+                        </motion.button>
+
+                        {/* Bottom Glow Line */}
+                        <motion.div
+                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
+                          whileHover={{ width: '75%' }}
+                        />
+                      </motion.div>
+                    </motion.div>
+                  )
+                ))}
               </div>
             </div>
 
@@ -2495,11 +2376,24 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="relative h-full min-h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-blue-900/30 to-indigo-900/40 border border-purple-500/30"
               >
+                {/* Background Video */}
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
+                >
+                  <source src="/video/popular_integration.webm" type="video/webm" />
+                  Your browser does not support the video tag.
+                </video>
+                
                 {/* Content Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-10">
                   <div className="bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full p-4 mb-6">
                     <svg className="w-12 h-12 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h7l9-11h-7z" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-white">
@@ -2608,11 +2502,11 @@ const Home: React.FC = () => {
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Contact Information */}
-          <motion.div
+                <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
+                  viewport={{ once: true }}
                   className="space-y-6"
                 >
                   <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
@@ -2631,7 +2525,7 @@ const Home: React.FC = () => {
                           <p className="text-gray-300">hello@flowtify.com</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center">
                           <svg className="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2643,7 +2537,7 @@ const Home: React.FC = () => {
                           <p className="text-gray-300">+1 (555) 123-4567</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
                           <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2683,14 +2577,13 @@ const Home: React.FC = () => {
                           name="name"
                           value={contactForm.name}
                           onChange={(e) => handleContactChange('name', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
-                            contactErrors.name 
-                              ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
-                              : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                          }`}
+                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${contactErrors.name
+                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
+                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
+                            }`}
                           placeholder="Your name"
                         />
-                        
+
                         {/* Error Icon */}
                         {contactErrors.name && (
                           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -2702,7 +2595,7 @@ const Home: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      
+
                       {/* Error Message */}
                       {contactErrors.name && (
                         <motion.div
@@ -2717,7 +2610,7 @@ const Home: React.FC = () => {
                         </motion.div>
                       )}
                     </div>
-                    
+
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                         Email
@@ -2729,14 +2622,13 @@ const Home: React.FC = () => {
                           name="email"
                           value={contactForm.email}
                           onChange={(e) => handleContactChange('email', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
-                            contactErrors.email 
-                              ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
-                              : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                          }`}
+                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${contactErrors.email
+                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
+                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
+                            }`}
                           placeholder="your.email@example.com"
                         />
-                        
+
                         {/* Error Icon */}
                         {contactErrors.email && (
                           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -2748,7 +2640,7 @@ const Home: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      
+
                       {/* Error Message */}
                       {contactErrors.email && (
                         <motion.div
@@ -2763,7 +2655,7 @@ const Home: React.FC = () => {
                         </motion.div>
                       )}
                     </div>
-                    
+
                     <div>
                       <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
                         Subject
@@ -2775,14 +2667,13 @@ const Home: React.FC = () => {
                           name="subject"
                           value={contactForm.subject}
                           onChange={(e) => handleContactChange('subject', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
-                            contactErrors.subject 
-                              ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
-                              : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                          }`}
+                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${contactErrors.subject
+                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
+                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
+                            }`}
                           placeholder="How can we help?"
                         />
-                        
+
                         {/* Error Icon */}
                         {contactErrors.subject && (
                           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -2794,7 +2685,7 @@ const Home: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      
+
                       {/* Error Message */}
                       {contactErrors.subject && (
                         <motion.div
@@ -2809,7 +2700,7 @@ const Home: React.FC = () => {
                         </motion.div>
                       )}
                     </div>
-                    
+
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                         Message
@@ -2821,14 +2712,13 @@ const Home: React.FC = () => {
                           rows={4}
                           value={contactForm.message}
                           onChange={(e) => handleContactChange('message', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 resize-none ${
-                            contactErrors.message 
-                              ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
-                              : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                          }`}
+                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 resize-none ${contactErrors.message
+                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
+                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
+                            }`}
                           placeholder="Tell us about your project..."
                         />
-                        
+
                         {/* Error Icon */}
                         {contactErrors.message && (
                           <div className="absolute top-3 right-3 flex items-center pointer-events-none">
@@ -2840,7 +2730,7 @@ const Home: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      
+
                       {/* Error Message */}
                       {contactErrors.message && (
                         <motion.div
@@ -2855,7 +2745,7 @@ const Home: React.FC = () => {
                         </motion.div>
                       )}
                     </div>
-                    
+
                     <motion.button
                       type="submit"
                       className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-teal-500 text-white font-semibold rounded-lg hover:from-green-600 hover:to-teal-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -2865,7 +2755,7 @@ const Home: React.FC = () => {
                       Send Message
                     </motion.button>
                   </form>
-          </motion.div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -3011,8 +2901,8 @@ const Home: React.FC = () => {
               <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
                 <h3 className="text-xl font-semibold text-white mb-4">What is Workflow Automation?</h3>
                 <p className="text-gray-300 leading-relaxed">
-                  Workflow automation is the process of automating repetitive tasks and business processes using technology. 
-                  It helps organizations reduce manual work, minimize errors, and improve efficiency by creating automated 
+                  Workflow automation is the process of automating repetitive tasks and business processes using technology.
+                  It helps organizations reduce manual work, minimize errors, and improve efficiency by creating automated
                   workflows that can handle complex business logic and decision-making processes.
                 </p>
               </div>
@@ -3072,7 +2962,7 @@ const Home: React.FC = () => {
                   <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-red-700 transform hover:scale-105 transition-all duration-300">
                     Get Started
                   </button>
-                  <button 
+                  <button
                     onClick={() => setShowWorkflowModal(false)}
                     className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
                   >
@@ -3117,22 +3007,22 @@ const Home: React.FC = () => {
                     <circle cx="16" cy="32" r="4" fill="currentColor" opacity="0.9" />
                     <circle cx="48" cy="32" r="4" fill="currentColor" opacity="0.9" />
                     <circle cx="32" cy="48" r="4" fill="currentColor" opacity="0.9" />
-                    
+
                     {/* Central AI Core */}
                     <circle cx="32" cy="32" r="6" fill="currentColor" />
-                    
+
                     {/* Connection Lines */}
                     <path d="M32 20 L32 26" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
                     <path d="M20 32 L26 32" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
                     <path d="M38 32 L44 32" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
                     <path d="M32 38 L32 44" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
-                    
+
                     {/* Diagonal Connections */}
                     <path d="M20 20 L26 26" stroke="currentColor" strokeWidth="1" opacity="0.5" />
                     <path d="M38 26 L44 20" stroke="currentColor" strokeWidth="1" opacity="0.5" />
                     <path d="M20 44 L26 38" stroke="currentColor" strokeWidth="1" opacity="0.5" />
                     <path d="M38 38 L44 44" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                    
+
                     {/* Data Flow Indicators */}
                     <circle cx="32" cy="8" r="1.5" fill="currentColor" opacity="0.6" />
                     <circle cx="8" cy="32" r="1.5" fill="currentColor" opacity="0.6" />
@@ -3162,8 +3052,8 @@ const Home: React.FC = () => {
               <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
                 <h3 className="text-xl font-semibold text-white mb-4">What are AI-Powered Solutions?</h3>
                 <p className="text-gray-300 leading-relaxed">
-                  AI-Powered Solutions leverage artificial intelligence and machine learning to create intelligent, 
-                  adaptive systems that can learn from data, make predictions, and automate complex decision-making processes. 
+                  AI-Powered Solutions leverage artificial intelligence and machine learning to create intelligent,
+                  adaptive systems that can learn from data, make predictions, and automate complex decision-making processes.
                   These solutions transform how businesses operate by providing insights, automation, and optimization capabilities.
                 </p>
               </div>
@@ -3223,7 +3113,7 @@ const Home: React.FC = () => {
                   <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300">
                     Explore AI Solutions
                   </button>
-                  <button 
+                  <button
                     onClick={() => setShowAISolutionsModal(false)}
                     className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
                   >
@@ -3265,7 +3155,7 @@ const Home: React.FC = () => {
                   >
                     {/* Main System Box */}
                     <rect x="16" y="16" width="32" height="24" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-                    
+
                     {/* Connection Points */}
                     <circle cx="12" cy="24" r="2" fill="currentColor" />
                     <circle cx="12" cy="32" r="2" fill="currentColor" />
@@ -3273,7 +3163,7 @@ const Home: React.FC = () => {
                     <circle cx="52" cy="24" r="2" fill="currentColor" />
                     <circle cx="52" cy="32" r="2" fill="currentColor" />
                     <circle cx="52" cy="40" r="2" fill="currentColor" />
-                    
+
                     {/* Connection Lines */}
                     <path d="M12 24 L16 24" stroke="currentColor" strokeWidth="1.5" />
                     <path d="M12 32 L16 32" stroke="currentColor" strokeWidth="1.5" />
@@ -3281,13 +3171,13 @@ const Home: React.FC = () => {
                     <path d="M48 24 L52 24" stroke="currentColor" strokeWidth="1.5" />
                     <path d="M48 32 L52 32" stroke="currentColor" strokeWidth="1.5" />
                     <path d="M48 40 L52 40" stroke="currentColor" strokeWidth="1.5" />
-                    
+
                     {/* Internal Components */}
                     <rect x="20" y="20" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
                     <rect x="34" y="20" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
                     <rect x="20" y="32" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
                     <rect x="34" y="32" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
-                    
+
                     {/* Central Hub */}
                     <circle cx="32" cy="28" r="4" fill="currentColor" opacity="0.2" />
                     <circle cx="32" cy="28" r="2.5" fill="currentColor" />
@@ -3315,8 +3205,8 @@ const Home: React.FC = () => {
               <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
                 <h3 className="text-xl font-semibold text-white mb-4">What is System Integration?</h3>
                 <p className="text-gray-300 leading-relaxed">
-                  System Integration connects different software applications, databases, and business processes to work 
-                  together seamlessly. It eliminates data silos, automates workflows, and provides a unified view of 
+                  System Integration connects different software applications, databases, and business processes to work
+                  together seamlessly. It eliminates data silos, automates workflows, and provides a unified view of
                   your business operations across all platforms and systems.
                 </p>
               </div>
@@ -3376,7 +3266,7 @@ const Home: React.FC = () => {
                   <button className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-teal-700 transform hover:scale-105 transition-all duration-300">
                     Start Integration
                   </button>
-                  <button 
+                  <button
                     onClick={() => setShowSystemIntegrationModal(false)}
                     className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
                   >
@@ -3418,23 +3308,23 @@ const Home: React.FC = () => {
                   >
                     {/* Professional Person */}
                     <circle cx="32" cy="20" r="8" fill="currentColor" />
-                    
+
                     {/* Business Suit */}
                     <path d="M24 28 L40 28 L40 48 L24 48 Z" fill="currentColor" />
                     <path d="M26 28 L38 28 L38 46 L26 46 Z" fill="currentColor" opacity="0.3" />
-                    
+
                     {/* Tie */}
                     <path d="M30 28 L34 28 L32 48 Z" fill="currentColor" opacity="0.8" />
-                    
+
                     {/* Briefcase */}
                     <rect x="22" y="42" width="20" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
                     <rect x="24" y="44" width="16" height="8" fill="currentColor" opacity="0.3" />
                     <path d="M26 42 L26 40 L30 40 L30 42" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                    
+
                     {/* Charts and Graphs */}
                     <rect x="12" y="12" width="10" height="8" rx="1" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
                     <path d="M14 18 L17 16 L20 18 L23 16" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
-                    
+
                     <rect x="42" y="12" width="10" height="8" rx="1" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
                     <rect x="44" y="14" width="2" height="4" fill="currentColor" opacity="0.7" />
                     <rect x="47" y="15" width="2" height="3" fill="currentColor" opacity="0.7" />
@@ -3463,8 +3353,8 @@ const Home: React.FC = () => {
               <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
                 <h3 className="text-xl font-semibold text-white mb-4">What are Consulting Services?</h3>
                 <p className="text-gray-300 leading-relaxed">
-                  Our consulting services provide expert guidance, strategic planning, and implementation support 
-                  to help your business achieve its goals. We analyze your current processes, identify opportunities 
+                  Our consulting services provide expert guidance, strategic planning, and implementation support
+                  to help your business achieve its goals. We analyze your current processes, identify opportunities
                   for improvement, and develop customized solutions that drive growth and efficiency.
                 </p>
               </div>
@@ -3524,7 +3414,7 @@ const Home: React.FC = () => {
                   <button className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-semibold rounded-lg hover:from-indigo-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300">
                     Get Consultation
                   </button>
-                  <button 
+                  <button
                     onClick={() => setShowConsultingModal(false)}
                     className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
                   >
