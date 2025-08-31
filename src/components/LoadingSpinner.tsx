@@ -75,7 +75,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ progress, isLoading }) 
           className="mb-8"
         >
           <img 
-            src="/logo.png" 
+            src="/logo_v.png" 
             alt="Flowtify" 
             className="w-24 h-24 mx-auto object-contain"
           />
