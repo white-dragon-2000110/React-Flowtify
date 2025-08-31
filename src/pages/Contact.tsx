@@ -96,7 +96,11 @@ const Contact: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <ContactForm />
+            <ContactForm onSubmit={(formData) => {
+              console.log('Contact form submitted:', formData);
+              // Here you would typically send the data to your backend
+              alert('Thank you for your message! We will get back to you soon.');
+            }} />
           </motion.div>
         </div>
       </div>

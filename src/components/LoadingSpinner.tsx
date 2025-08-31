@@ -152,7 +152,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ progress, isLoading }) 
           className="mt-6 text-sm text-gray-500"
         >
           {progress < 30 && "Initializing..."}
-          {progress >= 30 && progress < 60 && "Loading videos..."}
+          {progress >= 30 && progress < 60 && "Loading assets..."}
           {progress >= 60 && progress < 90 && "Preparing content..."}
           {progress >= 90 && "Almost ready..."}
         </motion.div>

@@ -1,85 +1,67 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 
-interface FormData {
+interface ContactFormProps {
+  onSubmit: (formData: ContactFormData) => void;
+  className?: string;
+}
+
+interface ContactFormData {
   name: string;
   email: string;
-  company?: string;
+  subject: string;
   message: string;
 }
 
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
-
-const ContactForm: React.FC = () => {
-  const { t } = useTranslation();
-  const [formData, setFormData] = useState<FormData>({
+const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className = "" }) => {
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
-    company: '',
+    subject: '',
     message: ''
   });
-  const [errors, setErrors] = useState<FormErrors>({});
+
+  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (field: keyof ContactFormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
+  };
 
   const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
+    const newErrors: Partial<ContactFormData> = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = 'Please enter a valid email address';
+      }
     }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
+    if (!formData.subject.trim()) newErrors.subject = 'Subject is required';
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setSubmitStatus('idle');
-
+    
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', company: '', message: '' });
-      
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      await onSubmit(formData);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setErrors({});
     } catch (error) {
-      setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 5000);
+      console.error('Form submission error:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -87,180 +69,213 @@ const ContactForm: React.FC = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      className={`relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-gray-700/30 rounded-3xl p-8 overflow-hidden ${className}`}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8"
+      whileHover={{ y: -5 }}
     >
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-          Get in touch
-        </h2>
-        <p className="text-gray-600 text-sm">
-          We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-        </p>
-      </div>
+      {/* Animated Background Glow */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0, 0.1, 0]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              {t('contact.name')} *
+      <div className="relative z-10">
+        <motion.h3 
+          className="text-2xl font-bold mb-6 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          Send us a Message
+        </motion.h3>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Name Field */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+              Name
             </label>
-            <input
+            <motion.input
               type="text"
               id="name"
               name="name"
               value={formData.name}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-                errors.name ? 'border-red-300 focus:ring-red-500' : 'hover:border-gray-300'
+              onChange={(e) => handleChange('name', e.target.value)}
+              className={`w-full px-4 py-3 bg-gray-700/50 border rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                errors.name 
+                  ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
+                  : 'border-gray-600/50 focus:ring-purple-500/50 focus:border-purple-500'
               }`}
-              placeholder="Enter your name"
-              required
+              placeholder="Your name"
+              whileFocus={{ scale: 1.02 }}
             />
+            
             {errors.name && (
-              <motion.p 
+              <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-red-500 text-sm mt-2 flex items-center"
+                className="mt-2 text-sm text-red-400"
               >
-                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
                 {errors.name}
-              </motion.p>
+              </motion.div>
             )}
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              {t('contact.email')} *
+          </motion.div>
+          
+          {/* Email Field */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              Email
             </label>
-            <input
+            <motion.input
               type="email"
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-                errors.email ? 'border-red-300 focus:ring-red-500' : 'hover:border-gray-300'
+              onChange={(e) => handleChange('email', e.target.value)}
+              className={`w-full px-4 py-3 bg-gray-700/50 border rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                errors.email 
+                  ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
+                  : 'border-gray-600/50 focus:ring-purple-500/50 focus:border-purple-500'
               }`}
-              placeholder="Enter your email"
-              required
+              placeholder="your.email@example.com"
+              whileFocus={{ scale: 1.02 }}
             />
+            
             {errors.email && (
-              <motion.p 
+              <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-red-500 text-sm mt-2 flex items-center"
+                className="mt-2 text-sm text-red-400"
               >
-                <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
                 {errors.email}
-              </motion.p>
+              </motion.div>
             )}
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-            Company
-          </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300"
-            placeholder="Enter your company name (optional)"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            {t('contact.message')} *
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            rows={5}
-            className={`w-full px-4 py-3 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none ${
-              errors.message ? 'border-red-300 focus:ring-red-500' : 'hover:border-gray-300'
-            }`}
-            placeholder="Tell us about your project or inquiry..."
-            required
-          />
-          {errors.message && (
-            <motion.p 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-red-500 text-sm mt-2 flex items-center"
-            >
-              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
-              {errors.message}
-            </motion.p>
-          )}
-        </div>
-
-        <motion.button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white font-medium py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          {isSubmitting ? (
-            <div className="flex items-center justify-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Sending message...
-            </div>
-          ) : (
-            'Send message'
-          )}
-        </motion.button>
-
-        {submitStatus === 'success' && (
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-green-50 border border-green-200 rounded-lg p-4"
-          >
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <p className="text-green-800 font-medium">Message sent successfully!</p>
-            </div>
-            <p className="text-green-700 text-sm mt-1">We'll get back to you within 24 hours.</p>
           </motion.div>
-        )}
-
-        {submitStatus === 'error' && (
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-red-50 border border-red-200 rounded-lg p-4"
+          
+          {/* Subject Field */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-red-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-              </svg>
-              <p className="text-red-800 font-medium">Failed to send message</p>
-            </div>
-            <p className="text-red-700 text-sm mt-1">Please try again or contact us directly.</p>
+            <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+              Subject
+            </label>
+            <motion.input
+              type="text"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={(e) => handleChange('subject', e.target.value)}
+              className={`w-full px-4 py-3 bg-gray-700/50 border rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                errors.subject 
+                  ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
+                  : 'border-gray-600/50 focus:ring-purple-500/50 focus:border-purple-500'
+              }`}
+              placeholder="How can we help?"
+              whileFocus={{ scale: 1.02 }}
+            />
+            
+            {errors.subject && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-2 text-sm text-red-400"
+              >
+                {errors.subject}
+              </motion.div>
+            )}
           </motion.div>
-        )}
-      </form>
+          
+          {/* Message Field */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+              Message
+            </label>
+            <motion.textarea
+              id="message"
+              name="message"
+              rows={4}
+              value={formData.message}
+              onChange={(e) => handleChange('message', e.target.value)}
+              className={`w-full px-4 py-3 bg-gray-700/50 border rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 resize-none ${
+                errors.message 
+                  ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500' 
+                  : 'border-gray-600/50 focus:ring-purple-500/50 focus:border-purple-500'
+              }`}
+              placeholder="Tell us about your project..."
+              whileFocus={{ scale: 1.02 }}
+            />
+            
+            {errors.message && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-2 text-sm text-red-400"
+              >
+                {errors.message}
+              </motion.div>
+            )}
+          </motion.div>
+          
+          {/* Submit Button */}
+          <motion.button
+            type="submit"
+            disabled={isSubmitting}
+            className="relative w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-2xl hover:from-purple-700 hover:to-blue-700 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-purple-500/25 overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            {/* Button Glow Effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              animate={{
+                x: ['-100%', '100%']
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            <span className="relative z-10 font-semibold">
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </span>
+          </motion.button>
+        </form>
+
+        {/* Bottom Glow Line */}
+        <motion.div
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 hover:w-3/4 transition-all duration-500"
+          whileHover={{ width: '75%' }}
+        />
+      </div>
     </motion.div>
   );
 };
