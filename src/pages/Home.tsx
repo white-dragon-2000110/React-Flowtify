@@ -74,7 +74,7 @@ const Home: React.FC = () => {
           clearInterval(progressTimer);
           return 100;
         }
-        return Math.min(prev + progressStep, 100);
+        return Math.min(Math.round(prev + progressStep), 100);
       });
     }, progressInterval);
 

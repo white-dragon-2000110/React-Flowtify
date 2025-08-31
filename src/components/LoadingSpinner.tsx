@@ -116,7 +116,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ progress, isLoading }) 
             transition={{ delay: 0.8 }}
             className="text-center mt-2 text-sm text-gray-400"
           >
-            {progress}% Complete
+            {Math.round(progress)}% Complete
           </motion.div>
         </div>
 
