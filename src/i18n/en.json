@@ -41,12 +41,6 @@
     }
   },
   "home": {
-    "hero": {
-      "title": "Flowtify AI",
-      "subtitle": "Streamline Your Workflow with Intelligent Automation",
-      "description": "Transform your business processes with AI-powered workflow automation. Boost productivity, reduce errors, and focus on what matters most.",
-      "cta": "Start Automating Today"
-    },
     "features": {
       "title": "Why Choose Flowtify?",
       "automation": {
@@ -67,12 +61,12 @@
       }
     },
     "servicesPreview": {
-      "title": "Our Core Services",
-      "subtitle": "Discover how our AI-powered solutions can transform your business workflows"
+      "title": "Superpowers for your business",
+      "subtitle": "Unlock capabilities your company never thought possible."
     },
     "integrationsPreview": {
-      "title": "Popular Integrations",
-      "subtitle": "Connect with the tools you already use and love"
+      "title": "Built to scale with you",
+      "subtitle": "A robust, secure SaaS platform that grows as you do."
     },
     "cta": {
       "title": "Ready to Transform Your Workflow?",
@@ -238,80 +232,129 @@
     }
   },
   "faqs": {
-    "title": "Frequently Asked Questions",
-    "description": "Find answers to common questions about Flowtify and our services",
+    "title": "Never lose information",
     "categories": {
       "general": {
         "name": "General Questions",
         "faqs": {
           "what": {
-            "question": "What is Flowtify?",
-            "answer": "Flowtify is an AI-powered workflow automation platform that helps businesses streamline their processes, reduce manual work, and improve productivity through intelligent automation and integration."
+            "question": "What is Flowtify AI and what do you offer?",
+            "answer": "Flowtify AI is an automation and AI assistant agency for businesses. We build multichannel chatbots, workflows in Make/n8n, and systems for scheduling, sales, and 24/7 customer support. Our focus: saving time and money, increasing conversions, and giving your clients a modern experience."
           },
-          "how": {
-            "question": "How does it work?",
-            "answer": "Flowtify uses a visual workflow builder where you can drag and drop elements to create automated processes. Our AI engine then optimizes these workflows and provides real-time analytics and insights."
+          "who": {
+            "question": "Who is Flowtify AI for?",
+            "answer": "We work with entrepreneurs and small businesses across the U.S. and LATAM — from service providers, e-commerce, and healthcare to education, events, travel, real estate, and consulting. If your team spends too much time on repetitive tasks or handling WhatsApp/Instagram manually, we can automate it."
           },
-          "benefits": {
-            "question": "What are the main benefits?",
-            "answer": "Key benefits include increased productivity, reduced errors, faster process execution, better visibility into operations, cost savings, and the ability to focus on strategic tasks instead of repetitive work."
+          "different": {
+            "question": "What makes Flowtify different from other agencies?",
+            "answer": "Solutions that are custom-built, not templates. AI + Automation fully integrated with your existing apps. Official APIs only, ensuring legal and ethical compliance. Business metrics (time saved, response rate, conversion) from day one."
+          }
+        }
+      },
+      "results": {
+        "name": "Results & Expectations",
+        "faqs": {
+          "results": {
+            "question": "What kind of results can I expect?",
+            "answer": "Results vary, but our clients typically see: Up to 40% lower operational costs, More than 20 hours saved per week, An average +35% increase in lead conversions. Outcomes depend on industry and volume — but everything is tracked and measured."
+          },
+          "processes": {
+            "question": "What processes can you automate?",
+            "answer": "Customer support & sales on WhatsApp / Instagram / Messenger, Scheduling and reminders (Google Calendar / Calendly), Lead funnels (forms, CRMs, follow-ups), Back-office tasks (Drive, Gmail, Notion, Slack, Airtable, HubSpot), Meeting summaries and auto-generated minutes."
+          },
+          "ai_agent": {
+            "question": "How does a Multichannel AI Agent work?",
+            "answer": "It receives, understands, and replies 24/7. It can escalate to a human when needed, keep conversation context, connect to knowledge bases, and log every interaction for analysis."
+          }
+        }
+      },
+      "integrations": {
+        "name": "Integrations & Technical",
+        "faqs": {
+          "integrations": {
+            "question": "What integrations do you support?",
+            "answer": "We connect with more than 50+ popular tools: Google Drive, Gmail, Make, n8n, Meta (WhatsApp/Instagram/Facebook), Slack, Notion, HubSpot, Airtable, Trello, Calendly, Discord, and more. Don't see your app? We can integrate it too."
+          },
+          "implementation": {
+            "question": "How long does implementation take?",
+            "answer": "MVP projects: 1–3 weeks, Full rollouts: 4–8 weeks. Our process: Discovery → Workflow design → Build → Testing → Launch → Optimization."
+          },
+          "whatsapp_api": {
+            "question": "Do you use the official WhatsApp API?",
+            "answer": "Yes. We work with the official Meta API (or approved partners) to guarantee deliverability, compliance, and scalability. We avoid risky, unofficial solutions."
+          }
+        }
+      },
+      "getting_started": {
+        "name": "Getting Started",
+        "faqs": {
+          "start": {
+            "question": "What do I need to get started?",
+            "answer": "Getting started with Flowtify is effortless. All you need to do is fill out a short intake form where we learn about your business and goals. Then, we schedule a discovery session to understand your challenges and needs. From there, our team takes care of everything: workflow design, integrations, setup, and delivery. We also provide training and ongoing support so you can focus on growing your business. You share your vision — we handle the rest."
+          },
+          "roi": {
+            "question": "How do you measure ROI?",
+            "answer": "We set up a dashboard with key KPIs: hours saved, response time, leads captured, conversion rates, revenue impact, cost per contact, and SLA performance. Reports and improvement suggestions are included."
+          },
+          "process": {
+            "question": "What's your process like?",
+            "answer": "1. Discovery (goals & use cases), 2. Workflow mapping & conversational design, 3. Build & integrations, 4. Testing & fine-tuning, 5. Launch, 6. Continuous optimization (data → improvements)."
+          },
+          "demo": {
+            "question": "How do I get started?",
+            "answer": "Book a demo. We'll show you scenarios, timelines, investment ranges, and the first wins you can expect in 2–3 weeks."
           }
         }
       },
       "pricing": {
-        "name": "Pricing & Plans",
+        "name": "Pricing & Contracts",
         "faqs": {
-          "pricing": {
-            "question": "What are the pricing plans?",
-            "answer": "We offer flexible pricing plans starting from $29/month for small teams, with enterprise solutions available for larger organizations. All plans include core features with additional capabilities based on your needs."
+          "cost": {
+            "question": "How much does it cost?",
+            "answer": "Our pricing is flexible and tailored to each client. The final cost depends on: Number of channels and agents, Complexity of the workflows, Level of integrations with your tools, Type of support and maintenance required. At Flowtify, we believe in transparency: after the demo, you'll receive a personalized proposal with clear phases and investment details. You pay only for what you need, with the confidence of a scalable solution."
           },
-          "trial": {
-            "question": "Do you offer a free trial?",
-            "answer": "Yes! We offer a 14-day free trial with full access to all features. No credit card required to start your trial, and you can upgrade or cancel at any time."
-          },
-          "cancellation": {
-            "question": "Can I cancel my subscription?",
-            "answer": "Absolutely. You can cancel your subscription at any time through your account settings. There are no long-term contracts or cancellation fees."
+          "contracts": {
+            "question": "Do you offer contracts, pilots, or cancellation?",
+            "answer": "Yes. We offer pilot projects/MVPs and flexible monthly or quarterly contracts. You can cancel with notice depending on the plan, and we hand over all your workflows and documentation."
           }
         }
       },
       "support": {
-        "name": "Support & Training",
+        "name": "Support & Security",
         "faqs": {
-          "support": {
-            "question": "What support do you offer?",
-            "answer": "We provide comprehensive support including live chat, email support, video tutorials, documentation, and dedicated customer success managers for enterprise customers."
+          "team_replacement": {
+            "question": "Does automation replace my team?",
+            "answer": "Not at all. AI takes care of repetitive tasks so your team can focus on what's strategic and human. There's always a manual override and escalation rules in place."
           },
-          "training": {
-            "question": "Do you provide training?",
-            "answer": "Yes, we offer onboarding sessions, training webinars, and custom training programs for teams. Our customer success team ensures you get the most value from Flowtify."
+          "languages": {
+            "question": "What languages do you support?",
+            "answer": "Spanish and English by default. We can also configure multilingual agents for international clients."
           },
-          "onboarding": {
-            "question": "What's included in onboarding?",
-            "answer": "Onboarding includes initial setup, workflow design consultation, team training, and ongoing support to ensure successful implementation and adoption."
-          }
-        }
-      },
-      "technical": {
-        "name": "Technical Questions",
-        "faqs": {
           "security": {
-            "question": "How secure is my data?",
-            "answer": "We implement enterprise-grade security including SOC 2 compliance, end-to-end encryption, regular security audits, and role-based access control to protect your data."
+            "question": "How do you protect information?",
+            "answer": "1. Encryption, access controls, and audit logs, 2. Compliance with GDPR/CCPA where applicable, 3. Official APIs and trusted providers only, 4. Full ownership and portability of your data and workflows."
           },
-          "integrations": {
-            "question": "What integrations do you support?",
-            "answer": "We support 100+ integrations including popular tools like Slack, Notion, Salesforce, HubSpot, and many more. We also offer custom API integration for specific needs."
+          "support_services": {
+            "question": "What kind of support do you provide?",
+            "answer": "Email and WhatsApp support, proactive maintenance, workflow monitoring, prompt updates, and continuous improvements. SLA-based support plans are available."
           },
-          "scalability": {
-            "question": "Can it scale with my business?",
-            "answer": "Yes, Flowtify is built to scale from small teams to enterprise organizations. Our platform handles increased workloads and users without performance degradation."
+          "troubleshooting": {
+            "question": "What happens if something goes wrong?",
+            "answer": "We have alerts, logs, and human fallback in place. Issues are escalated by severity and resolved with incident playbooks."
+          },
+          "migration": {
+            "question": "Can you migrate what I already have?",
+            "answer": "Yes. We audit your current stack, clean it up, and migrate to Make/n8n or whichever platform works best — ensuring business continuity throughout."
+          },
+          "voice": {
+            "question": "Do you offer voice or voice-note assistants?",
+            "answer": "Yes. We build voice → text → actions assistants (via WhatsApp or web) that generate summaries and execute tasks automatically."
           }
         }
       }
-    }
+    },
+    "contact_info": "📩 info@flowtifyai.com | Instagram · LinkedIn · Facebook"
   },
-
   "contact": {
     "title": "Contact Us",
     "description": "Get in touch with our team. We're here to help you succeed with Flowtify.",
@@ -391,95 +434,92 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "summary": "We are committed to protecting your privacy and ensuring the security of your personal information.",
-    "lastUpdated": "December 2024",
-    "version": "3.2",
-    "pdfUrl": "/documents/privacy-policy-bilingual.pdf",
-    "pdfEmbed": {
-      "title": "Full Privacy Policy (Bilingual)",
-      "description": "View our complete privacy policy in both English and Spanish. The PDF document contains all the detailed privacy terms and data handling practices.",
-      "documentTitle": "Privacy Policy - English & Spanish",
-      "documentSubtitle": "Comprehensive bilingual privacy policy document",
-      "buttonText": "View Full Policy"
-    },
+    "summary": "At Flowtify AI we respect and protect the privacy of our users and clients. All personal information collected through our website (https://flowtifyai.com) is used exclusively for internal purposes, service improvement, and communication with the user.",
+    "lastUpdated": "August 2025",
     "sections": {
-      "information-collection": {
-        "title": "Information We Collect",
-        "content": "We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support. This may include your name, email address, company information, and usage data."
+      "data-collection": {
+        "title": "What data do we collect?",
+        "content": "Full name, Email address, Messages sent via our contact forms, Navigation data (through cookies or analytics tools, if enabled)"
       },
-      "how-we-use": {
-        "title": "How We Use Your Information",
-        "content": "We use the information we collect to provide, maintain, and improve our services, communicate with you, ensure security, and comply with legal obligations. We never sell your personal information to third parties."
+      "data-usage": {
+        "title": "How do we use your data?",
+        "content": "To provide support and answer inquiries, To improve user experience and optimize our services, To comply with legal and security obligations, To send relevant updates only when you have given consent"
       },
-      "information-sharing": {
-        "title": "Information Sharing",
-        "content": "We may share your information with service providers who assist us in operating our platform, with your consent, or when required by law. We maintain strict data protection standards with all partners."
+      "data-protection": {
+        "title": "Data protection:",
+        "content": "We use technical and organizational security measures to protect your data against unauthorized access. We do not share personal data with third parties, except: When required by law or regulation, With trusted service providers (hosting, automation platforms, APIs) that support our operations under strict confidentiality and security standards."
       },
-      "data-security": {
-        "title": "Data Security",
-        "content": "We implement industry-standard security measures to protect your personal information, including encryption, access controls, and regular security audits. Your data is stored securely and accessed only by authorized personnel."
+      "user-rights": {
+        "title": "User rights:",
+        "content": "You can request access, rectification, deletion, restriction, portability, or objection to the processing of your data at any time by writing to info@flowtifyai.com."
       },
-      "your-rights": {
-        "title": "Your Rights",
-        "content": "You have the right to access, correct, or delete your personal information. You can also opt out of certain communications and request data portability. Contact us to exercise these rights."
+      "international-transfers": {
+        "title": "International transfers:",
+        "content": "Data may be stored or processed on servers located outside your country of residence, always applying appropriate legal protections."
+      },
+      "responsible-entity": {
+        "title": "Responsible entity:",
+        "content": "Flowtify AI LLC — Morris County, New Jersey, USA, Email: info@flowtifyai.com"
+      },
+      "updates": {
+        "title": "Updates:",
+        "content": "This policy may be updated periodically. We encourage you to review this page regularly."
       }
-    },
-    "contactInfo": {
-      "title": "Privacy Contact Information",
-      "email": "privacy@flowtify.com",
-      "address": "123 Innovation Drive, Tech City, TC 12345",
-      "phone": "+1 (555) 123-4567"
     }
   },
   "terms": {
-    "title": "Terms of Service",
-    "summary": "Please read these terms carefully before using our services.",
-    "lastUpdated": "December 2024",
-    "version": "2.1",
+    "title": "Terms & Conditions",
+    "summary": "Access and use of the Flowtify AI website https://flowtifyai.com implies full acceptance of these Terms & Conditions.",
     "pdfUrl": "/documents/terms-of-service-bilingual.pdf",
     "pdfEmbed": {
-      "title": "Full Terms of Service (Bilingual)",
-      "description": "View our complete terms of service in both English and Spanish. The PDF document contains all the detailed legal terms and conditions.",
-      "documentTitle": "Terms of Service - English & Spanish",
+      "title": "Full Terms & Conditions (Bilingual)",
+      "description": "View our complete terms & Conditions in both English and Spanish. The PDF document contains all the detailed legal terms and conditions.",
+      "documentTitle": "Terms & Conditions - English & Spanish",
       "documentSubtitle": "Comprehensive bilingual legal terms document",
       "buttonText": "View Full Terms"
     },
     "sections": {
-      "acceptance": {
-        "title": "Acceptance of Terms",
-        "content": "By accessing and using Flowtify services, you accept and agree to be bound by the terms and provision of this agreement."
+      "permitted-use": {
+        "title": "1. Permitted use",
+        "content": "Users agree to use this site legally and appropriately, avoiding any unlawful, fraudulent, or harmful activities that may affect the security or availability of the service."
       },
-      "use-of-services": {
-        "title": "Use of Services",
-        "content": "You may use our services only for lawful purposes and in accordance with these Terms. You agree not to use the services in any way that violates any applicable federal, state, local, or international law or regulation."
+      "intellectual": {
+        "title": "2. Intellectual property",
+        "content": "All content, text, graphics, logos, trademarks, and materials on this site are the property of Flowtify AI LLC. Unauthorized use, reproduction, or distribution is strictly prohibited."
       },
-      "user-accounts": {
-        "title": "User Accounts",
-        "content": "When you create an account with us, you must provide information that is accurate, complete, and current at all times. You are responsible for safeguarding the password and for all activities that occur under your account."
+      "services": {
+        "title": "3. Services and limitations",
+        "content": "Flowtify AI provides automation and AI solutions that may integrate with third-party applications (such as WhatsApp, Meta, Make, n8n, among others). We are not responsible for outages, interruptions, or changes in the functionality of these external platforms."
       },
-      "intellectual-property": {
-        "title": "Intellectual Property Rights",
-        "content": "The Service and its original content, features, and functionality are and will remain the exclusive property of Flowtify and its licensors. The Service is protected by copyright, trademark, and other laws."
+      "liability": {
+        "title": "4. Liability",
+        "content": "Flowtify AI shall not be held liable for direct or indirect damages arising from the use of this site or from its temporary unavailability."
       },
-      "limitation-of-liability": {
-        "title": "Limitation of Liability",
-        "content": "In no event shall Flowtify, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages."
+      "payments": {
+        "title": "5. Payments and commercial agreements",
+        "content": "Payment terms, pricing, and services are governed by individual agreements signed with each client."
       },
-      "termination": {
-        "title": "Termination",
-        "content": "We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever."
+      "data-privacy": {
+        "title": "6. Data privacy",
+        "content": "The processing of personal data is regulated by our Privacy Policy, available on this site."
+      },
+      "modifications": {
+        "title": "7. Modifications",
+        "content": "Flowtify AI reserves the right to update or modify these Terms & Conditions at any time. We encourage users to review them regularly."
+      },
+      "jurisdiction": {
+        "title": "8. Jurisdiction",
+        "content": "These Terms are governed by the laws of the State of New Jersey, USA, and any disputes shall be resolved before its competent courts."
+      },
+      "contact": {
+        "title": "9. Contact",
+        "content": "For inquiries regarding these Terms, please write to: info@flowtifyai.com"
       }
-    },
-    "contactInfo": {
-      "title": "Contact Information",
-      "email": "legal@flowtify.com",
-      "address": "123 Innovation Drive, Tech City, TC 12345",
-      "phone": "+1 (555) 123-4567"
     }
   },
   "testimonials": {
-    "title": "What Our Customers Say",
-    "subtitle": "Join thousands of satisfied businesses using Flowtify",
+    "title": "Integrations without limits",
+    "subtitle": "Flowtify AI works seamlessly with 50+ leading apps:",
     "testimonial1": {
       "name": "Sarah Johnson",
       "role": "Operations Director",
@@ -505,4 +545,4 @@
       "rating": 5
     }
   }
-} 
+}

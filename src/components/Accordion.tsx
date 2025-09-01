@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 interface AccordionItemProps {
   id: string;
+  order?: number;
   question: string;
   answer: string;
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface AccordionItemProps {
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
   id,
+  order,
   question,
   answer,
   isOpen,
@@ -54,9 +56,16 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         className="w-full px-6 py-4 text-left hover:bg-purple-500/10 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset transition-colors"
       >
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white pr-4">
-            {question}
-          </h3>
+          <div className="flex items-center gap-3 pr-4">
+            {order && (
+              <span className="flex-shrink-0 w-8 h-8 bg-purple-600 text-white text-sm font-bold rounded-full flex items-center justify-center">
+                {order}
+              </span>
+            )}
+            <h3 className="text-lg font-semibold text-white">
+              {question}
+            </h3>
+          </div>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
@@ -93,6 +102,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 interface AccordionProps {
   items: Array<{
     id: string;
+    order?: number;
     question: string;
     answer: string;
   }>;
@@ -135,6 +145,7 @@ const Accordion: React.FC<AccordionProps> = ({
         <AccordionItem
           key={item.id}
           id={item.id}
+          order={item.order}
           question={item.question}
           answer={item.answer}
           isOpen={openItems.has(item.id)}

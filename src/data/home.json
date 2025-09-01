@@ -1,37 +1,282 @@
 {
-  "hero": {
-    "title": "Flowtify AI",
-    "subtitle": "Streamline Your Workflow with Intelligent Automation",
-    "description": "Transform your business processes with AI-powered workflow automation. Boost productivity, reduce errors, and focus on what matters most.",
-    "cta": "Start Automating Today"
-  },
-  "features": {
-    "title": "Why Choose Flowtify?",
-    "items": [
-      {
-        "key": "automation",
-        "icon": "🤖",
-        "title": "Smart Automation",
-        "description": "AI-powered automation that learns and adapts to your workflow patterns."
-      },
-      {
-        "key": "analytics",
-        "icon": "📊",
-        "title": "Advanced Analytics",
-        "description": "Comprehensive insights into your workflow performance and optimization opportunities."
-      },
-      {
-        "key": "integration",
-        "icon": "🔗",
-        "title": "Easy Integration",
-        "description": "Seamlessly connect with your existing tools and platforms in minutes."
-      },
-      {
-        "key": "security",
-        "icon": "🔒",
-        "title": "Enterprise Security",
-        "description": "Bank-level security with SOC 2 compliance and end-to-end encryption."
+  "en": {
+    "hero": {
+      "title": "Automating the future of business with AI",
+      "subtitle": "Flowtify AI redefines business efficiency with 24/7 automation and intelligent workflows.",
+      "description": "Focus on growth, while we take care of the repetitive.",
+      "cta": "Request a Demo"
+    },
+    "superpowers": {
+      "title": "Superpowers for your business",
+      "subtitle": "Unlock capabilities your company never thought possible.",
+      "items": [
+        {
+          "key": "ai-agents",
+          "icon": "🤖",
+          "title": "AI-Powered Agents",
+          "description": "Instant customer support on WhatsApp, Instagram, and Messenger."
+        },
+        {
+          "key": "process-automation",
+          "icon": "⚡",
+          "title": "Process Automation",
+          "description": "Eliminate repetitive work and give time back to your team."
+        },
+        {
+          "key": "lead-generation",
+          "icon": "📈",
+          "title": "Lead Generation & Sales Automation",
+          "description": "Smart campaigns that run day and night."
+        },
+        {
+          "key": "scheduling",
+          "icon": "📅",
+          "title": "Scheduling & Operations",
+          "description": "Automated confirmations and reminders synced with Google Calendar and Calendly."
+        }
+      ]
+    },
+    "scale": {
+      "title": "Built to scale with you",
+      "subtitle": "A robust, secure SaaS platform that grows as you do.",
+      "features": [
+        "Always-on updates",
+        "Instant scalability", 
+        "Dedicated support team"
+      ]
+    },
+    "integrations": {
+      "title": "Integrations without limits",
+      "subtitle": "Flowtify AI works seamlessly with 50+ leading apps:",
+      "apps": "Google Drive • Gmail • Make • n8n • Meta (WhatsApp, Instagram, Facebook) • Slack • Notion • HubSpot • Airtable • Calendly • Trello • Discord",
+      "note": "👉 Don't see your favorite app? We can integrate it too.",
+      "cta": "Request integration"
+    },
+    "dataProtection": {
+      "title": "Never lose information",
+      "subtitle": "Keep your business connected and your data safe.",
+      "features": [
+        "Automated workflows running in the background",
+        "Information always synced and accessible"
+      ]
+    },
+    "security": {
+      "title": "Enterprise-grade security",
+      "subtitle": "Your data deserves nothing less.",
+      "features": [
+        "Official APIs with end-to-end encryption",
+        "GDPR & CCPA compliance",
+        "Secure cloud infrastructure"
+      ]
+    },
+    "results": {
+      "title": "Real results, measurable impact",
+      "subtitle": "With Flowtify AI, businesses have achieved:",
+      "metrics": [
+        "Up to 40% lower operational costs",
+        "More than 20 hours saved per week",
+        "An average +35% increase in lead conversion"
+      ]
+    },
+    "pricing": {
+      "title": "Pricing that adapts to you",
+      "subtitle": "Every business is different — and so is our pricing.",
+      "description": "Your investment depends on:",
+      "factors": [
+        "The number of channels and agents you want to automate",
+        "The complexity of workflows",
+        "The level of integrations with your current tools",
+        "The type of support and maintenance you prefer"
+      ],
+      "commitment": "At Flowtify, we believe in transparency and simplicity. After your demo, you'll receive a tailored proposal with clear phases, costs, and ROI expectations.",
+      "promise": "You only pay for what you truly need — and nothing more.",
+      "bonus": "✨ Bonus: Schedule your demo today and receive our free eBook on \"The Future of Business Automation\", packed with practical insights to start optimizing immediately."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "At Flowtify, we believe technology should save you both time and money. Our mission is to free entrepreneurs from repetitive work, optimize operations, and let them focus on what truly matters: growing their business and connecting with more clients."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To become the leading automation partner for Spanish-speaking businesses in the U.S. and LATAM, delivering ethical, scalable, and measurable solutions. Every company should see a clear ROI and tangible growth powered by automation."
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "A global indie team passionate about AI and automation:",
+      "members": [
+        "Ysrael Campos – Founder",
+        "Massiel Zanatta – Co-Founder",
+        "Sara Martínez Beltrán – Co-Founder",
+        "Wilfredo Zapata – Fullstack Developer",
+        "Juan Felipe Saavedra – Fullstack Developer",
+        "Ivette Dextre – Marketing & Content Creator",
+        "Kevin Brown – Backend Developer",
+        "Fabio Campos – Engineering Student, Carnegie Mellon"
+      ]
+    },
+    "testimonials": {
+      "title": "What our clients say",
+      "items": [
+        {
+          "quote": "Flowtify completely transformed how we work. We now serve clients 24/7 without hiring more staff.",
+          "author": "Pilot Client, NJ"
+        },
+        {
+          "quote": "With Flowtify we cut operational costs by 30% in just three months.",
+          "author": "Marketing Agency, Peru"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "Ready to transform your business?",
+      "description": "Tell us about your project and we'll build your automation plan.",
+      "email": "info@flowtifyai.com",
+      "social": {
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn",
+        "facebook": "Facebook"
       }
-    ]
+    }
+  },
+  "es": {
+  "hero": {
+      "title": "Automatizando el futuro de los negocios con IA",
+      "subtitle": "Flowtify AI revoluciona la eficiencia empresarial integrando inteligencia artificial y automatización 24/7.",
+      "description": "Haz crecer tu empresa, mientras nosotros automatizamos el resto.",
+      "cta": "Solicita una demo"
+    },
+    "superpowers": {
+      "title": "Superpoderes para tu negocio",
+      "subtitle": "Dale a tu empresa habilidades que antes parecían imposibles.",
+      "items": [
+        {
+          "key": "ai-agents",
+          "icon": "🤖",
+          "title": "Agentes Inteligentes de IA",
+          "description": "Atención instantánea en WhatsApp, Instagram y Messenger."
+        },
+      {
+        "key": "process-automation",
+          "icon": "⚡",
+          "title": "Automatización de Procesos Internos",
+          "description": "Reduce tareas repetitivas y libera tiempo real para tu equipo."
+        },
+        {
+          "key": "lead-generation",
+          "icon": "📈",
+          "title": "Generación de Leads y Ventas Automática",
+          "description": "Campañas inteligentes que trabajan día y noche."
+        },
+        {
+          "key": "scheduling",
+          "icon": "📅",
+          "title": "Gestión de Citas y Operaciones",
+          "description": "Confirmaciones y recordatorios conectados a Google Calendar y Calendly."
+        }
+      ]
+    },
+    "scale": {
+      "title": "Una plataforma lista para escalar",
+      "subtitle": "SaaS robusto, seguro y en crecimiento constante.",
+      "features": [
+        "Actualizaciones automáticas",
+        "Escalabilidad inmediata",
+        "Soporte especializado"
+      ]
+    },
+    "integrations": {
+      "title": "Integraciones ilimitadas",
+      "subtitle": "Flowtify AI conecta tu negocio con más de 50+ herramientas líderes:",
+      "apps": "Google Drive • Gmail • Make • n8n • Meta (WhatsApp, Instagram, Facebook) • Slack • Notion • HubSpot • Airtable • Calendly • Trello • Discord",
+      "note": "¿No ves tu herramienta favorita? Podemos integrarla también.",
+      "cta": "Consultar integración"
+    },
+    "dataProtection": {
+      "title": "Nunca pierdas información",
+      "subtitle": "Todos tus procesos, clientes y operaciones sincronizados y centralizados.",
+      "features": [
+        "Flujos automáticos en segundo plano",
+        "Datos siempre disponibles y seguros"
+      ]
+    },
+    "security": {
+      "title": "Seguridad de nivel empresarial",
+      "subtitle": "Tus datos son sagrados.",
+      "features": [
+        "Usamos APIs oficiales y cifrado end-to-end",
+        "Cumplimos con GDPR y CCPA",
+        "Almacenamiento seguro en la nube"
+      ]
+    },
+    "results": {
+      "title": "Impacto real en tu negocio",
+      "subtitle": "Con Flowtify AI, nuestros clientes han logrado:",
+      "metrics": [
+        "Reducir hasta 40% de costos operativos",
+        "Ahorrar más de 20 horas semanales en tareas repetitivas",
+        "Incrementar en promedio +35% de leads convertidos con campañas automatizadas"
+      ]
+    },
+    "pricing": {
+      "title": "Precios que se adaptan a ti",
+      "subtitle": "Cada negocio es único — y nuestra propuesta también.",
+      "description": "La inversión depende de:",
+      "factors": [
+        "El número de canales y agentes a automatizar",
+        "La complejidad de los flujos",
+        "El nivel de integraciones con tus herramientas",
+        "El tipo de soporte y mantenimiento que elijas"
+      ],
+      "commitment": "En Flowtify creemos en la transparencia y la claridad. Después de tu demo recibirás una propuesta personalizada con fases, inversión y resultados esperados.",
+      "promise": "Solo pagas por lo que realmente necesitas — nada más.",
+      "bonus": "Extra: Al agendar tu demo recibirás GRATIS nuestro eBook \"El Futuro de la Automatización Empresarial\", con ideas prácticas para empezar a optimizar tu negocio de inmediato."
+    },
+    "mission": {
+      "title": "Nuestra misión",
+      "description": "En Flowtify creemos que la tecnología no solo debe ahorrar tiempo, sino también dinero. Nuestra misión es ayudar a los emprendedores a escapar de lo repetitivo, optimizar sus operaciones y enfocarse en lo que realmente importa: hacer crecer su negocio y conectar con más clientes."
+    },
+    "vision": {
+      "title": "Nuestra visión",
+      "description": "Convertirnos en la agencia líder de automatización para hispanohablantes en EE.UU. y LATAM, ofreciendo soluciones éticas, escalables y medibles. Queremos que cada empresa vea un ROI inmediato y tangible gracias a la automatización."
+    },
+    "team": {
+      "title": "Nuestro equipo",
+      "subtitle": "Un equipo indie global, apasionado por la IA y la automatización:",
+      "members": [
+        "Ysrael Campos – Fundador",
+        "Massiel Zanatta – Cofundadora",
+        "Sara Martínez Beltrán – Cofundadora",
+        "Wilfredo Zapata – Programador Fullstack",
+        "Juan Felipe Saavedra – Programador Fullstack",
+        "Ivette Dextre – Marketing & Content Creator",
+        "Kevin Brown – Backend Developer",
+        "Fabio Campos – Engineering Student, Carnegie Mellon University"
+      ]
+    },
+    "testimonials": {
+      "title": "Testimonios",
+      "items": [
+        {
+          "quote": "Flowtify cambió por completo nuestra forma de trabajar. Hoy atendemos clientes 24/7 sin necesidad de más personal.",
+          "author": "Cliente piloto, NJ"
+        },
+        {
+          "quote": "Gracias a Flowtify logramos reducir costos operativos en un 30% en solo tres meses.",
+          "author": "Agencia de Marketing, Perú"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contáctanos",
+      "subtitle": "¿Listo para transformar tu negocio?",
+      "description": "Completa el formulario y recibe tu propuesta personalizada.",
+      "email": "info@flowtifyai.com",
+      "social": {
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn",
+        "facebook": "Facebook"
+      }
+    }
   }
 } 

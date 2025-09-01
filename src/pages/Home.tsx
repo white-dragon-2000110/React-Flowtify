@@ -1,62 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
-import Testimonials from '../components/Testimonials';
 import RequestDemoButton from '../components/RequestDemoButton';
 import { Vortex } from '../components/Vortex';
-import Circle from '../components/Circle';
-import AnimatedBeam from '../components/AnimatedBeam';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-// Meteors Animation Component
-const Meteors = ({
-  number,
-  className,
-}: {
-  number?: number;
-  className?: string;
-}) => {
-  const meteors = new Array(number || 20).fill(true);
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      {meteors.map((_, idx) => {
-        const meteorCount = number || 20;
-        // Calculate position to evenly distribute meteors across full section space
-        const position = (idx * (3000 / meteorCount)) - 1500; // Spread across 3000px range, centered
-
-        return (
-          <span
-            key={"meteor" + idx}
-            className={`animate-meteor-effect absolute h-1 w-1 rotate-[45deg] rounded-[9999px] bg-white shadow-[0_0_0_2px_#ffffff20] before:absolute before:top-1/2 before:h-[1px] before:w-[80px] before:-translate-y-[50%] before:transform before:bg-gradient-to-r before:from-[#ffffff] before:via-[#94a3b8] before:to-transparent before:content-[''] ${className || ''}`}
-            style={{
-              top: "-60px", // Start above the container
-              left: position + "px",
-              animationDelay: Math.random() * 10 + "s", // Random delay between 0-10s
-              animationDuration: Math.floor(Math.random() * (20 - 10) + 10) + "s", // Random duration between 10-20s
-            }}
-          ></span>
-        );
-      })}
-    </motion.div>
-  );
-};
-
-
-
-
-
-
-
-
-
+// Import data
+import homeDataRaw from '../data/home.json';
 
 const Home: React.FC = () => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language === 'es' ? 'es' : 'en';
+  const homeData = homeDataRaw[currentLang as keyof typeof homeDataRaw];
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -67,7 +23,7 @@ const Home: React.FC = () => {
     const loadingDuration = 3000; // 3 seconds
     const progressInterval = 50; // Update progress every 50ms
     const progressStep = (progressInterval / loadingDuration) * 100;
-    
+
     const progressTimer = setInterval(() => {
       setLoadingProgress(prev => {
         if (prev >= 100) {
@@ -88,2054 +44,968 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  // Refs for circular layout
-  const containerRef = useRef<HTMLDivElement>(null);
-  const div1Ref = useRef<HTMLDivElement>(null);
-  const div2Ref = useRef<HTMLDivElement>(null);
-  const div3Ref = useRef<HTMLDivElement>(null);
-  const div4Ref = useRef<HTMLDivElement>(null);
-  const div5Ref = useRef<HTMLDivElement>(null);
-  const div6Ref = useRef<HTMLDivElement>(null);
-  const div7Ref = useRef<HTMLDivElement>(null);
-
-  // Contact form state
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const [contactErrors, setContactErrors] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  // Modal state for Workflow Automation card
-  const [showWorkflowModal, setShowWorkflowModal] = useState(false);
-
-  // Modal state for AI-Powered Solutions card
-  const [showAISolutionsModal, setShowAISolutionsModal] = useState(false);
-
-  // Modal state for System Integration card
-  const [showSystemIntegrationModal, setShowSystemIntegrationModal] = useState(false);
-
-  // Modal state for Consulting Services card
-  const [showConsultingModal, setShowConsultingModal] = useState(false);
-
-  const handleContactChange = (field: string, value: string) => {
-    setContactForm(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
-    if (contactErrors[field as keyof typeof contactErrors] && value) {
-      setContactErrors(prev => ({ ...prev, [field]: '' }));
-    }
-  };
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Reset errors
-    const newErrors = {
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    };
-
-    // Validation
-    if (!contactForm.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!contactForm.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(contactForm.email)) {
-        newErrors.email = 'Please enter a valid email address';
-      }
-    }
-
-    if (!contactForm.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!contactForm.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-
-    setContactErrors(newErrors);
-
-    // If no errors, handle submission
-    if (!Object.values(newErrors).some(error => error)) {
-      console.log('Contact form submitted:', contactForm);
-      // Here you would typically send the data to your backend
-    }
-  };
-
-  // Handle AI icon click to show Workflow Automation modal
-  const handleAIIconClick = () => {
-    setShowWorkflowModal(true);
-  };
-
-  // Handle Integration icon click to show AI-Powered Solutions modal
-  const handleIntegrationIconClick = () => {
-    setShowAISolutionsModal(true);
-  };
-
-  // Handle System Integration icon click to show System Integration modal
-  const handleSystemIntegrationIconClick = () => {
-    setShowSystemIntegrationModal(true);
-  };
-
-  // Handle Consulting Services icon click to show Consulting Services modal
-  const handleConsultingIconClick = () => {
-    setShowConsultingModal(true);
-  };
-
-  // Handle escape key to close modals
-  React.useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (showWorkflowModal) {
-          setShowWorkflowModal(false);
-        }
-        if (showAISolutionsModal) {
-          setShowAISolutionsModal(false);
-        }
-        if (showSystemIntegrationModal) {
-          setShowSystemIntegrationModal(false);
-        }
-        if (showConsultingModal) {
-          setShowConsultingModal(false);
-        }
-      }
-    };
-
-    if (showWorkflowModal || showAISolutionsModal || showSystemIntegrationModal || showConsultingModal) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
-    };
-  }, [showWorkflowModal, showAISolutionsModal, showSystemIntegrationModal, showConsultingModal]);
-
-
-
-
-
-
-
-  // Custom SVG Icon for Notion
-
-
-
-
-
-
-
-
-  const integrationsPreview = [
-    { name: 'LinkedIn', logo: '/svg/linkedin-icon.svg', description: 'Professional networking' },
-    { name: 'WhatsApp', logo: '/svg/whatsapp-icon.svg', description: 'Business messaging' },
-    { name: 'Instagram', logo: '/svg/instagram-icon.svg', description: 'Social media marketing' },
-    { name: 'Facebook', logo: '/svg/facebook-icon.svg', description: 'Community engagement' },
-    { name: 'Calendly', logo: '/svg/calendly-icon.svg', description: 'Meeting scheduling' },
-    { name: 'Slack', logo: '/svg/slack-icon.svg', description: 'Team communication' }
-  ];
-
   return (
     <>
       {/* Loading Spinner */}
       <LoadingSpinner isLoading={isLoading} progress={loadingProgress} />
-      
+
       <div className="min-h-screen bg-[#000008]">
         {/* Hero Section */}
         <section id="home" className="relative bg-[#000008] min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Vortex Background Animation */}
-        <Vortex
-          backgroundColor="rgb(0, 0, 12)"
-          rangeY={800}
-          particleCount={500}
-          baseHue={270}
-          className="absolute inset-0"
-        />
+          {/* Vortex Background Animation */}
+          <Vortex
+            backgroundColor="rgb(0, 0, 12)"
+            rangeY={800}
+            particleCount={500}
+            baseHue={270}
+            className="absolute inset-0"
+          />
 
-        <div className="relative z-10 text-center text-white px-4">
-          {/* AI Feature Tag */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full px-4 py-2 mb-8"
-          >
-            <span className="text-purple-300">✨</span>
-            <span className="text-purple-200 text-sm font-medium">Take notes using AI</span>
-          </motion.div>
-
-          <motion.h1
-            className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent h-[110px]"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {t('home.hero.title')}
-          </motion.h1>
-
-          {/* Hero Video */}
-          <motion.div
-            className="w-full max-w-4xl mx-auto mb-8"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.1 }}
-          >
-            <video
-              className="w-full h-auto rounded-2xl shadow-2xl"
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{
-                filter: 'brightness(0.9) contrast(1.1) saturate(1.1)',
-              }}
+          <div className="relative z-10 text-center text-white px-4">
+            <motion.h1
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <source src="/video/home.webm" type="video/webm" />
-              Your browser does not support the video tag.
-            </video>
-          </motion.div>
+              {homeData.hero.title}
+            </motion.h1>
 
-          <motion.h2
-            className="text-2xl md:text-4xl font-semibold mb-8 mt-5 text-gray-200"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {t('home.hero.subtitle')}
-          </motion.h2>
-          <motion.p
-            className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-gray-300"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            {t('home.hero.description')}
-          </motion.p>
-
-          {/* Vortex Animation Component */}
-          <motion.div
-            className="w-full max-w-4xl mx-auto mb-12"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <Vortex
-              backgroundColor="transparent"
-              particleCount={200}
-              baseHue={270}
-              baseSpeed={0.08}
-              rangeSpeed={0.2}
-              baseRadius={0.6}
-              rangeRadius={1.2}
-              className="h-64 w-full rounded-2xl overflow-hidden"
-              containerClassName="h-64 w-full"
-            />
-          </motion.div>
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <RequestDemoButton size="lg" />
-            <motion.button
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  const headerHeight = 64; // h-16 = 64px
-                  const elementPosition = contactSection.offsetTop - headerHeight;
-                  window.scrollTo({
-                    top: elementPosition,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-              className="px-8 py-4 text-xl border border-purple-400/50 text-purple-200 hover:bg-purple-500/20 hover:border-purple-400 rounded-lg transition-all duration-300 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.h2
+              className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-200"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              {t('common.contactUs')}
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
+              {homeData.hero.subtitle}
+            </motion.h2>
 
-      {/* Services Preview Section */}
-      <section id="services" className="section-padding bg-gray-800/50 relative overflow-hidden">
-        {/* Simple Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 via-purple-900/20 to-gray-800/50" />
+            <motion.p
+              className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-gray-300"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              {homeData.hero.description}
+            </motion.p>
 
-        {/* Meteors Animation Background - Covering Full Section Space */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-50 w-full h-full">
-          <Meteors number={80} className="opacity-80" />
-        </div>
-
-        {/* Meteor Animation Styles */}
-        <style>{`
-          @keyframes meteor-effect {
-            0% {
-              transform: rotate(45deg) translateX(0);
-              opacity: 1;
-            }
-            70% {
-              opacity: 1;
-            }
-                            100% {
-                  transform: rotate(45deg) translateX(3000px);
-                  opacity: 0;
-                }
-          }
-          .animate-meteor-effect {
-            animation: meteor-effect linear infinite;
-          }
-        `}</style>
-
-        <div className="container-custom relative z-10 mb-[100px]">
-
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
-              {t('home.servicesPreview.title')}
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-[100px]">
-              {t('home.servicesPreview.subtitle')}
-            </p>
-          </motion.div>
-
-          <div className="relative max-w-6xl mx-auto">
-            {/* Circular Services Layout */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-              className="relative flex w-full max-w-[800px] items-center justify-center overflow-hidden rounded-2xl border border-gray-700/50 bg-gray-800/20 backdrop-blur-sm p-16 mx-auto"
-              ref={containerRef}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              {/* Background Video */}
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="absolute inset-0 w-full h-full object-cover opacity-100 z-0"
-              >
-                <source src="/video/ourservice.webm" type="video/webm" />
-                Your browser does not support the video tag.
-              </video>
-
-
-
-              {/* Gradient Line */}
-              <div className="absolute right-5 top-0 h-px w-1/2 bg-gradient-to-l from-transparent via-purple-400/30 via-10% to-transparent" />
-
-              {/* Main Component */}
-              <div className="flex h-full w-full flex-row justify-between gap-16 max-w-lg items-center">
-                <div className="flex flex-col justify-center gap-4">
-                  {/* Div 1 - AI */}
-                  {/* Div 1 - AI */}
-                  <Circle ref={div1Ref} className='mt-16'>
-                    <svg
-                      viewBox="0 0 256 308"
-                      width="40"
-                      height="40"
-                      xmlns="http://www.w3.org/2000/svg"
-                      preserveAspectRatio="xMidYMid"
-                      className="cursor-pointer hover:scale-110 transition-transform duration-200"
-                      onClick={handleAIIconClick}
-                    >
-                      <path
-                        d="M239.682 40.707C211.113-.182 154.69-12.301 113.895 13.69L42.247 59.356a82.198 82.198 0 0 0-37.135 55.056 86.566 86.566 0 0 0 8.536 55.576 82.425 82.425 0 0 0-12.296 30.719 87.596 87.596 0 0 0 14.964 66.244c28.574 40.893 84.997 53.007 125.787 27.016l71.648-45.664a82.182 82.182 0 0 0 37.135-55.057 86.601 86.601 0 0 0-8.53-55.577 82.409 82.409 0 0 0 12.29-30.718 87.573 87.573 0 0 0-14.963-66.244"
-                        fill="#FF3E00"
-                      />
-                      <path
-                        d="M106.889 270.841c-23.102 6.007-47.497-3.036-61.103-22.648a52.685 52.685 0 0 1-9.003-39.85 49.978 49.978 0 0 1 1.713-6.693l1.35-4.115 3.671 2.697a92.447 92.447 0 0 0 28.036 14.007l2.663.808-.245 2.659a16.067 16.067 0 0 0 2.89 10.656 17.143 17.143 0 0 0 18.397 6.828 15.786 15.786 0 0 0 4.403-1.935l71.67-45.672a14.922 14.922 0 0 0 6.734-9.977 15.923 15.923 0 0 0-2.713-12.011 17.156 17.156 0 0 0-18.404-6.832 15.78 15.78 0 0 0-4.396 1.933l-27.35 17.434a52.298 52.298 0 0 1-14.553 6.391c-23.101 6.007-47.497-3.036-61.101-22.649a52.681 52.681 0 0 1-9.004-39.849 49.428 49.428 0 0 1 22.34-33.114l71.664-45.677a52.218 52.218 0 0 1 14.563-6.398c23.101-6.007 47.497 3.036 61.101 22.648a52.685 52.685 0 0 1 9.004 39.85 50.559 50.559 0 0 1-1.713 6.692l-1.35 4.116-3.67-2.693a92.373 92.373 0 0 0-28.037-14.013l-2.664-.809.246-2.658a16.099 16.099 0 0 0-2.89-10.656 17.143 17.143 0 0 0-18.398-6.828 15.786 15.786 0 0 0-4.402 1.935l-71.67 45.674a14.898 14.898 0 0 0-6.73 9.975 15.9 15.9 0 0 0 2.709 12.012 17.156 17.156 0 0 0 18.404 6.832 15.841 15.841 0 0 0 4.402-1.935l27.345-17.427a52.147 52.147 0 0 1 14.552-6.397c23.101-6.006 47.497 3.037 61.102 22.65a52.681 52.681 0 0 1 9.003 39.848 49.453 49.453 0 0 1-22.34 33.12l-71.664 45.673a52.218 52.218 0 0 1-14.563 6.398"
-                        fill="#FFF"
-                      />
-                    </svg>
-                  </Circle>
-
-                  {/* Div 2 - AI-Powered Solutions */}
-                  <Circle ref={div2Ref}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="120"
-                      height="120"
-                      viewBox="0 0 120 120"
-                      className="cursor-pointer hover:scale-110 transition-transform duration-200"
-                      onClick={handleIntegrationIconClick}
-                    >
-                      {/* Main AI Brain */}
-                      <path
-                        d="M60 20 C40 20 25 35 25 55 C25 75 40 90 60 90 C80 90 95 75 95 55 C95 35 80 20 60 20 Z"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="3"
-                      />
-
-                      {/* Brain Folds */}
-                      <path
-                        d="M35 40 Q45 35 55 40 Q65 45 75 40 Q85 35 95 40"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        opacity="0.8"
-                      />
-                      <path
-                        d="M35 50 Q45 45 55 50 Q65 55 75 50 Q85 45 95 50"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        opacity="0.8"
-                      />
-                      <path
-                        d="M35 60 Q45 55 55 60 Q65 65 75 60 Q85 55 95 60"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        opacity="0.8"
-                      />
-
-                      {/* AI Circuit Lines */}
-                      <path
-                        d="M20 30 L40 30 L40 40 L60 40 L60 50 L80 50 L80 60 L100 60"
-                        fill="none"
-                        stroke="#fff"
-                        strokeWidth="2"
-                        opacity="0.7"
-                      />
-
-                      {/* Data Nodes */}
-                      <circle cx="20" cy="30" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="40" cy="30" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="40" cy="40" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="60" cy="40" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="60" cy="50" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="80" cy="50" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="80" cy="60" r="3" fill="#fff" opacity="0.9" />
-                      <circle cx="100" cy="60" r="3" fill="#fff" opacity="0.9" />
-
-                      {/* Central Processing Unit */}
-                      <circle cx="60" cy="55" r="8" fill="#fff" opacity="0.3" />
-                      <circle cx="60" cy="55" r="5" fill="#fff" />
-
-                      {/* AI Text */}
-                      <text x="60" y="110" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">
-                        AI
-                      </text>
-                    </svg>
-                  </Circle>
-
-                  {/* Div 3 - System Integration */}
-                  <Circle ref={div3Ref}>
-                    <svg
-                      width="120"
-                      height="120"
-                      viewBox="0 0 120 120"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="cursor-pointer hover:scale-110 transition-transform duration-200"
-                      onClick={handleSystemIntegrationIconClick}
-                    >
-                      {/* Main System Box */}
-                      <rect x="20" y="20" width="80" height="60" rx="8" fill="none" stroke="#fff" strokeWidth="3" />
-
-                      {/* Connection Points */}
-                      <circle cx="15" cy="35" r="3" fill="#fff" />
-                      <circle cx="15" cy="50" r="3" fill="#fff" />
-                      <circle cx="15" cy="65" r="3" fill="#fff" />
-                      <circle cx="105" cy="35" r="3" fill="#fff" />
-                      <circle cx="105" cy="50" r="3" fill="#fff" />
-                      <circle cx="105" cy="65" r="3" fill="#fff" />
-
-                      {/* Connection Lines */}
-                      <path d="M15 35 L20 35" stroke="#fff" strokeWidth="2" />
-                      <path d="M15 50 L20 50" stroke="#fff" strokeWidth="2" />
-                      <path d="M15 65 L20 65" stroke="#fff" strokeWidth="2" />
-                      <path d="M100 35 L105 35" stroke="#fff" strokeWidth="2" />
-                      <path d="M100 50 L105 50" stroke="#fff" strokeWidth="2" />
-                      <path d="M100 65 L105 65" stroke="#fff" strokeWidth="2" />
-
-                      {/* Internal Components */}
-                      <rect x="30" y="30" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
-                      <rect x="70" y="30" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
-                      <rect x="30" y="55" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
-                      <rect x="70" y="55" width="20" height="15" rx="3" fill="#fff" opacity="0.3" />
-
-                      {/* Central Hub */}
-                      <circle cx="60" cy="50" r="8" fill="#fff" opacity="0.2" />
-                      <circle cx="60" cy="50" r="5" fill="#fff" />
-
-                      {/* Data Flow Arrows */}
-                      <path d="M50 50 L45 50" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
-                      <path d="M70 50 L75 50" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
-                      <path d="M60 40 L60 35" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
-                      <path d="M60 60 L60 65" stroke="#fff" strokeWidth="2" markerEnd="url(#arrowhead)" />
-
-                      {/* Arrow Markers */}
-                      <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                          <polygon points="0 0, 10 3.5, 0 7" fill="#fff" />
-                        </marker>
-                      </defs>
-
-                      {/* Integration Text */}
-                      <text x="60" y="100" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">
-                        INTEGRATION
-                      </text>
-                    </svg>
-                  </Circle>
-
-                  {/* Div 4 - Consulting Services */}
-                  <Circle ref={div4Ref}>
-                    <svg
-                      width="120"
-                      height="120"
-                      viewBox="0 0 120 120"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="cursor-pointer hover:scale-110 transition-transform duration-200"
-                      onClick={handleConsultingIconClick}
-                    >
-                      {/* Professional Person */}
-                      <circle cx="60" cy="35" r="15" fill="#fff" />
-
-                      {/* Business Suit */}
-                      <path d="M45 50 L75 50 L75 85 L45 85 Z" fill="#fff" />
-                      <path d="M50 50 L70 50 L70 75 L50 75 Z" fill="#fff" opacity="0.3" />
-
-                      {/* Tie */}
-                      <path d="M58 50 L62 50 L60 85 Z" fill="#fff" opacity="0.8" />
-
-                      {/* Briefcase */}
-                      <rect x="35" y="70" width="50" height="25" rx="3" fill="none" stroke="#fff" strokeWidth="2" />
-                      <rect x="40" y="75" width="40" height="15" fill="#fff" opacity="0.3" />
-                      <path d="M45 70 L45 65 L55 65 L55 70" fill="none" stroke="#fff" strokeWidth="2" />
-
-                      {/* Charts and Graphs */}
-                      <rect x="25" y="25" width="20" height="15" rx="2" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7" />
-                      <path d="M30 35 L35 32 L40 35 L45 30" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7" />
-
-                      <rect x="75" y="25" width="20" height="15" rx="2" fill="none" stroke="#fff" strokeWidth="1.5" opacity="0.7" />
-                      <rect x="78" y="28" width="4" height="9" fill="#fff" opacity="0.7" />
-                      <rect x="84" y="30" width="4" height="7" fill="#fff" opacity="0.7" />
-                      <rect x="90" y="32" width="4" height="5" fill="#fff" opacity="0.7" />
-
-                      {/* Consulting Text */}
-                      <text x="60" y="110" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">
-                        CONSULTING
-                      </text>
-                    </svg>
-                  </Circle>
-                </div>
-
-                <div className="flex flex-col justify-center">
-                  {/* Div 6 - Central AI Card */}
-                  <Circle ref={div6Ref}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 512 512"
-                    >
-                      <rect
-                        fill="#CC9B7A"
-                        width="512"
-                        height="512"
-                        rx="104.187"
-                        ry="105.042"
-                      />
-                      <path
-                        fill="#1F1F1E"
-                        fillRule="nonzero"
-                        d="M318.663 149.787h-43.368l78.952 212.423 43.368.004-78.952-212.427zm-125.326 0l-78.952 212.427h44.255l15.932-44.608 82.846-.004 16.107 44.612h44.255l-79.126-212.427h-45.317zm-4.251 128.341l26.91-74.701 27.083 74.701h-53.993z"
-                      />
-                    </svg>
-                  </Circle>
-                </div>
-
-                <div className="flex flex-col justify-center">
-                  {/* Div 7 - User */}
-                  <Circle ref={div7Ref}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className='text-white'
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                      <circle cx="12" cy="7" r="4" />
-                    </svg>
-                  </Circle>
-                </div>
-              </div>
-
-              {/* Animated Beams */}
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div1Ref}
-                toRef={div6Ref}
-                curvature={20}
-                gradientStartColor="#ffaa40"
-                gradientStopColor="#9c40ff"
-                duration={6}
-                delay={0.2}
-                intendedWidth={800}
-                intendedHeight={434}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div2Ref}
-                toRef={div6Ref}
-                curvature={15}
-                gradientStartColor="#40ffaa"
-                gradientStopColor="#409cff"
-                duration={5.5}
-                delay={0.4}
-                intendedWidth={800}
-                intendedHeight={434}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div3Ref}
-                toRef={div6Ref}
-                curvature={25}
-                gradientStartColor="#ff40aa"
-                gradientStopColor="#9c40ff"
-                duration={6.5}
-                delay={0.6}
-                intendedWidth={800}
-                intendedHeight={434}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div4Ref}
-                toRef={div6Ref}
-                curvature={18}
-                gradientStartColor="#aa40ff"
-                gradientStopColor="#40ff9c"
-                duration={5.8}
-                delay={0.8}
-                intendedWidth={800}
-                intendedHeight={434}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div5Ref}
-                toRef={div6Ref}
-                curvature={22}
-                gradientStartColor="#ff9c40"
-                gradientStopColor="#40aaff"
-                duration={6.2}
-                delay={1.0}
-                intendedWidth={800}
-                intendedHeight={434}
-              />
-              <AnimatedBeam
-                containerRef={containerRef}
-                fromRef={div6Ref}
-                toRef={div7Ref}
-                curvature={30}
-                reverse={true}
-                gradientStartColor="#ff4080"
-                gradientStopColor="#8040ff"
-                duration={7}
-                delay={1.2}
-                intendedWidth={800}
-                intendedHeight={434}
-              />
+              <RequestDemoButton size="lg" />
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services Cards Section */}
-      
+        {/* Superpowers Section */}
+        <section id="superpowers" className="section-padding bg-gray-900/50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
 
-      {/* Integrations Preview Section */}
-      <section id="integrations" className="section-padding bg-gray-900 relative overflow-hidden">
-        {/* Simple Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/10 to-gray-900" />
-
-        <div className="container-custom relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent h-[60px]">
-              {t('home.integrationsPreview.title')}
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t('home.integrationsPreview.subtitle')}
-            </p>
-          </motion.div>
-
-          <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
-            {/* Left Side - Integration Cards Grid */}
-            <div className="lg:w-2/3">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {integrationsPreview.map((integration, index) => (
-                  integration.name === 'WhatsApp' ? (
-                    // Special Card for WhatsApp (without video)
-                    <motion.div
-                      key={integration.name}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="relative group"
-                    >
-                      {/* Animated Card Background */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                        animate={{
-                          scale: [1, 1.05, 1],
-                          opacity: [0, 0.3, 0]
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      />
-
-                      {/* Main Card */}
-                      <motion.div
-                        className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-purple-500/50 rounded-3xl p-6 h-full group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
-                        whileHover={{ y: -8, scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {/* Animated Border Glow */}
-                        <motion.div
-                          className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                          animate={{
-                            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "linear"
-                          }}
-                        />
-
-                        <div className="text-center mb-4 flex-grow relative z-10">
-                          <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <img
-                              src={integration.logo}
-                              alt={`${integration.name} logo`}
-                              className="w-16 h-16 object-contain"
-                            />
-                          </div>
-                          <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                            {integration.name}
-                          </h3>
-                          <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
-                            {integration.description}
-                          </p>
-                        </div>
-
-                        {/* Integration Features */}
-                        <div className="mt-6 pt-6 border-t border-gray-700/50 relative z-10">
-                          <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
-                            Key Features
-                          </h4>
-                          <ul className="space-y-2">
-                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                              <motion.span
-                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              Seamless integration
-                            </li>
-                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                              <motion.span
-                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              Real-time sync
-                            </li>
-                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                              <motion.span
-                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              Secure connection
-                            </li>
-                          </ul>
-                        </div>
-
-                        {/* Enhanced Connect Button */}
-                        <motion.button
-                          className="relative w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          {/* Button Glow Effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            animate={{
-                              x: ['-100%', '100%']
-                            }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              ease: "linear"
-                            }}
-                          />
-
-                          {/* Button Text */}
-                          <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
-                            Connect {integration.name}
-                          </span>
-                        </motion.button>
-
-                        {/* Bottom Glow Line */}
-                        <motion.div
-                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
-                          whileHover={{ width: '75%' }}
-                        />
-                      </motion.div>
-                    </motion.div>
-                  ) : (
-                    // Regular Card for other integrations
-                    <motion.div
-                      key={integration.name}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="relative group"
-                    >
-                      {/* Animated Card Background */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-500/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                        animate={{
-                          scale: [1, 1.05, 1],
-                          opacity: [0, 0.3, 0]
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      />
-
-                      {/* Main Card */}
-                      <motion.div
-                        className="relative bg-gradient-to-br from-gray-800/90 via-gray-800/80 to-gray-900/90 backdrop-blur-xl border border-gray-700/50 rounded-3xl p-6 h-full group-hover:border-purple-500/50 group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 overflow-hidden"
-                        whileHover={{ y: -8, scale: 1.02 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {/* Animated Border Glow */}
-                        <motion.div
-                          className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                          animate={{
-                            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "linear"
-                          }}
-                        />
-
-                        <div className="text-center mb-4 flex-grow relative z-10">
-                          <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                            <img
-                              src={integration.logo}
-                              alt={`${integration.name} logo`}
-                              className="w-16 h-16 object-contain"
-                            />
-                          </div>
-                          <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-purple-300 via-blue-300 to-purple-300 bg-clip-text text-transparent group-hover:from-purple-200 group-hover:via-blue-200 group-hover:to-purple-200 transition-all duration-300">
-                            {integration.name}
-                          </h3>
-                          <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
-                            {integration.description}
-                          </p>
-                        </div>
-
-                        {/* Integration Features */}
-                        <div className="mt-6 pt-6 border-t border-gray-700/50 relative z-10">
-                          <h4 className="font-semibold mb-3 text-purple-400 text-sm uppercase tracking-wide group-hover:text-purple-300 transition-colors duration-300">
-                            Key Features
-                          </h4>
-                          <ul className="space-y-2">
-                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                              <motion.span
-                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              Seamless integration
-                            </li>
-                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                              <motion.span
-                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              Real-time sync
-                            </li>
-                            <li className="text-sm text-gray-400 flex items-center group-hover:text-gray-300 transition-colors duration-300">
-                              <motion.span
-                                className="text-purple-400 mr-2 text-lg group-hover:text-purple-300 transition-colors duration-300"
-                                whileHover={{ scale: 1.2, rotate: 5 }}
-                                transition={{ duration: 0.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              Secure connection
-                            </li>
-                          </ul>
-                        </div>
-
-                        {/* Enhanced Connect Button */}
-                        <motion.button
-                          className="relative w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-purple-600/20 border border-purple-400/50 text-purple-200 hover:from-purple-500/30 hover:via-blue-500/30 hover:to-purple-500/30 hover:border-purple-400 rounded-2xl transition-all duration-300 backdrop-blur-sm group-hover:shadow-lg group-hover:shadow-purple-500/25 overflow-hidden"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          {/* Button Glow Effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            animate={{
-                              x: ['-100%', '100%']
-                            }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              ease: "linear"
-                            }}
-                          />
-
-                          {/* Button Text */}
-                          <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
-                            Connect {integration.name}
-                          </span>
-                        </motion.button>
-
-                        {/* Bottom Glow Line */}
-                        <motion.div
-                          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
-                          whileHover={{ width: '75%' }}
-                        />
-                      </motion.div>
-                    </motion.div>
-                  )
-                ))}
-              </div>
-            </div>
-
-            {/* Right Side - Content */}
-            <div className="lg:w-1/3">
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              {/* Superpowers Video */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="relative h-full min-h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 via-blue-900/30 to-indigo-900/40 border border-purple-500/30"
+                className="mb-8"
               >
-                {/* Background Video */}
                 <video
-                  autoPlay
+                  ref={(el) => {
+                    if (el) {
+                      setTimeout(() => {
+                        el.play().catch(console.error);
+                      }, 3000);
+                    }
+                  }}
+                  src="/video/superpower.webm"
                   loop
                   muted
                   playsInline
-                  preload="auto"
-                  className="absolute inset-0 w-full h-full object-cover opacity-30 z-0"
+                  className="w-full max-w-xs mx-auto rounded-lg shadow-2xl"
                 >
-                  <source src="/video/popular_integration.webm" type="video/webm" />
                   Your browser does not support the video tag.
                 </video>
-                
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 z-10">
-                  <div className="bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 rounded-full p-4 mb-6">
-                    <svg className="w-12 h-12 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 text-white">
-                    Seamless Integrations
-                  </h3>
-                  <p className="text-lg text-purple-200 leading-relaxed">
-                    Connect your favorite tools and automate your workflow with our powerful integration platform.
-                  </p>
-                </div>
               </motion.div>
-            </div>
-          </div>
 
-
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <div className="bg-gradient-to-br from-gray-800/50 via-purple-900/20 to-gray-800/50 relative overflow-hidden min-h-screen">
-        {/* Simple Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 via-purple-900/20 to-gray-800/50" />
-
-        <div className="relative z-10">
-          <Testimonials />
-        </div>
-      </div>
-
-      {/* FAQs Section */}
-      <section id="faqs" className="section-padding bg-gray-900/80 relative overflow-hidden">
-        {/* Simple Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-purple-900/10 to-gray-900/80" />
-
-        <div className="relative z-10">
-          <div className="container-custom">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
-                Frequently Asked Questions
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+                {homeData.superpowers.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Get answers to the most common questions about Flowtify
+                {homeData.superpowers.subtitle}
               </p>
-            </div>
+            </motion.div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="space-y-6">
-                {[
-                  {
-                    question: "What is Flowtify and how does it work?",
-                    answer: "Flowtify is a powerful workflow automation platform that connects your favorite tools and automates repetitive tasks. It works by creating custom workflows that trigger actions across multiple applications, saving you time and reducing manual work."
-                  },
-                  {
-                    question: "How secure is my data with Flowtify?",
-                    answer: "Your data security is our top priority. We use enterprise-grade encryption, secure API connections, and follow industry best practices for data protection. All data is encrypted in transit and at rest."
-                  },
-                  {
-                    question: "Can I integrate Flowtify with my existing tools?",
-                    answer: "Yes! Flowtify integrates with 100+ popular business tools including Slack, Notion, Salesforce, Zapier, HubSpot, and Asana. We're constantly adding new integrations based on user requests."
-                  },
-                  {
-                    question: "How long does it take to set up my first workflow?",
-                    answer: "Most users can create their first workflow in under 10 minutes using our intuitive drag-and-drop interface. We also provide pre-built templates to get you started quickly."
-                  },
-                  {
-                    question: "What kind of support do you offer?",
-                    answer: "We offer comprehensive support including live chat, email support, video tutorials, and a knowledge base. Enterprise customers also get dedicated account management and priority support."
-                  }
-                ].map((faq, index) => (
+            {/* Interactive Network Visualization */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="relative w-full h-96 mb-16 overflow-hidden"
+            >
+              {/* Background Grid */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="w-full h-full" style={{
+                  backgroundImage: `
+                    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)
+                  `,
+                  backgroundSize: '40px 40px'
+                }}></div>
+              </div>
+
+              {/* Scattered Light Points */}
+              <div className="absolute inset-0">
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      opacity: [0.3, 0.8, 0.3],
+                      scale: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 3 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: Math.random() * 2,
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                {/* Left Column - Integrated with your devices */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="flex items-start space-x-4"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Desktop monitor */}
+                        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+                        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+                        <path d="M12 18v-3" strokeWidth="2" />
+                        {/* Mobile phone overlapping */}
+                        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+                        <path d="M6 14v2" strokeWidth="1" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[0].title}
+                    </h3>
+                    <h5 className="text-sm font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[0].description}
+                    </h5>
+                  </div>
+                </motion.div>
+
+                {/* Vertical Separator */}
+                <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-px h-16 bg-gray-600"></div>
+                </div>
+
+                {/* Right Column - Secure but open */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex items-start space-x-4"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Shield with padlock */}
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
+                        <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
+                        <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[1].title}
+                    </h3>
+                    <h5 className="text-sm font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[1].description}
+                    </h5>
+                  </div>
+                </motion.div>
+              </div>
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                {/* Left Column - Integrated with your devices */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="flex items-start space-x-4"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Desktop monitor */}
+                        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+                        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+                        <path d="M12 18v-3" strokeWidth="2" />
+                        {/* Mobile phone overlapping */}
+                        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+                        <path d="M6 14v2" strokeWidth="1" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[2].title}
+                    </h3>
+                    <h5 className="text-sm font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[2].description}
+                    </h5>
+                  </div>
+                </motion.div>
+
+                {/* Vertical Separator */}
+                <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-px h-16 bg-gray-600"></div>
+                </div>
+
+                {/* Right Column - Secure but open */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex items-start space-x-4"
+                >
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Shield with padlock */}
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
+                        <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
+                        <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[3].title}
+                    </h3>
+                    <h5 className="text-sm font-semibold mb-2 text-white">
+                      {homeData.superpowers.items[3].description}
+                    </h5>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Scale Section */}
+        <section id="scale" className="section-padding bg-gray-800/50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
+
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+                {homeData.scale.title}
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+                {homeData.scale.subtitle}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {homeData.scale.features.map((feature, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:shadow-2xl hover:shadow-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
+                    className="bg-gray-800/40 backdrop-blur-sm border border-gray-700/20 rounded-3xl p-6 hover:bg-gray-800/60 hover:border-green-500/30 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-500 group relative overflow-hidden"
                   >
-                    <h3 className="text-xl font-semibold mb-4 text-blue-300 group-hover:text-blue-200 transition-colors">
-                      {faq.question}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      {faq.answer}
-                    </p>
+                    {/* Gradient highlight effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+
+                    <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10">
+                      <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-300 font-medium relative z-10">{feature}</p>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="section-padding bg-gray-800/50 relative overflow-hidden">
-        {/* Simple Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/50 via-green-900/20 to-gray-800/50" />
+        {/* Integrations Section */}
+        <section id="integrations" className="section-padding bg-gray-900 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
 
-        <div className="relative z-10">
-          <div className="container-custom">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
-                Get In Touch
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent h-[55px]">
+                {homeData.integrations.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Ready to transform your workflow? Let's discuss how Flowtify can help your business grow.
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                {homeData.integrations.subtitle}
               </p>
-            </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Contact Information */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="space-y-6"
-                >
-                  <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6">
-                    <h3 className="text-2xl font-bold mb-6 text-green-300">
-                      Contact Information
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
-                          <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-white">Email</p>
-                          <p className="text-gray-300">hello@flowtify.com</p>
-                        </div>
-                      </div>
+              {/* Integrations Grid - 2x2 with Central Orb */}
+              <div className="relative w-full max-w-4xl mx-auto mb-8">
+                {/* Background Grid */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="w-full h-full" style={{
+                    backgroundImage: `
+                      linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '40px 40px'
+                  }}></div>
+                </div>
 
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-teal-500/20 rounded-full flex items-center justify-center">
-                          <svg className="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-white">Phone</p>
-                          <p className="text-gray-300">+1 (555) 123-4567</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
-                          <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-white">Office</p>
-                          <p className="text-gray-300">123 Innovation Drive<br />Tech City, TC 12345</p>
-                        </div>
+                {/* Central Glowing Purple Orb */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 mt-4">
+                  <div className="relative">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shadow-2xl shadow-purple-500/50 flex items-center justify-center">
+                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="3" strokeWidth={2} />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 1v6m0 6v6m11-7h-6m-6 0H1" />
+                        </svg>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
 
-                {/* Contact Form */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6"
-                >
-                  <h3 className="text-2xl font-bold mb-6 text-teal-300">
-                    Send us a Message
-                  </h3>
-                  <form onSubmit={handleContactSubmit} className="space-y-4" noValidate>
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                        Name
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={contactForm.name}
-                          onChange={(e) => handleContactChange('name', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${contactErrors.name
-                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
-                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                            }`}
-                          placeholder="Your name"
-                        />
-
-                        {/* Error Icon */}
-                        {contactErrors.name && (
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                              </svg>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Error Message */}
-                      {contactErrors.name && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mt-2 text-sm text-red-400 flex items-center space-x-2"
-                        >
-                          <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                {/* 2x2 Grid Layout */}
+                <div className="grid grid-cols-2 gap-8 relative z-30">
+                  {/* Top-Left: Productivity & Communication */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                  >
+                    <div className="grid grid-cols-5 gap-3 mb-4">
+                      {/* Google Drive */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                           </svg>
-                          <span>{contactErrors.name}</span>
-                        </motion.div>
-                      )}
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                        Email
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="email"
-                          name="email"
-                          value={contactForm.email}
-                          onChange={(e) => handleContactChange('email', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${contactErrors.email
-                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
-                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                            }`}
-                          placeholder="your.email@example.com"
-                        />
-
-                        {/* Error Icon */}
-                        {contactErrors.email && (
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                              </svg>
-                            </div>
-                          </div>
-                        )}
+                        </div>
+                        <span className="text-xs text-gray-300">Google Drive</span>
                       </div>
-
-                      {/* Error Message */}
-                      {contactErrors.email && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mt-2 text-sm text-red-400 flex items-center space-x-2"
-                        >
-                          <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      {/* Gmail */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                           </svg>
-                          <span>{contactErrors.email}</span>
-                        </motion.div>
-                      )}
-                    </div>
-
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                        Subject
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="subject"
-                          name="subject"
-                          value={contactForm.subject}
-                          onChange={(e) => handleContactChange('subject', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${contactErrors.subject
-                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
-                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                            }`}
-                          placeholder="How can we help?"
-                        />
-
-                        {/* Error Icon */}
-                        {contactErrors.subject && (
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                              </svg>
-                            </div>
-                          </div>
-                        )}
+                        </div>
+                        <span className="text-xs text-gray-300">Gmail</span>
                       </div>
-
-                      {/* Error Message */}
-                      {contactErrors.subject && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mt-2 text-sm text-red-400 flex items-center space-x-2"
-                        >
-                          <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      {/* Slack */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 15a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-6 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
                           </svg>
-                          <span>{contactErrors.subject}</span>
-                        </motion.div>
-                      )}
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                        Message
-                      </label>
-                      <div className="relative">
-                        <textarea
-                          id="message"
-                          name="message"
-                          rows={4}
-                          value={contactForm.message}
-                          onChange={(e) => handleContactChange('message', e.target.value)}
-                          className={`w-full px-4 py-3 pr-12 bg-gray-700/50 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 resize-none ${contactErrors.message
-                            ? 'border-red-500 focus:ring-red-500/50 focus:border-red-500'
-                            : 'border-gray-600/50 focus:ring-teal-500/50 focus:border-teal-500'
-                            }`}
-                          placeholder="Tell us about your project..."
-                        />
-
-                        {/* Error Icon */}
-                        {contactErrors.message && (
-                          <div className="absolute top-3 right-3 flex items-center pointer-events-none">
-                            <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                              </svg>
-                            </div>
-                          </div>
-                        )}
+                        </div>
+                        <span className="text-xs text-gray-300">Slack</span>
                       </div>
-
-                      {/* Error Message */}
-                      {contactErrors.message && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="mt-2 text-sm text-red-400 flex items-center space-x-2"
-                        >
-                          <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      {/* Notion */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v12h12V6H6z"/>
                           </svg>
-                          <span>{contactErrors.message}</span>
-                        </motion.div>
-                      )}
+                        </div>
+                        <span className="text-xs text-gray-300">Notion</span>
+                      </div>
+                      {/* Discord */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">Discord</span>
+                      </div>
                     </div>
+                  </motion.div>
 
-                    <motion.button
-                      type="submit"
-                      className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-teal-500 text-white font-semibold rounded-lg hover:from-green-600 hover:to-teal-600 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      Send Message
-                    </motion.button>
-                  </form>
-                </motion.div>
+                  {/* Top-Right: Automation & Workflow */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    viewport={{ once: true }}
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                  >
+                    <div className="grid grid-cols-5 gap-3 mb-4">
+                      {/* Make */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">Make</span>
+                      </div>
+                      {/* n8n */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <span className="text-white font-bold text-xs">n8n</span>
+                        </div>
+                        <span className="text-xs text-gray-300">n8n</span>
+                      </div>
+                      {/* HubSpot */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">HubSpot</span>
+                      </div>
+                      {/* Airtable */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">Airtable</span>
+                      </div>
+                      {/* Trello */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h12V5H6z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">Trello</span>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Bottom-Left: Social Media & Messaging */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                  >
+                    <div className="grid grid-cols-3 gap-3 mb-4">
+                      {/* WhatsApp */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">WhatsApp</span>
+                      </div>
+                      {/* Instagram */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">Instagram</span>
+                      </div>
+                      {/* Facebook */}
+                      <div className="text-center">
+                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          </svg>
+                        </div>
+                        <span className="text-xs text-gray-300">Facebook</span>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Bottom-Right: Scheduling & Calendar */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                  >
+                    <div className="flex flex-col items-center justify-center mb-4">
+                      <div className="w-12 h-12 border-2 border-white rounded-lg flex items-center justify-center mb-2">
+                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                      </div>
+                      <span className="text-xs text-gray-300">Calendly</span>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
+
+              <p className="text-lg text-gray-300 mb-4">
+                {homeData.integrations.note}
+              </p>
+
+              <motion.button
+                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {homeData.integrations.cta}
+              </motion.button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Data Protection & Security Section */}
+        <section id="security" className="section-padding bg-gray-800/50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
+
+          <div className="container-custom relative z-10">
+            <div className="space-y-16">
+              {/* Never Lose Information */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center lg:text-left"
+              >
+                {/* Never Lose Information Video */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="mb-8"
+                >
+                  <video
+                    ref={(el) => {
+                      if (el) {
+                        setTimeout(() => {
+                          el.play().catch(console.error);
+                        }, 3000);
+                      }
+                    }}
+                    src="/video/nolose.webm"
+                    loop
+                    muted
+                    playsInline
+                    className="w-full max-w-sm mx-auto rounded-lg shadow-2xl"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </motion.div>
+
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                  {homeData.dataProtection.title}
+                </h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  {homeData.dataProtection.subtitle}
+                </p>
+
+                {/* Two-Column Feature Layout */}
+                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  {/* Left Column - Integrated with your devices */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="flex items-start space-x-4"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          {/* Desktop monitor */}
+                          <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+                          <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+                          <path d="M12 18v-3" strokeWidth="2" />
+                          {/* Mobile phone overlapping */}
+                          <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+                          <path d="M6 14v2" strokeWidth="1" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold mb-2 text-white">
+                        {homeData.dataProtection.features[0]}
+                      </h3>
+                    </div>
+                  </motion.div>
+
+                  {/* Vertical Separator */}
+                  <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-px h-16 bg-gray-600"></div>
+                  </div>
+
+                  {/* Right Column - Secure but open */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-start space-x-4"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          {/* Shield with padlock */}
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
+                          <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
+                          <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold mb-2 text-white">
+                        {homeData.dataProtection.features[1]}
+                      </h3>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Enterprise Security */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center lg:text-left"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+                  {homeData.security.title}
+                </h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  {homeData.security.subtitle}
+                </p>
+
+                <div className="space-y-4">
+                  {homeData.security.features.map((feature, index) => (
+                    <div key={index} className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4">
+                      <p className="text-gray-300">{feature}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Workflow Automation Modal */}
-      {showWorkflowModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowWorkflowModal(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-gray-800/90 backdrop-blur-md border border-gray-700/50 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center">
-                  <svg
-                    viewBox="0 0 64 64"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-10 h-10"
+        {/* Results Section */}
+        <section id="results" className="section-padding bg-gray-900/50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
+
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-orange-300 to-red-300 bg-clip-text text-transparent">
+                {homeData.results.title}
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+                {homeData.results.subtitle}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {homeData.results.metrics.map((metric, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 rounded-2xl p-8 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300"
                   >
-                    {/* Central Automation Hub */}
-                    <circle
-                      cx="32"
-                      cy="32"
-                      r="20"
-                      fill="url(#hubGradient)"
-                      stroke="url(#hubStroke)"
-                      strokeWidth="2"
-                    />
+                    <p className="text-2xl font-bold text-white mb-2">{metric}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
-                    {/* Inner Hub Core */}
-                    <circle
-                      cx="32"
-                      cy="32"
-                      r="12"
-                      fill="url(#coreGradient)"
-                      stroke="url(#coreStroke)"
-                      strokeWidth="1.5"
-                    />
+        {/* Pricing Section */}
+        <section id="pricing" className="section-padding bg-gray-800/50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
 
-                    {/* Rotating Gear System */}
-                    <g>
-                      {/* Main Gear */}
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="16"
-                        fill="none"
-                        stroke="url(#gearGradient)"
-                        strokeWidth="2"
-                        strokeDasharray="2 2"
-                      />
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                {homeData.pricing.title}
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                {homeData.pricing.subtitle}
+              </p>
 
-                      {/* Gear Teeth */}
-                      {[...Array(12)].map((_, i) => (
-                        <rect
-                          key={i}
-                          x="30"
-                          y="16"
-                          width="4"
-                          height="6"
-                          rx="2"
-                          fill="url(#gearTeethGradient)"
-                          transform={`rotate(${i * 30} 32 32)`}
-                        />
+              {/* Pricing Image with Text Overlay */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="mb-8 relative w-full max-w-4xl mx-auto"
+              >
+                {/* Background Video */}
+                <video
+                  src="/video/price.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full rounded-2xl shadow-2xl"
+                >
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Text Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8" style={{ transform: 'translateY(-250px)' }}>
+                  {/* Pricing */}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <span className="text-6xl font-bold text-purple-300">$10</span>
+                      <span className="text-2xl text-gray-300">/month</span>
+                    </div>
+                    <p className="text-lg text-gray-400">(billed annually)</p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="grid gap-6 mb-8 text-center w-full items-center justify-center">
+                    <div className="flex items-center gap-1">
+                      <span className="text-gray-300 text-md">{homeData.pricing.description}</span>
+                    </div>
+                    <div className="space-y-2 w-full">
+                      {homeData.pricing.factors.map((factor, index) => (
+                        <div className="flex items-center gap-3">
+                          <span className="text-gray-400 text-sm">•</span>
+                          <span className="text-gray-300 text-sm">{factor}</span>
+                        </div>
                       ))}
-                    </g>
+                    </div>
+                  </div>
 
-                    {/* Workflow Process Nodes */}
-                    <circle cx="16" cy="16" r="5" fill="url(#processGradient)" stroke="url(#processStroke)" strokeWidth="1.5" />
-                    <circle cx="48" cy="16" r="5" fill="url(#processGradient)" stroke="url(#processStroke)" strokeWidth="1.5" />
-                    <circle cx="16" cy="48" r="5" fill="url(#processGradient)" stroke="url(#processStroke)" strokeWidth="1.5" />
-                    <circle cx="48" cy="48" r="5" fill="url(#processGradient)" stroke="url(#processStroke)" strokeWidth="1.5" />
+                  {/* CTA Button */}
+                  <button className="border border-purple-400 text-white font-semibold py-1 px-3 rounded-xl transition-all duration-300 transform hover:scale-105 text-md">
+                    Start your 14-day trial
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
-                    {/* Gradients */}
-                    <defs>
-                      <linearGradient id="hubGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ff8a00" />
-                        <stop offset="100%" stopColor="#ff6b35" />
-                      </linearGradient>
-                      <linearGradient id="hubStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffaa40" />
-                        <stop offset="100%" stopColor="#ff6b35" />
-                      </linearGradient>
-                      <linearGradient id="coreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffffff" />
-                        <stop offset="100%" stopColor="#ffd700" />
-                      </linearGradient>
-                      <linearGradient id="coreStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffaa40" />
-                        <stop offset="100%" stopColor="#ff6b35" />
-                      </linearGradient>
-                      <linearGradient id="gearGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffaa40" />
-                        <stop offset="100%" stopColor="#ff6b35" />
-                      </linearGradient>
-                      <linearGradient id="gearTeethGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffffff" />
-                        <stop offset="100%" stopColor="#ffd700" />
-                      </linearGradient>
-                      <linearGradient id="processGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffaa40" />
-                        <stop offset="100%" stopColor="#ff6b35" />
-                      </linearGradient>
-                      <linearGradient id="processStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#ffffff" />
-                        <stop offset="100%" stopColor="#ffd700" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-                    Workflow Automation
-                  </h2>
-                  <p className="text-gray-400 text-lg">Streamline your business processes</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowWorkflowModal(false)}
-                className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-full flex items-center justify-center transition-colors duration-200"
+        {/* Mission, Vision & Team Section */}
+        <section id="about" className="section-padding bg-gray-900 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
+
+          <div className="container-custom relative z-10">
+            <div className="space-y-16">
+              {/* Mission */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center"
               >
-                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="space-y-6">
-              <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                <h3 className="text-xl font-semibold text-white mb-4">What is Workflow Automation?</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  Workflow automation is the process of automating repetitive tasks and business processes using technology.
-                  It helps organizations reduce manual work, minimize errors, and improve efficiency by creating automated
-                  workflows that can handle complex business logic and decision-making processes.
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                  {homeData.mission.title}
+                </h2>
+                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                  {homeData.mission.description}
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Key Benefits</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Increased productivity
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Reduced errors
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Cost savings
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Better compliance
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Use Cases</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Customer onboarding
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Invoice processing
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      HR workflows
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Marketing campaigns
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-xl p-6 border border-orange-500/30">
-                <h4 className="text-lg font-semibold text-white mb-3">Ready to Automate?</h4>
-                <p className="text-gray-300 mb-4">
-                  Let us help you identify and automate your business workflows to improve efficiency and reduce costs.
-                </p>
-                <div className="flex gap-4">
-                  <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-red-700 transform hover:scale-105 transition-all duration-300">
-                    Get Started
-                  </button>
-                  <button
-                    onClick={() => setShowWorkflowModal(false)}
-                    className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
-                  >
-                    Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-
-      {/* AI-Powered Solutions Modal */}
-      {showAISolutionsModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowAISolutionsModal(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-gray-800/90 backdrop-blur-md border border-gray-700/50 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 64 64"
-                    className="text-white"
-                  >
-                    {/* Neural Network Nodes */}
-                    <circle cx="32" cy="16" r="4" fill="currentColor" opacity="0.9" />
-                    <circle cx="16" cy="32" r="4" fill="currentColor" opacity="0.9" />
-                    <circle cx="48" cy="32" r="4" fill="currentColor" opacity="0.9" />
-                    <circle cx="32" cy="48" r="4" fill="currentColor" opacity="0.9" />
-
-                    {/* Central AI Core */}
-                    <circle cx="32" cy="32" r="6" fill="currentColor" />
-
-                    {/* Connection Lines */}
-                    <path d="M32 20 L32 26" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
-                    <path d="M20 32 L26 32" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
-                    <path d="M38 32 L44 32" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
-                    <path d="M32 38 L32 44" stroke="currentColor" strokeWidth="1.5" opacity="0.7" />
-
-                    {/* Diagonal Connections */}
-                    <path d="M20 20 L26 26" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                    <path d="M38 26 L44 20" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                    <path d="M20 44 L26 38" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                    <path d="M38 38 L44 44" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-
-                    {/* Data Flow Indicators */}
-                    <circle cx="32" cy="8" r="1.5" fill="currentColor" opacity="0.6" />
-                    <circle cx="8" cy="32" r="1.5" fill="currentColor" opacity="0.6" />
-                    <circle cx="56" cy="32" r="1.5" fill="currentColor" opacity="0.6" />
-                    <circle cx="32" cy="56" r="1.5" fill="currentColor" opacity="0.6" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    AI-Powered Solutions
-                  </h2>
-                  <p className="text-gray-400 text-lg">Intelligent automation for modern businesses</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowAISolutionsModal(false)}
-                className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-full flex items-center justify-center transition-colors duration-200"
+              {/* Vision */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center"
               >
-                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="space-y-6">
-              <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                <h3 className="text-xl font-semibold text-white mb-4">What are AI-Powered Solutions?</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  AI-Powered Solutions leverage artificial intelligence and machine learning to create intelligent,
-                  adaptive systems that can learn from data, make predictions, and automate complex decision-making processes.
-                  These solutions transform how businesses operate by providing insights, automation, and optimization capabilities.
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+                  {homeData.vision.title}
+                </h2>
+                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                  {homeData.vision.description}
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Core Features</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Machine Learning algorithms
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Natural Language Processing
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Predictive analytics
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Computer vision
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Applications</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Chatbots & virtual assistants
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Data analysis & insights
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Process optimization
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-                      Customer behavior prediction
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl p-6 border border-blue-500/30">
-                <h4 className="text-lg font-semibold text-white mb-3">Ready to Leverage AI?</h4>
-                <p className="text-gray-300 mb-4">
-                  Discover how AI-powered solutions can transform your business operations and drive innovation.
-                </p>
-                <div className="flex gap-4">
-                  <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300">
-                    Explore AI Solutions
-                  </button>
-                  <button
-                    onClick={() => setShowAISolutionsModal(false)}
-                    className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
-                  >
-                    Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-
-      {/* System Integration Modal */}
-      {showSystemIntegrationModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowSystemIntegrationModal(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-gray-800/90 backdrop-blur-md border border-gray-700/50 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 64 64"
-                    className="text-white"
-                  >
-                    {/* Main System Box */}
-                    <rect x="16" y="16" width="32" height="24" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
-
-                    {/* Connection Points */}
-                    <circle cx="12" cy="24" r="2" fill="currentColor" />
-                    <circle cx="12" cy="32" r="2" fill="currentColor" />
-                    <circle cx="12" cy="40" r="2" fill="currentColor" />
-                    <circle cx="52" cy="24" r="2" fill="currentColor" />
-                    <circle cx="52" cy="32" r="2" fill="currentColor" />
-                    <circle cx="52" cy="40" r="2" fill="currentColor" />
-
-                    {/* Connection Lines */}
-                    <path d="M12 24 L16 24" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M12 32 L16 32" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M12 40 L16 40" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M48 24 L52 24" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M48 32 L52 32" stroke="currentColor" strokeWidth="1.5" />
-                    <path d="M48 40 L52 40" stroke="currentColor" strokeWidth="1.5" />
-
-                    {/* Internal Components */}
-                    <rect x="20" y="20" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
-                    <rect x="34" y="20" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
-                    <rect x="20" y="32" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
-                    <rect x="34" y="32" width="10" height="8" rx="2" fill="currentColor" opacity="0.3" />
-
-                    {/* Central Hub */}
-                    <circle cx="32" cy="28" r="4" fill="currentColor" opacity="0.2" />
-                    <circle cx="32" cy="28" r="2.5" fill="currentColor" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-teal-400 bg-clip-text text-transparent">
-                    System Integration
-                  </h2>
-                  <p className="text-gray-400 text-lg">Connect and synchronize your business systems</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowSystemIntegrationModal(false)}
-                className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-full flex items-center justify-center transition-colors duration-200"
+              {/* Team */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center"
               >
-                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                  {homeData.team.title}
+                </h2>
+                <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
+                  {homeData.team.subtitle}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {homeData.team.members.map((member, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 hover:border-purple-500/50 transition-all duration-300"
+                    >
+                      <p className="text-gray-300 text-sm">{member}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
+          </div>
+        </section>
 
-            {/* Modal Content */}
-            <div className="space-y-6">
-              <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                <h3 className="text-xl font-semibold text-white mb-4">What is System Integration?</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  System Integration connects different software applications, databases, and business processes to work
-                  together seamlessly. It eliminates data silos, automates workflows, and provides a unified view of
-                  your business operations across all platforms and systems.
-                </p>
-              </div>
+        {/* Testimonials Section */}
+        <section id="testimonials" className="section-padding bg-gray-800/50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Integration Benefits</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Seamless data flow
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Reduced manual work
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Real-time synchronization
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                      Improved accuracy
-                    </li>
-                  </ul>
-                </div>
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                {homeData.testimonials.title}
+              </h2>
 
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Integration Types</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-teal-400 rounded-full"></span>
-                      API integrations
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-teal-400 rounded-full"></span>
-                      Database connections
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-teal-400 rounded-full"></span>
-                      Cloud services
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-teal-400 rounded-full"></span>
-                      Third-party tools
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-green-500/20 to-teal-500/20 rounded-xl p-6 border border-green-500/30">
-                <h4 className="text-lg font-semibold text-white mb-3">Ready to Integrate?</h4>
-                <p className="text-gray-300 mb-4">
-                  Let us help you connect your systems and create a unified, efficient business environment.
-                </p>
-                <div className="flex gap-4">
-                  <button className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-teal-700 transform hover:scale-105 transition-all duration-300">
-                    Start Integration
-                  </button>
-                  <button
-                    onClick={() => setShowSystemIntegrationModal(false)}
-                    className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {homeData.testimonials.items.map((testimonial, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                    viewport={{ once: true }}
+                    className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300"
                   >
-                    Learn More
-                  </button>
+                    <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                      💬 "{testimonial.quote}"
+                    </p>
+                    <p className="text-yellow-300 font-medium">— {testimonial.author}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="section-padding bg-gray-900 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[#000008]" />
+
+          <div className="container-custom relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+                {homeData.contact.title}
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
+                {homeData.contact.subtitle}
+              </p>
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
+                {homeData.contact.description}
+              </p>
+
+              <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 max-w-2xl mx-auto">
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <span className="text-2xl">📩</span>
+                  <a href={`mailto:${homeData.contact.email}`} className="text-xl text-green-300 hover:text-green-200 transition-colors">
+                    {homeData.contact.email}
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-center gap-6">
+                  <span className="text-lg text-gray-300">🌐</span>
+                  <div className="flex gap-4">
+                    <span className="text-gray-300">{homeData.contact.social.instagram}</span>
+                    <span className="text-gray-400">|</span>
+                    <span className="text-gray-300">{homeData.contact.social.linkedin}</span>
+                    <span className="text-gray-400">|</span>
+                    <span className="text-gray-300">{homeData.contact.social.facebook}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
+            </motion.div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
 
-      {/* Consulting Services Modal */}
-      {showConsultingModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowConsultingModal(false)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-gray-800/90 backdrop-blur-md border border-gray-700/50 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 64 64"
-                    className="text-white"
-                  >
-                    {/* Professional Person */}
-                    <circle cx="32" cy="20" r="8" fill="currentColor" />
-
-                    {/* Business Suit */}
-                    <path d="M24 28 L40 28 L40 48 L24 48 Z" fill="currentColor" />
-                    <path d="M26 28 L38 28 L38 46 L26 46 Z" fill="currentColor" opacity="0.3" />
-
-                    {/* Tie */}
-                    <path d="M30 28 L34 28 L32 48 Z" fill="currentColor" opacity="0.8" />
-
-                    {/* Briefcase */}
-                    <rect x="22" y="42" width="20" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                    <rect x="24" y="44" width="16" height="8" fill="currentColor" opacity="0.3" />
-                    <path d="M26 42 L26 40 L30 40 L30 42" fill="none" stroke="currentColor" strokeWidth="1.5" />
-
-                    {/* Charts and Graphs */}
-                    <rect x="12" y="12" width="10" height="8" rx="1" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
-                    <path d="M14 18 L17 16 L20 18 L23 16" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
-
-                    <rect x="42" y="12" width="10" height="8" rx="1" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
-                    <rect x="44" y="14" width="2" height="4" fill="currentColor" opacity="0.7" />
-                    <rect x="47" y="15" width="2" height="3" fill="currentColor" opacity="0.7" />
-                    <rect x="50" y="16" width="2" height="2" fill="currentColor" opacity="0.7" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">
-                    Consulting Services
-                  </h2>
-                  <p className="text-gray-400 text-lg">Expert guidance for your business transformation</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowConsultingModal(false)}
-                className="w-10 h-10 bg-gray-700/50 hover:bg-gray-600/50 rounded-full flex items-center justify-center transition-colors duration-200"
-              >
-                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="space-y-6">
-              <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                <h3 className="text-xl font-semibold text-white mb-4">What are Consulting Services?</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  Our consulting services provide expert guidance, strategic planning, and implementation support
-                  to help your business achieve its goals. We analyze your current processes, identify opportunities
-                  for improvement, and develop customized solutions that drive growth and efficiency.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Consulting Areas</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                      Business strategy
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                      Process optimization
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                      Digital transformation
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-indigo-400 rounded-full"></span>
-                      Technology implementation
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-gray-700/30 rounded-xl p-6 border border-gray-600/30">
-                  <h4 className="text-lg font-semibold text-white mb-3">Our Approach</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Assessment & analysis
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Strategic planning
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Implementation support
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
-                      Ongoing guidance
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-r from-indigo-500/20 to-blue-500/20 rounded-xl p-6 border border-indigo-500/30">
-                <h4 className="text-lg font-semibold text-white mb-3">Ready to Transform?</h4>
-                <p className="text-gray-300 mb-4">
-                  Let our expert consultants help you navigate your business challenges and achieve sustainable growth.
-                </p>
-                <div className="flex gap-4">
-                  <button className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-semibold rounded-lg hover:from-indigo-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300">
-                    Get Consultation
-                  </button>
-                  <button
-                    onClick={() => setShowConsultingModal(false)}
-                    className="px-6 py-3 bg-gray-700/50 text-gray-300 font-semibold rounded-lg hover:bg-gray-600/50 transition-colors duration-200"
-                  >
-                    Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-
-        </div>
-      </>
-    );
-  };
-
-export default Home; 
+export default Home;

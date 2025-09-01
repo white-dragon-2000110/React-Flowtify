@@ -14,39 +14,21 @@ const Footer: React.FC = () => {
       ]
     },
     {
-      title: "Integrations",
-      links: [
-        { name: "Popular Tools", href: '/integrations' },
-        { name: "API Access", href: '/integrations' },
-        { name: "Custom Connectors", href: '/integrations' },
-        { name: "Webhooks", href: '/integrations' }
-      ]
-    },
-    {
-      title: "Support",
-      links: [
-        { name: "FAQs", href: '/faqs' },
-        { name: "Contact Us", href: '/contact' },
-        { name: "Documentation", href: '/faqs' },
-        { name: "Help Center", href: '/contact' }
-      ]
-    },
-    {
       title: "Company",
       links: [
         { name: "About Us", href: '/services' },
         { name: "Privacy Policy", href: '/privacy' },
-        { name: "Terms & Conditions", href: '/terms' },
-        { name: "Contact", href: '/contact' }
+        { name: "Terms & Conditions", href: '/terms' }
       ]
     }
   ];
 
   const socialLinks = [
-    { name: 'LinkedIn', href: '#', icon: '💼' },
-    { name: 'Facebook', href: '#', icon: '📘' },
-    { name: 'Instagram', href: '#', icon: '📷' },
-    { name: 'WhatsApp', href: '#', icon: '💬' }
+    { name: 'LinkedIn', href: '#', icon: '/svg/linkedin-icon.svg' },
+    { name: 'Facebook', href: '#', icon: '/svg/facebook-icon.svg' },
+    { name: 'Instagram', href: '#', icon: '/svg/instagram-icon.svg' },
+    { name: 'WhatsApp', href: '#', icon: '/svg/whatsapp-icon.svg' },
+    { name: 'Calendly', href: '#', icon: '/svg/calendly-icon.svg' }
   ];
 
   return (
@@ -150,7 +132,7 @@ const Footer: React.FC = () => {
                 </h3>
                 
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  Transform your business processes with AI-powered workflow automation. Boost productivity, reduce errors, and focus on what matters most.
+                  Flowtify AI redefines business efficiency with 24/7 automation and intelligent workflows. Focus on growth, while we take care of the repetitive.
                 </p>
 
                 {/* Social Links */}
@@ -181,9 +163,11 @@ const Footer: React.FC = () => {
                         }}
                       />
                       
-                      <span className="relative z-10 text-lg group-hover:scale-110 transition-transform duration-300">
-                        {social.icon}
-                      </span>
+                      <img 
+                        src={social.icon} 
+                        alt={social.name}
+                        className="relative z-10 w-5 h-5 group-hover:scale-110 transition-transform duration-300"
+                      />
                     </motion.a>
                   ))}
                 </div>

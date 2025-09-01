@@ -1,0 +1,30 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="automationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="url(#automationGradient)" opacity="0.1"/>
+  <g transform="translate(8, 8)">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="url(#automationGradient)" stroke-width="2"/>
+    <circle cx="8" cy="8" r="2" fill="url(#automationGradient)"/>
+    <path d="M8 2L8 6M8 10L8 14M2 8L6 8M10 8L14 8" stroke="url(#automationGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(20, 8)">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="url(#automationGradient)" stroke-width="2"/>
+    <circle cx="8" cy="8" r="2" fill="url(#automationGradient)"/>
+    <path d="M8 2L8 6M8 10L8 14M2 8L6 8M10 8L14 8" stroke="url(#automationGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(8, 20)">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="url(#automationGradient)" stroke-width="2"/>
+    <circle cx="8" cy="8" r="2" fill="url(#automationGradient)"/>
+    <path d="M8 2L8 6M8 10L8 14M2 8L6 8M10 8L14 8" stroke="url(#automationGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(20, 20)">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="url(#automationGradient)" stroke-width="2"/>
+    <circle cx="8" cy="8" r="2" fill="url(#automationGradient)"/>
+    <path d="M8 2L8 6M8 10L8 14M2 8L6 8M10 8L14 8" stroke="url(#automationGradient)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <path d="M20 12L24 12M20 20L24 20M12 20L16 20M12 28L16 28" stroke="url(#automationGradient)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>

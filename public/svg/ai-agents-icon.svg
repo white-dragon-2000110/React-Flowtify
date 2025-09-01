@@ -1,0 +1,16 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="url(#aiGradient)" opacity="0.1"/>
+  <path d="M24 12C18.48 12 14 16.48 14 22C14 27.52 18.48 32 24 32C29.52 32 34 27.52 34 22C34 16.48 29.52 12 24 12ZM24 30C19.59 30 16 26.41 16 22C16 17.59 19.59 14 24 14C28.41 14 32 17.59 32 22C32 26.41 28.41 30 24 30Z" fill="url(#aiGradient)"/>
+  <circle cx="20" cy="20" r="2" fill="url(#aiGradient)"/>
+  <circle cx="28" cy="20" r="2" fill="url(#aiGradient)"/>
+  <path d="M20 26C20 24.9 20.9 24 22 24H26C27.1 24 28 24.9 28 26V28H20V26Z" fill="url(#aiGradient)"/>
+  <path d="M12 36H36V38H12V36Z" fill="url(#aiGradient)" opacity="0.6"/>
+  <circle cx="12" cy="38" r="1" fill="url(#aiGradient)"/>
+  <circle cx="36" cy="38" r="1" fill="url(#aiGradient)"/>
+</svg>
