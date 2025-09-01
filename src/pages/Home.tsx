@@ -1,10 +1,294 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import createGlobe from "cobe";
+import type { COBEOptions } from "cobe";
+import { useMotionValue, useSpring } from "motion/react";
+import { useRef } from "react";
+import DottedMap from "dotted-map";
 
 import RequestDemoButton from '../components/RequestDemoButton';
 import { Vortex } from '../components/Vortex';
 import LoadingSpinner from '../components/LoadingSpinner';
+
+// Globe Component
+const MOVEMENT_DAMPING = 1400;
+
+const GLOBE_CONFIG: COBEOptions = {
+  width: 800,
+  height: 800,
+  onRender: () => { },
+  devicePixelRatio: 2,
+  phi: 0,
+  theta: 0.3,
+  dark: -2,
+  diffuse: 0.4,
+  mapSamples: 16000,
+  mapBrightness: 20.0,
+  baseColor: [0.1, 0.1, 0.1],
+  markerColor: [251 / 255, 100 / 255, 21 / 255],
+  glowColor: [0.2, 0.2, 0.2],
+  markers: [
+    { location: [14.5995, 120.9842], size: 0.03 },
+    { location: [19.076, 72.8777], size: 0.1 },
+    { location: [23.8103, 90.4125], size: 0.05 },
+    { location: [30.0444, 31.2357], size: 0.07 },
+    { location: [39.9042, 116.4074], size: 0.08 },
+    { location: [-23.5505, -46.6333], size: 0.1 },
+    { location: [19.4326, -99.1332], size: 0.1 },
+    { location: [40.7128, -74.006], size: 0.1 },
+    { location: [34.6937, 135.5022], size: 0.05 },
+    { location: [41.0082, 28.9784], size: 0.06 },
+  ],
+};
+
+function Globe({
+  className,
+  config = GLOBE_CONFIG,
+}: {
+  className?: string;
+  config?: COBEOptions;
+}) {
+  const phiRef = useRef(0);
+  const widthRef = useRef(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pointerInteracting = useRef<number | null>(null);
+  const pointerInteractionMovement = useRef(0);
+
+  const r = useMotionValue(0);
+  const rs = useSpring(r, {
+    mass: 1,
+    damping: 30,
+    stiffness: 100,
+  });
+
+  const updatePointerInteraction = (value: number | null) => {
+    pointerInteracting.current = value;
+    if (canvasRef.current) {
+      canvasRef.current.style.cursor = value !== null ? "grabbing" : "grab";
+    }
+  };
+
+  const updateMovement = (clientX: number) => {
+    if (pointerInteracting.current !== null) {
+      const delta = clientX - pointerInteracting.current;
+      pointerInteractionMovement.current = delta;
+      r.set(r.get() + delta / MOVEMENT_DAMPING);
+    }
+  };
+
+  useEffect(() => {
+    const onResize = () => {
+      if (canvasRef.current) {
+        widthRef.current = canvasRef.current.offsetWidth;
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    onResize();
+
+    const globe = createGlobe(canvasRef.current!, {
+      ...config,
+      width: widthRef.current * 2,
+      height: widthRef.current * 2,
+      onRender: (state: Record<string, unknown>) => {
+        if (!pointerInteracting.current) phiRef.current += 0.005;
+        (state as any).phi = phiRef.current + rs.get();
+        (state as any).width = widthRef.current * 2;
+        (state as any).height = widthRef.current * 2;
+      },
+    });
+
+    setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0);
+    return () => {
+      globe.destroy();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [rs, config]);
+
+  return (
+    <div
+      className={`relative mx-auto aspect-[1/1] w-full h-full max-w-[600px] ${className || ''}`}
+    >
+      <canvas
+        className="w-full h-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
+        ref={canvasRef}
+        onPointerDown={(e) => {
+          pointerInteracting.current = e.clientX;
+          updatePointerInteraction(e.clientX);
+        }}
+        onPointerUp={() => updatePointerInteraction(null)}
+        onPointerOut={() => updatePointerInteraction(null)}
+        onMouseMove={(e) => updateMovement(e.clientX)}
+        onTouchMove={(e) =>
+          e.touches[0] && updateMovement(e.touches[0].clientX)
+        }
+      />
+    </div>
+  );
+}
+
+// World Map Component
+interface MapProps {
+  dots?: Array<{
+    start: { lat: number; lng: number; label?: string };
+    end: { lat: number; lng: number; label?: string };
+  }>;
+  lineColor?: string;
+}
+
+function WorldMap({
+  dots = [],
+  lineColor = "#0ea5e9",
+}: MapProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const map = new DottedMap({ height: 100, grid: "diagonal" });
+
+  const svgMap = map.getSVG({
+    radius: 0.22,
+    color: "#FFFFFF40",
+    shape: "circle",
+    backgroundColor: "black",
+  });
+
+  const projectPoint = (lat: number, lng: number) => {
+    const x = (lng + 180) * (800 / 360);
+    const y = (90 - lat) * (400 / 180);
+    return { x, y };
+  };
+
+  const createCurvedPath = (
+    start: { x: number; y: number },
+    end: { x: number; y: number }
+  ) => {
+    const midX = (start.x + end.x) / 2;
+    const midY = Math.min(start.y, end.y) - 50;
+    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
+  };
+
+  return (
+    <div className="w-full aspect-[2/1] bg-black rounded-lg relative font-sans">
+      <img
+        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+        className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
+        alt="world map"
+        height="495"
+        width="1056"
+        draggable={false}
+      />
+      <svg
+        ref={svgRef}
+        viewBox="0 0 800 400"
+        className="w-full h-full absolute inset-0 pointer-events-none select-none"
+      >
+        {dots.map((dot, i) => {
+          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
+          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+          return (
+            <g key={`path-group-${i}`}>
+              <motion.path
+                d={createCurvedPath(startPoint, endPoint)}
+                fill="none"
+                stroke="url(#path-gradient)"
+                strokeWidth="1"
+                initial={{
+                  pathLength: 0,
+                }}
+                animate={{
+                  pathLength: 1,
+                }}
+                transition={{
+                  duration: 1,
+                  delay: 0.5 * i,
+                  ease: "easeOut",
+                }}
+                key={`start-upper-${i}`}
+              ></motion.path>
+            </g>
+          );
+        })}
+
+        <defs>
+          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
+        {dots.map((dot, i) => (
+          <g key={`points-group-${i}`}>
+            <g key={`start-${i}`}>
+              <circle
+                cx={projectPoint(dot.start.lat, dot.start.lng).x}
+                cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                r="2"
+                fill={lineColor}
+              />
+              <circle
+                cx={projectPoint(dot.start.lat, dot.start.lng).x}
+                cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                r="2"
+                fill={lineColor}
+                opacity="0.5"
+              >
+                <animate
+                  attributeName="r"
+                  from="2"
+                  to="8"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  from="0.5"
+                  to="0"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+            <g key={`end-${i}`}>
+              <circle
+                cx={projectPoint(dot.end.lat, dot.end.lng).x}
+                cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                r="2"
+                fill={lineColor}
+              />
+              <circle
+                cx={projectPoint(dot.end.lat, dot.end.lng).x}
+                cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                r="2"
+                fill={lineColor}
+                opacity="0.5"
+              >
+                <animate
+                  attributeName="r"
+                  from="2"
+                  to="8"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  from="0.5"
+                  to="0"
+                  dur="1.5s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 // Import data
 import homeDataRaw from '../data/home.json';
@@ -426,10 +710,10 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Google Drive</span>
@@ -438,7 +722,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Gmail</span>
@@ -447,7 +731,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6 15a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-6 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+                            <path d="M6 15a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-6 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Slack</span>
@@ -456,7 +740,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v12h12V6H6z"/>
+                            <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v12h12V6H6z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Notion</span>
@@ -465,7 +749,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Discord</span>
@@ -486,7 +770,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Make</span>
@@ -502,7 +786,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">HubSpot</span>
@@ -511,7 +795,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                            <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Airtable</span>
@@ -520,7 +804,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h12V5H6z"/>
+                            <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h12V5H6z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Trello</span>
@@ -541,7 +825,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">WhatsApp</span>
@@ -550,7 +834,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Instagram</span>
@@ -559,7 +843,7 @@ const Home: React.FC = () => {
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                           </svg>
                         </div>
                         <span className="text-xs text-gray-300">Facebook</span>
@@ -578,7 +862,7 @@ const Home: React.FC = () => {
                     <div className="flex flex-col items-center justify-center mb-4">
                       <div className="w-12 h-12 border-2 border-white rounded-lg flex items-center justify-center mb-2">
                         <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
                       </div>
                       <span className="text-xs text-gray-300">Calendly</span>
@@ -614,7 +898,7 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="text-center lg:text-left"
+                className="text-center"
               >
                 {/* Never Lose Information Video */}
                 <motion.div
@@ -717,7 +1001,7 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="text-center lg:text-left"
+                className="text-center"
               >
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
                   {homeData.security.title}
@@ -831,7 +1115,7 @@ const Home: React.FC = () => {
                       <span className="text-gray-300 text-md">{homeData.pricing.description}</span>
                     </div>
                     <div className="space-y-2 w-full">
-                      {homeData.pricing.factors.map((factor, index) => (
+                      {homeData.pricing.factors.map((factor) => (
                         <div className="flex items-center gap-3">
                           <span className="text-gray-400 text-sm">•</span>
                           <span className="text-gray-300 text-sm">{factor}</span>
@@ -870,6 +1154,11 @@ const Home: React.FC = () => {
                 <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
                   {homeData.mission.description}
                 </p>
+
+                {/* Globe Component */}
+                <div className="mt-12 relative h-[600px] w-full max-w-6xl mx-auto overflow-visible">
+                  <Globe className="w-full h-full" />
+                </div>
               </motion.div>
 
               {/* Vision */}
@@ -980,6 +1269,20 @@ const Home: React.FC = () => {
               <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
                 {homeData.contact.description}
               </p>
+
+              {/* World Map Component */}
+              <div className="mb-12 max-w-6xl mx-auto">
+                <WorldMap 
+                  dots={[
+                    { start: { lat: 40.7128, lng: -74.006 }, end: { lat: 51.5074, lng: -0.1278 } },
+                    { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 35.6762, lng: 139.6503 } },
+                    { start: { lat: 35.6762, lng: 139.6503 }, end: { lat: 19.076, lng: 72.8777 } },
+                    { start: { lat: 19.076, lng: 72.8777 }, end: { lat: -23.5505, lng: -46.6333 } },
+                    { start: { lat: -23.5505, lng: -46.6333 }, end: { lat: 40.7128, lng: -74.006 } }
+                  ]}
+                  lineColor="#0ea5e9"
+                />
+              </div>
 
               <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 max-w-2xl mx-auto">
                 <div className="flex items-center justify-center gap-2 mb-6">
