@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import createGlobe from "cobe";
@@ -15,16 +15,16 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const MOVEMENT_DAMPING = 1400;
 
 const GLOBE_CONFIG: COBEOptions = {
-  width: 800,
-  height: 800,
+  width: 600,
+  height: 600,
   onRender: () => { },
-  devicePixelRatio: 2,
+  devicePixelRatio: 1,
   phi: 0,
   theta: 0.3,
   dark: -2,
   diffuse: 0.4,
-  mapSamples: 16000,
-  mapBrightness: 20.0,
+  mapSamples: 4000,
+  mapBrightness: 1.0,
   baseColor: [0.1, 0.1, 0.1],
   markerColor: [251 / 255, 100 / 255, 21 / 255],
   glowColor: [0.2, 0.2, 0.2],
@@ -58,8 +58,8 @@ function Globe({
   const r = useMotionValue(0);
   const rs = useSpring(r, {
     mass: 1,
-    damping: 30,
-    stiffness: 100,
+    damping: 40,
+    stiffness: 80,
   });
 
   const updatePointerInteraction = (value: number | null) => {
@@ -89,13 +89,13 @@ function Globe({
 
     const globe = createGlobe(canvasRef.current!, {
       ...config,
-      width: widthRef.current * 2,
-      height: widthRef.current * 2,
+      width: widthRef.current,
+      height: widthRef.current,
       onRender: (state: Record<string, unknown>) => {
-        if (!pointerInteracting.current) phiRef.current += 0.005;
+        if (!pointerInteracting.current) phiRef.current += 0.003;
         (state as any).phi = phiRef.current + rs.get();
-        (state as any).width = widthRef.current * 2;
-        (state as any).height = widthRef.current * 2;
+        (state as any).width = widthRef.current;
+        (state as any).height = widthRef.current;
       },
     });
 
@@ -142,14 +142,14 @@ function WorldMap({
   lineColor = "#0ea5e9",
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const map = new DottedMap({ height: 100, grid: "diagonal" });
+  const map = useMemo(() => new DottedMap({ height: 80, grid: "diagonal" }), []);
 
-  const svgMap = map.getSVG({
-    radius: 0.22,
+  const svgMap = useMemo(() => map.getSVG({
+    radius: 0.18,
     color: "#FFFFFF40",
     shape: "circle",
     backgroundColor: "black",
-  });
+  }), [map]);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -198,8 +198,8 @@ function WorldMap({
                   pathLength: 1,
                 }}
                 transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
+                  duration: 0.8,
+                  delay: 0.3 * i,
                   ease: "easeOut",
                 }}
                 key={`start-upper-${i}`}
@@ -236,8 +236,8 @@ function WorldMap({
                 <animate
                   attributeName="r"
                   from="2"
-                  to="8"
-                  dur="1.5s"
+                  to="6"
+                  dur="2s"
                   begin="0s"
                   repeatCount="indefinite"
                 />
@@ -245,7 +245,7 @@ function WorldMap({
                   attributeName="opacity"
                   from="0.5"
                   to="0"
-                  dur="1.5s"
+                  dur="2s"
                   begin="0s"
                   repeatCount="indefinite"
                 />
@@ -268,8 +268,8 @@ function WorldMap({
                 <animate
                   attributeName="r"
                   from="2"
-                  to="8"
-                  dur="1.5s"
+                  to="6"
+                  dur="2s"
                   begin="0s"
                   repeatCount="indefinite"
                 />
@@ -277,7 +277,7 @@ function WorldMap({
                   attributeName="opacity"
                   from="0.5"
                   to="0"
-                  dur="1.5s"
+                  dur="2s"
                   begin="0s"
                   repeatCount="indefinite"
                 />
@@ -1276,9 +1276,7 @@ const Home: React.FC = () => {
                   dots={[
                     { start: { lat: 40.7128, lng: -74.006 }, end: { lat: 51.5074, lng: -0.1278 } },
                     { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 35.6762, lng: 139.6503 } },
-                    { start: { lat: 35.6762, lng: 139.6503 }, end: { lat: 19.076, lng: 72.8777 } },
-                    { start: { lat: 19.076, lng: 72.8777 }, end: { lat: -23.5505, lng: -46.6333 } },
-                    { start: { lat: -23.5505, lng: -46.6333 }, end: { lat: 40.7128, lng: -74.006 } }
+                    { start: { lat: 35.6762, lng: 139.6503 }, end: { lat: 19.076, lng: 72.8777 } }
                   ]}
                   lineColor="#0ea5e9"
                 />
