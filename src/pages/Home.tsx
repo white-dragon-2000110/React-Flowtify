@@ -10,6 +10,7 @@ import DottedMap from "dotted-map";
 import RequestDemoButton from '../components/RequestDemoButton';
 import { Vortex } from '../components/Vortex';
 import LoadingSpinner from '../components/LoadingSpinner';
+import FeatureSection from '../components/FeatureSection';
 
 // Globe Component
 const MOVEMENT_DAMPING = 1400;
@@ -335,7 +336,7 @@ const Home: React.FC = () => {
 
       <div className="min-h-screen bg-[#000008]">
         {/* Hero Section */}
-        <section id="home" className="relative bg-[#000008] min-h-screen flex items-center justify-center overflow-hidden">
+        <section id="home" className="relative bg-[#000008] h-[853px] flex items-center justify-center overflow-hidden">
           {/* Vortex Background Animation */}
           <Vortex
             backgroundColor="rgb(0, 0, 12)"
@@ -365,7 +366,7 @@ const Home: React.FC = () => {
             </motion.h2>
 
             <motion.p
-              className="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-gray-300"
+              className="text-lg md:text-xl mb-14 max-w-3xl mx-auto text-gray-300"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -373,11 +374,30 @@ const Home: React.FC = () => {
               {homeData.hero.description}
             </motion.p>
 
+                         {/* Hero Video */}
+             <motion.div
+               className="mb-[120px] w-full max-w-4xl mx-auto px-4"
+               initial={{ opacity: 0, scale: 0.8 }}
+               animate={{ opacity: 1, scale: 1 }}
+               transition={{ duration: 0.8, delay: 0.5 }}
+             >
+               <video
+                 src="/video/home.webm"
+                 autoPlay
+                 loop
+                 muted
+                 playsInline
+                 className="w-full h-auto max-h-[60vh] object-cover rounded-2xl shadow-2xl"
+               >
+                 Your browser does not support the video tag.
+               </video>
+             </motion.div>
+
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-5"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
             >
               <RequestDemoButton size="lg" />
             </motion.div>
@@ -396,33 +416,33 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              {/* Superpowers Video */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="mb-8"
-              >
-                <video
-                  ref={(el) => {
-                    if (el) {
-                      setTimeout(() => {
-                        el.play().catch(console.error);
-                      }, 3000);
-                    }
-                  }}
-                  src="/video/superpower.webm"
-                  loop
-                  muted
-                  playsInline
-                  className="w-full max-w-xs mx-auto rounded-lg shadow-2xl"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </motion.div>
+                             {/* Superpowers Video */}
+               <motion.div
+                 initial={{ opacity: 0, scale: 0.8 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 transition={{ duration: 0.6 }}
+                 viewport={{ once: true }}
+                 className="mb-8 w-full max-w-sm mx-auto px-4"
+               >
+                 <video
+                   ref={(el) => {
+                     if (el) {
+                       setTimeout(() => {
+                         el.play().catch(console.error);
+                       }, 3000);
+                     }
+                   }}
+                   src="/video/superpower.webm"
+                   loop
+                   muted
+                   playsInline
+                   className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-cover rounded-lg shadow-2xl"
+                 >
+                   Your browser does not support the video tag.
+                 </video>
+               </motion.div>
 
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-300">
                 {homeData.superpowers.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -470,136 +490,57 @@ const Home: React.FC = () => {
                   />
                 ))}
               </div>
-              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                {/* Left Column - Integrated with your devices */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="flex items-start space-x-4"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+              <FeatureSection
+                features={[
+                  {
+                    icon: (
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Desktop monitor */}
                         <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
                         <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
                         <path d="M12 18v-3" strokeWidth="2" />
-                        {/* Mobile phone overlapping */}
                         <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
                         <path d="M6 14v2" strokeWidth="1" />
                       </svg>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[0].title}
-                    </h3>
-                    <h5 className="text-sm font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[0].description}
-                    </h5>
-                  </div>
-                </motion.div>
-
-                {/* Vertical Separator */}
-                <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-px h-16 bg-gray-600"></div>
-                </div>
-
-                {/* Right Column - Secure but open */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-start space-x-4"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                    ),
+                    title: homeData.superpowers.items[0].title,
+                    description: homeData.superpowers.items[0].description
+                  },
+                  {
+                    icon: (
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Shield with padlock */}
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
                         <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
                         <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
                       </svg>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[1].title}
-                    </h3>
-                    <h5 className="text-sm font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[1].description}
-                    </h5>
-                  </div>
-                </motion.div>
-              </div>
-              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                {/* Left Column - Integrated with your devices */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="flex items-start space-x-4"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                    ),
+                    title: homeData.superpowers.items[1].title,
+                    description: homeData.superpowers.items[1].description
+                  },
+                  {
+                    icon: (
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Desktop monitor */}
                         <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
                         <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
                         <path d="M12 18v-3" strokeWidth="2" />
-                        {/* Mobile phone overlapping */}
                         <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
                         <path d="M6 14v2" strokeWidth="1" />
                       </svg>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[2].title}
-                    </h3>
-                    <h5 className="text-sm font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[2].description}
-                    </h5>
-                  </div>
-                </motion.div>
-
-                {/* Vertical Separator */}
-                <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-px h-16 bg-gray-600"></div>
-                </div>
-
-                {/* Right Column - Secure but open */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-start space-x-4"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                    ),
+                    title: homeData.superpowers.items[2].title,
+                    description: homeData.superpowers.items[2].description
+                  },
+                  {
+                    icon: (
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Shield with padlock */}
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
-                        <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
                         <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
                       </svg>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[3].title}
-                    </h3>
-                    <h5 className="text-sm font-semibold mb-2 text-white">
-                      {homeData.superpowers.items[3].description}
-                    </h5>
-                  </div>
-                </motion.div>
-              </div>
+                    ),
+                    title: homeData.superpowers.items[3].title,
+                    description: homeData.superpowers.items[3].description
+                  }
+                ]}
+              />
             </motion.div>
           </div>
         </section>
@@ -616,71 +557,53 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-300">
                 {homeData.scale.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
                 {homeData.scale.subtitle}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Column 1 - Always-on updates */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {/* Update/refresh icon */}
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {homeData.scale.features[0]}
-                  </h3>
-                </motion.div>
-
-                {/* Column 2 - Instant scalability */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {/* Scale/expand icon */}
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {homeData.scale.features[1]}
-                  </h3>
-                </motion.div>
-
-                {/* Column 3 - Dedicated support team */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {/* Support/headset icon */}
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {homeData.scale.features[2]}
-                  </h3>
-                </motion.div>
-              </div>
+              <FeatureSection
+                features={[
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    ),
+                    title: homeData.scale.features[0],
+                    description: "Always-on updates and real-time synchronization"
+                  },
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                      </svg>
+                    ),
+                    title: homeData.scale.features[1],
+                    description: "Instant scalability to handle any workload"
+                  },
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
+                      </svg>
+                    ),
+                    title: homeData.scale.features[2],
+                    description: "Dedicated support team available 24/7"
+                  },
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    ),
+                    title: "Performance Optimization",
+                    description: "Advanced algorithms for maximum efficiency"
+                  }
+                ]}
+              />
             </motion.div>
           </div>
         </section>
@@ -697,7 +620,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent h-[55px]">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-300">
                 {homeData.integrations.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
@@ -937,31 +860,31 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                {/* Never Lose Information Video */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="mb-8"
-                >
-                  <video
-                    ref={(el) => {
-                      if (el) {
-                        setTimeout(() => {
-                          el.play().catch(console.error);
-                        }, 3000);
-                      }
-                    }}
-                    src="/video/nolose.webm"
-                    loop
-                    muted
-                    playsInline
-                    className="w-full max-w-sm mx-auto rounded-lg shadow-2xl"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                </motion.div>
+                                 {/* Never Lose Information Video */}
+                 <motion.div
+                   initial={{ opacity: 0, scale: 0.8 }}
+                   whileInView={{ opacity: 1, scale: 1 }}
+                   transition={{ duration: 0.6 }}
+                   viewport={{ once: true }}
+                   className="mb-8 w-full max-w-sm mx-auto px-4"
+                 >
+                   <video
+                     ref={(el) => {
+                       if (el) {
+                         setTimeout(() => {
+                           el.play().catch(console.error);
+                         }, 3000);
+                       }
+                     }}
+                     src="/video/nolose.webm"
+                     loop
+                     muted
+                     playsInline
+                     className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-cover rounded-lg shadow-2xl"
+                   >
+                     Your browser does not support the video tag.
+                   </video>
+                 </motion.div>
 
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
                   {homeData.dataProtection.title}
@@ -1040,78 +963,61 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-green-300">
                   {homeData.security.title}
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
                   {homeData.security.subtitle}
                 </p>
 
-                {/* Three-Column Feature Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                  {/* Column 1 - Official APIs with end-to-end encryption */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col items-center text-center"
-                  >
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Shield with padlock */}
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
-                        <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
-                        <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.security.features[0]}
-                    </h3>
-                  </motion.div>
-
-                  {/* Column 2 - GDPR & CCPA compliance */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col items-center text-center"
-                  >
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Compliance badge */}
-                        <path d="M9 12l2 2 4-4" strokeWidth="2" />
-                        <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z" strokeWidth="2" />
-                        <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z" strokeWidth="2" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.security.features[1]}
-                    </h3>
-                  </motion.div>
-
-                  {/* Column 3 - Secure cloud infrastructure */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col items-center text-center"
-                  >
-                    <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        {/* Cloud with security */}
-                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" strokeWidth="2" />
-                        <path d="M12 16l-2-2 2-2" strokeWidth="2" />
-                        <path d="M12 12l2 2-2 2" strokeWidth="2" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-white">
-                      {homeData.security.features[2]}
-                    </h3>
-                  </motion.div>
-                </div>
+                <FeatureSection
+                  features={[
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
+                          <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
+                          <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
+                        </svg>
+                      ),
+                      title: homeData.security.features[0],
+                      description: "Official APIs with end-to-end encryption"
+                    },
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 12l2 2 4-4" strokeWidth="2" />
+                          <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z" strokeWidth="2" />
+                          <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z" strokeWidth="2" />
+                        </svg>
+                      ),
+                      title: homeData.security.features[1],
+                      description: "GDPR & CCPA compliance guaranteed"
+                    },
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" strokeWidth="2" />
+                          <path d="M12 16l-2-2 2-2" strokeWidth="2" />
+                          <path d="M12 12l2 2-2 2" strokeWidth="2" />
+                        </svg>
+                      ),
+                      title: homeData.security.features[2],
+                      description: "Secure cloud infrastructure"
+                    },
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 12l2 2 4-4" strokeWidth="2" />
+                          <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z" strokeWidth="2" />
+                          <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z" strokeWidth="2" />
+                        </svg>
+                      ),
+                      title: "Advanced Monitoring",
+                      description: "Real-time security monitoring and alerts"
+                    }
+                  ]}
+                />
               </motion.div>
             </div>
           </div>
@@ -1129,72 +1035,54 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-orange-300 to-red-300 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orange-300">
                 {homeData.results.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
                 {homeData.results.subtitle}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Column 1 - Lower operational costs */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {/* Trending down chart */}
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {homeData.results.metrics[0]}
-                  </h3>
-                </motion.div>
-
-                {/* Column 2 - Time saved */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {/* Clock icon */}
-                      <circle cx="12" cy="12" r="10" strokeWidth={2} />
-                      <polyline points="12,6 12,12 16,14" strokeWidth={2} />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {homeData.results.metrics[1]}
-                  </h3>
-                </motion.div>
-
-                {/* Column 3 - Lead conversion increase */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      {/* Trending up chart */}
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-white">
-                    {homeData.results.metrics[2]}
-                  </h3>
-                </motion.div>
-              </div>
+              <FeatureSection
+                features={[
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                      </svg>
+                    ),
+                    title: homeData.results.metrics[0],
+                    description: "Lower operational costs and increased efficiency"
+                  },
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" strokeWidth={2} />
+                        <polyline points="12,6 12,12 16,14" strokeWidth={2} />
+                      </svg>
+                    ),
+                    title: homeData.results.metrics[1],
+                    description: "Time saved through automation and optimization"
+                  },
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                      </svg>
+                    ),
+                    title: homeData.results.metrics[2],
+                    description: "Lead conversion increase and revenue growth"
+                  },
+                  {
+                    icon: (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    ),
+                    title: "ROI Improvement",
+                    description: "Significant return on investment and cost savings"
+                  }
+                ]}
+              />
             </motion.div>
           </div>
         </section>
@@ -1211,7 +1099,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-300">
                 {homeData.pricing.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
@@ -1226,17 +1114,17 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="mb-8 relative w-full max-w-4xl mx-auto"
               >
-                {/* Background Video */}
-                <video
-                  src="/video/price.webm"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full rounded-2xl shadow-2xl"
-                >
-                  Your browser does not support the video tag.
-                </video>
+                                 {/* Background Video */}
+                 <video
+                   src="/video/price.webm"
+                   autoPlay
+                   loop
+                   muted
+                   playsInline
+                   className="w-full h-auto max-h-[70vh] object-cover rounded-2xl shadow-2xl"
+                 >
+                   Your browser does not support the video tag.
+                 </video>
 
                 {/* Text Overlay */}
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8" style={{ transform: 'translateY(-250px)' }}>
@@ -1288,7 +1176,7 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-blue-300">
                   {homeData.mission.title}
                 </h2>
                 <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
@@ -1309,7 +1197,7 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-green-300">
                   {homeData.vision.title}
                 </h2>
                 <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
@@ -1325,35 +1213,53 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-purple-300">
                   {homeData.team.title}
                 </h2>
                 <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
                   {homeData.team.subtitle}
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {homeData.team.members.map((member, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex flex-col items-center text-center"
-                    >
-                      <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center mb-4">
+                <FeatureSection
+                  features={[
+                    {
+                      icon: (
                         <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          {/* User icon */}
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                      </div>
-                      <h3 className="text-lg font-semibold mb-2 text-white">
-                        {member}
-                      </h3>
-                    </motion.div>
-                  ))}
-                </div>
+                      ),
+                      title: homeData.team.members[0] || "Team Member 1",
+                      description: "Expert in automation and workflow optimization"
+                    },
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      ),
+                      title: homeData.team.members[1] || "Team Member 2",
+                      description: "Specialist in AI and machine learning"
+                    },
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      ),
+                      title: homeData.team.members[2] || "Team Member 3",
+                      description: "Lead developer and system architect"
+                    },
+                    {
+                      icon: (
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      ),
+                      title: homeData.team.members[3] || "Team Member 4",
+                      description: "Customer success and support specialist"
+                    }
+                  ]}
+                />
               </motion.div>
             </div>
           </div>
@@ -1371,7 +1277,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-300">
                 {homeData.testimonials.title}
               </h2>
 
@@ -1408,7 +1314,7 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-300 to-teal-300 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-300">
                 {homeData.contact.title}
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
