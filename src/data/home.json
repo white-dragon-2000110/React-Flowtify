@@ -82,6 +82,9 @@
       "title": "Pricing that adapts to you",
       "subtitle": "Every business is different — and so is our pricing.",
       "description": "Your investment depends on:",
+      "monthly": "/month",
+      "billing": "(billed annually)",
+      "cta": "Start your 14-day trial",
       "factors": [
         "The number of channels and agents you want to automate",
         "The complexity of workflows",
@@ -222,6 +225,9 @@
       "title": "Precios que se adaptan a ti",
       "subtitle": "Cada negocio es único — y nuestra propuesta también.",
       "description": "La inversión depende de:",
+      "monthly": "/mes",
+      "billing": "(facturado anualmente)",
+      "cta": "Inicia tu prueba de 14 días",
       "factors": [
         "El número de canales y agentes a automatizar",
         "La complejidad de los flujos",

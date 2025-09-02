@@ -76,12 +76,12 @@ const Navigation: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   const navigationItems = [
     { path: '/', label: t('common.home'), isHomeSection: true, sectionId: 'home' },
-    { path: '/services', label: t('common.services'), isHomeSection: true, sectionId: 'services' },
     { path: '/integrations', label: t('common.integrations'), isHomeSection: true, sectionId: 'integrations' },
-    { path: '/faqs', label: t('common.faqs'), isHomeSection: true, sectionId: 'faqs' },
+    { path: '/', label: 'Price', isHomeSection: true, sectionId: 'pricing' },
     { path: '/contact', label: t('common.contact'), isHomeSection: true, sectionId: 'contact' },
   ];
 
@@ -120,6 +120,38 @@ const Navigation: React.FC = () => {
     }
   }, [location]);
 
+  // Track active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navigationItems
+        .filter(item => item.sectionId)
+        .map(item => item.sectionId!);
+      
+      const headerHeight = 64;
+      const scrollPosition = window.scrollY + headerHeight + 100; // Add offset for better detection
+      
+      let currentSection = 'home';
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionId = sections[i];
+        const element = document.getElementById(sectionId);
+        if (element && element.offsetTop <= scrollPosition) {
+          currentSection = sectionId;
+          break;
+        }
+      }
+      
+      setActiveSection(currentSection);
+    };
+
+    if (location.pathname === '/') {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Check initial position
+      
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [location.pathname, navigationItems]);
+
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -145,13 +177,16 @@ const Navigation: React.FC = () => {
           {/* Logo - Clickable to Home */}
           <button
             onClick={() => scrollToSection('home')}
-            className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-200"
+            className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
           >
             <img
-              src="/logo_h.png"
+              src="/logo.png"
               alt="Flowtify"
-              className="w-[250px] h-[250px] object-contain"
+              className="h-[50px] w-[50px] object-contain"
             />
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Flowtify
+            </span>
           </button>
 
           {/* Desktop Navigation with Dock Effects */}
@@ -161,13 +196,13 @@ const Navigation: React.FC = () => {
                 {item.isHomeSection && item.sectionId ? (
                   <motion.button
                     onClick={() => scrollToSection(item.sectionId!)}
-                    className={`relative text-sm font-medium transition-all duration-300 px-4 py-2 rounded-xl ${isActive(item.path)
+                    className={`relative text-sm font-medium transition-all duration-300 px-4 py-2 rounded-xl ${activeSection === item.sectionId
                         ? 'text-purple-400 bg-purple-500/20 border border-purple-500/30'
                         : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10 border border-transparent'
                       }`}
                   >
                     {/* Active Indicator Glow */}
-                    {isActive(item.path) && (
+                    {activeSection === item.sectionId && (
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur-sm"
                         animate={{
@@ -288,7 +323,7 @@ const Navigation: React.FC = () => {
                           scrollToSection(item.sectionId!);
                           setIsMobileMenuOpen(false);
                         }}
-                        className={`relative w-full text-left text-sm font-medium transition-all duration-300 px-4 py-3 rounded-xl ${isActive(item.path)
+                        className={`relative w-full text-left text-sm font-medium transition-all duration-300 px-4 py-3 rounded-xl ${activeSection === item.sectionId
                             ? 'text-purple-400 bg-purple-500/20 border border-purple-500/30'
                             : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10 border border-transparent'
                           }`}
@@ -296,7 +331,7 @@ const Navigation: React.FC = () => {
                         whileTap={{ scale: 0.98 }}
                       >
                         {/* Active Indicator Glow */}
-                        {isActive(item.path) && (
+                        {activeSection === item.sectionId && (
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl blur-sm"
                             animate={{
