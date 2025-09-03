@@ -1090,6 +1090,13 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                  {homeData.dataProtection.title}
+                </h2>
+                <p className="text-xl text-white mb-8">
+                  {homeData.dataProtection.subtitle}
+                </p>
+
                 {/* Never Lose Information Video */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -1124,15 +1131,8 @@ const Home: React.FC = () => {
                   </video>
                 </motion.div>
 
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                  {homeData.dataProtection.title}
-                </h2>
-                <p className="text-xl text-white mb-8">
-                  {homeData.dataProtection.subtitle}
-                </p>
-
                 {/* Two-Column Feature Layout */}
-                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 px-[50px]">
                   {/* Left Column - Integrated with your devices */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
@@ -1192,6 +1192,9 @@ const Home: React.FC = () => {
                   </motion.div>
                 </div>
               </motion.div>
+
+              {/* Spacer for more distance between sections */}
+              <div className="h-[50px]"></div>
 
               {/* Enterprise Security */}
               <motion.div
@@ -1360,6 +1363,9 @@ const Home: React.FC = () => {
               <p className="text-xl text-white max-w-3xl mx-auto mb-8">
                 {homeData.pricing.subtitle}
               </p>
+
+              {/* Spacer for more distance between title and video */}
+              <div className="h-20"></div>
 
               {/* Pricing Image with Text Overlay */}
               <motion.div
@@ -1540,7 +1546,7 @@ const Home: React.FC = () => {
 
               {/* World Map Component */}
               <motion.div 
-                className="mb-12 max-w-6xl mx-auto"
+                className="mb-12 max-w-6xl mx-auto px-[100px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
