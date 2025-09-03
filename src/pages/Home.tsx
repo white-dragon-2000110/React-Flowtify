@@ -11,6 +11,8 @@ import RequestDemoButton from '../components/RequestDemoButton';
 import { Vortex } from '../components/Vortex';
 import LoadingSpinner from '../components/LoadingSpinner';
 import FeatureSection from '../components/FeatureSection';
+import { cn } from "../lib/utils";
+import { Marquee } from "../components/magicui/marquee";
 
 // Globe Component
 const MOVEMENT_DAMPING = 1400;
@@ -23,7 +25,7 @@ const GLOBE_CONFIG: COBEOptions = {
   phi: 0,
   theta: 0.3,
   dark: 1,
-  diffuse:0.4,
+  diffuse: 0.4,
   mapSamples: 4000,
   mapBrightness: 20.0,
   baseColor: [0.1, 0.1, 0.1],
@@ -125,6 +127,181 @@ function Globe({
           e.touches[0] && updateMovement(e.touches[0].clientX)
         }
       />
+    </div>
+  );
+}
+
+// Marquee Reviews Component
+const reviews = [
+  {
+    name: "JaGabriela Méndezck",
+    username: "@gabymendezcoaching",
+    body: "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed.",
+    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+      <path d="M12 18v-3" strokeWidth="2" />
+      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+      <path d="M6 14v2" strokeWidth="1" />
+    </svg>,
+  },
+  {
+    name: "Michael Harris",
+    username: "@mikeharris_mkt",
+    body: "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress.",
+    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+      <path d="M12 18v-3" strokeWidth="2" />
+      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+      <path d="M6 14v2" strokeWidth="1" />
+    </svg>,
+  },
+  {
+    name: "Jonathan Blake",
+    username: "@jonblake_ops",
+    body: "I've worked with dozens of automation tools — but Flowtify? It's different. Sleek, intuitive, and actually built for humans. Top-notch support too.",
+    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+      <path d="M12 18v-3" strokeWidth="2" />
+      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+      <path d="M6 14v2" strokeWidth="1" />
+    </svg>,
+  },
+  {
+    name: "Laura Fernández",
+    username: "@laura.fer.ux",
+    body: "I run a small branding studio and Flowtify helps me handle DMs, appointment reminders, and follow-ups. It's like having a digital assistant that never sleeps.",
+    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+      <path d="M12 18v-3" strokeWidth="2" />
+      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+      <path d="M6 14v2" strokeWidth="1" />
+    </svg>,
+  },
+  {
+    name: "Michael Harris",
+    username: "@mikeharris_mkt",
+    body: "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress.",
+    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+      <path d="M12 18v-3" strokeWidth="2" />
+      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+      <path d="M6 14v2" strokeWidth="1" />
+    </svg>,
+  },
+  {
+    name: "Daniela Rivas",
+    username: "@daniwritescontent",
+    body: "At first I thought Flowtify was just another bot. But wow. It's smart, human-like, and so easy to train. My clients love how responsive I've become.",
+    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+      <path d="M12 18v-3" strokeWidth="2" />
+      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+      <path d="M6 14v2" strokeWidth="1" />
+    </svg>,
+  },
+  // {
+  //   name: "JaGabriela Méndezck",
+  //   username: "@gabymendezcoaching",
+  //   body: "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed.",
+  //   img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  //     <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+  //     <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+  //     <path d="M12 18v-3" strokeWidth="2" />
+  //     <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+  //     <path d="M6 14v2" strokeWidth="1" />
+  //   </svg>,
+  // },
+];
+
+const firstRow = reviews.slice(0, reviews.length / 2);
+const secondRow = reviews.slice(reviews.length / 2);
+
+const ReviewCard = ({
+  img,
+  name,
+  username,
+  body,
+}: {
+  img: string | React.ReactElement;
+  name: string;
+  username: string;
+  body: string;
+}) => {
+  return (
+    <figure
+      className={cn(
+        "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+        // light styles
+        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+        // dark styles
+        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+      )}
+    >
+      <div className="flex flex-row items-center gap-3 mb-3">
+        <div className="flex-shrink-0">
+          {typeof img === 'string' ? (
+            <>
+              <img
+                className="w-12 h-12 rounded-full border-2 border-gray-600/30 object-cover"
+                alt={`${name}'s avatar`}
+                src={img}
+                onError={(e) => {
+                  // Fallback to initials if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              {/* Fallback initials if image fails */}
+              <div
+                className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg hidden"
+                style={{ display: 'none' }}
+              >
+                {name.charAt(0).toUpperCase()}
+              </div>
+            </>
+          ) : (
+            <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col min-w-0">
+          <figcaption className="text-sm font-semibold text-white truncate">
+            {name}
+          </figcaption>
+          <p className="text-xs text-white truncate">{username}</p>
+        </div>
+      </div>
+      <blockquote className="text-sm text-gray-200 leading-relaxed">{body}</blockquote>
+    </figure>
+  );
+};
+
+export function MarqueeDemo() {
+  return (
+    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+      <Marquee pauseOnHover className="[--duration:40s]">
+        {firstRow.map((review) => (
+          <ReviewCard key={review.username} {...review} />
+        ))}
+      </Marquee>
+      <Marquee reverse pauseOnHover className="[--duration:40s]">
+        {secondRow.map((review) => (
+          <ReviewCard key={review.username} {...review} />
+        ))}
+      </Marquee>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-r from-background"></div>
     </div>
   );
 }
@@ -374,24 +551,24 @@ const Home: React.FC = () => {
               {homeData.hero.description}
             </motion.p>
 
-                         {/* Hero Video */}
-             <motion.div
-               className="mb-[120px] w-full max-w-2xl mx-auto px-4"
-               initial={{ opacity: 0, scale: 0.8 }}
-               animate={{ opacity: 1, scale: 1 }}
-               transition={{ duration: 0.8, delay: 0.5 }}
-             >
-               <video
-                 src="/video/home.webm"
-                 autoPlay
-                 loop
-                 muted
-                 playsInline
-                 className="w-full h-auto max-h-[40vh] object-cover rounded-2xl shadow-2xl"
-               >
-                 Your browser does not support the video tag.
-               </video>
-             </motion.div>
+            {/* Hero Video */}
+            <motion.div
+              className="mb-[120px] w-full max-w-2xl mx-auto px-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <video
+                src="/video/home.webm"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto max-h-[40vh] object-cover rounded-2xl shadow-2xl"
+              >
+                Your browser does not support the video tag.
+              </video>
+            </motion.div>
 
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
@@ -580,7 +757,7 @@ const Home: React.FC = () => {
                       }, 3000);
                     }
                   }}
-                  src="/video/scale.webm"
+                  src="/video/scalable.webm"
                   loop
                   muted
                   playsInline
@@ -662,9 +839,9 @@ const Home: React.FC = () => {
                   <div className="relative">
                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shadow-2xl shadow-purple-500/50 flex items-center justify-center">
                       <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                        <img 
-                          src="/logo.png" 
-                          alt="Flowtify Logo" 
+                        <img
+                          src="/logo.png"
+                          alt="Flowtify Logo"
                           className="w-12 h-12 object-contain"
                         />
                       </div>
@@ -842,7 +1019,7 @@ const Home: React.FC = () => {
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
                       </div>
-                                              <span className="text-xs text-white">Calendly</span>
+                      <span className="text-xs text-white">Calendly</span>
                     </div>
                   </motion.div>
                 </div>
@@ -877,31 +1054,31 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                                 {/* Never Lose Information Video */}
-                 <motion.div
-                   initial={{ opacity: 0, scale: 0.8 }}
-                   whileInView={{ opacity: 1, scale: 1 }}
-                   transition={{ duration: 0.6 }}
-                   viewport={{ once: true }}
-                   className="mb-8 w-full max-w-sm mx-auto px-4"
-                 >
-                   <video
-                     ref={(el) => {
-                       if (el) {
-                         setTimeout(() => {
-                           el.play().catch(console.error);
-                         }, 3000);
-                       }
-                     }}
-                     src="/video/nolose.webm"
-                     loop
-                     muted
-                     playsInline
-                     className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-cover rounded-lg shadow-2xl"
-                   >
-                     Your browser does not support the video tag.
-                   </video>
-                 </motion.div>
+                {/* Never Lose Information Video */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="mb-8 w-full max-w-sm mx-auto px-4"
+                >
+                  <video
+                    ref={(el) => {
+                      if (el) {
+                        setTimeout(() => {
+                          el.play().catch(console.error);
+                        }, 3000);
+                      }
+                    }}
+                    src="/video/nolose.webm"
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-cover rounded-lg shadow-2xl"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </motion.div>
 
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                   {homeData.dataProtection.title}
@@ -1138,17 +1315,17 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="mb-8 relative w-full max-w-4xl mx-auto"
               >
-                                 {/* Background Video */}
-                 <video
-                   src="/video/price.webm"
-                   autoPlay
-                   loop
-                   muted
-                   playsInline
-                   className="w-full h-auto max-h-[70vh] object-cover rounded-2xl shadow-2xl"
-                 >
-                   Your browser does not support the video tag.
-                 </video>
+                {/* Background Video */}
+                <video
+                  src="/video/price.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto max-h-[70vh] object-cover rounded-2xl shadow-2xl"
+                >
+                  Your browser does not support the video tag.
+                </video>
 
                 {/* Text Overlay */}
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8" style={{ transform: 'translateY(-250px)' }}>
@@ -1228,7 +1405,7 @@ const Home: React.FC = () => {
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="section-padding bg-gray-800/50 relative overflow-hidden">
+        <section id="testimonials" className="section-padding bg-gray-800/50 relative overflow-hidden pb-0">
           <div className="absolute inset-0 bg-[#000008]" />
 
           <div className="container-custom relative z-10">
@@ -1239,160 +1416,13 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <h2 className="text-4xl md:text-5xl font-bold mb-16 text-white">
                 {homeData.testimonials.title}
               </h2>
 
-              <div className="flex flex-col gap-10 max-w-7xl mx-auto mt-20">
-                {/* First Row - 3 cards centered */}
-                <div className="flex justify-center">
-                  <div className="flex gap-10">
-                    {/* Gabriela Méndez */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-4 w-80"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex-1 text-left min-w-0">
-                        <h3 className="text-lg font-semibold mb-1 text-white">
-                          Gabriela Méndez
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-2">
-                          @gabymendezcoaching
-                        </p>
-                        <p className="text-xs text-gray-300 leading-relaxed">
-                          "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed."
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    {/* Jonathan Blake */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-4 w-80"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex-1 text-left min-w-0">
-                        <h3 className="text-lg font-semibold mb-1 text-white">
-                          Jonathan Blake
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-2">
-                          @jonblake_ops
-                        </p>
-                        <p className="text-xs text-gray-300 leading-relaxed">
-                          "I've worked with dozens of automation tools — but Flowtify? It's different. Sleek, intuitive, and actually built for humans. Top-notch support too."
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    {/* Laura Fernández */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.2 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-4 w-80"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex-1 text-left min-w-0">
-                        <h3 className="text-lg font-semibold mb-1 text-white">
-                          Laura Fernández
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-2">
-                          @laura.fer.ux
-                        </p>
-                        <p className="text-xs text-gray-300 leading-relaxed">
-                          "I run a small branding studio and Flowtify helps me handle DMs, appointment reminders, and follow-ups. It's like having a digital assistant that never sleeps."
-                        </p>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                {/* Second Row - 2 cards centered */}
-                <div className="flex justify-center">
-                  <div className="flex gap-10">
-                    {/* Michael Harris */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.3 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-4 w-80"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex-1 text-left min-w-0">
-                        <h3 className="text-lg font-semibold mb-1 text-white">
-                          Michael Harris
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-2">
-                          @mikeharris_mkt
-                        </p>
-                        <p className="text-xs text-gray-300 leading-relaxed">
-                          "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress."
-                        </p>
-                      </div>
-                    </motion.div>
-
-                    {/* Daniela Rivas */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.4 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-4 w-80"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="flex-1 text-left min-w-0">
-                        <h3 className="text-lg font-semibold mb-1 text-white">
-                          Daniela Rivas
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-2">
-                          @daniwritescontent
-                        </p>
-                        <p className="text-xs text-gray-300 leading-relaxed">
-                          "At first I thought Flowtify was just another bot. But wow. It's smart, human-like, and so easy to train. My clients love how responsive I've become."
-                        </p>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
+              {/* Marquee Reviews Section */}
+              <div>
+                <MarqueeDemo />
               </div>
             </motion.div>
           </div>
@@ -1442,36 +1472,36 @@ const Home: React.FC = () => {
 
                 <div className="flex items-center justify-center gap-6">
                   <div className="flex gap-4">
-                    <a 
-                      href="https://www.instagram.com/flowtify.ai/reels/?next=%2F" 
-                      target="_blank" 
+                    <a
+                      href="https://www.instagram.com/flowtify.ai/reels/?next=%2F"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
                     >
                       {homeData.contact.social.instagram}
                     </a>
                     <span className="text-white">|</span>
-                    <a 
-                      href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" 
-                      target="_blank" 
+                    <a
+                      href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
                     >
                       {homeData.contact.social.linkedin}
                     </a>
                     <span className="text-white">|</span>
-                    <a 
-                      href="https://www.facebook.com/share/1Kws4Vzbxt/?mibextid=wwXIfr" 
-                      target="_blank" 
+                    <a
+                      href="https://www.facebook.com/share/1Kws4Vzbxt/?mibextid=wwXIfr"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
                     >
                       {homeData.contact.social.facebook}
                     </a>
                     <span className="text-white">|</span>
-                    <a 
-                      href="https://wa.me/19738869963" 
-                      target="_blank" 
+                    <a
+                      href="https://wa.me/19738869963"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
                     >
