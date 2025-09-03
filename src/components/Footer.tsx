@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
 
   return (
     <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-t border-gray-800/50 overflow-hidden">
@@ -77,21 +79,21 @@ const Footer: React.FC = () => {
           viewport={{ once: true }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex flex-col items-center md:items-start space-y-2">
-              <p className="text-gray-400 text-xs sm:text-sm text-center md:text-left">
-                © 2024 Flowtify. All rights reserved.
-              </p>
-              <p className="text-gray-500 text-xs text-center md:text-left">
-                Morris County, New Jersey, USA
-              </p>
-            </div>
+                         <div className="flex flex-col items-center md:items-start space-y-2">
+               <p className="text-gray-400 text-xs sm:text-sm text-center md:text-left">
+                 {t('common.copyright')}
+               </p>
+               <p className="text-gray-500 text-xs text-center md:text-left">
+                 {t('common.location')}
+               </p>
+             </div>
 
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-xs sm:text-sm text-gray-400">
               <Link to="/privacy" className="hover:text-purple-400 transition-colors duration-300">
-                Privacy Policy
+                {t('common.privacy')}
               </Link>
               <Link to="/terms" className="hover:text-purple-400 transition-colors duration-300">
-                Terms & Conditions
+                {t('common.terms')}
               </Link>
             </div>
           </div>

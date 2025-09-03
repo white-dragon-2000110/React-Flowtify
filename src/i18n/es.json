@@ -13,7 +13,12 @@
     "getStarted": "Comenzar",
     "learnMore": "Saber Más",
     "contactUs": "Contáctanos",
-    "login": "Iniciar Sesión"
+    "login": "Iniciar Sesión",
+    "copyright": "© 2024 Flowtify. Todos los derechos reservados.",
+    "location": "Condado de Morris, Nueva Jersey, EE.UU.",
+    "download": "Descargar",
+    "viewMore": "Ver Más",
+    "readMore": "Leer Más"
   },
   "demo": {
     "title": "Solicitar una Demo",
@@ -391,90 +396,79 @@
   },
   "privacy": {
     "title": "Política de Privacidad",
-    "summary": "Estamos comprometidos a proteger tu privacidad y asegurar la seguridad de tu información personal.",
-    "lastUpdated": "Diciembre 2024",
-    "version": "3.2",
-    "pdfUrl": "/documents/privacy-policy-bilingual.pdf",
-    "pdfEmbed": {
-      "title": "Política de Privacidad Completa (Bilingüe)",
-      "description": "Ver nuestra política de privacidad completa en inglés y español. El documento PDF contiene todos los términos de privacidad detallados y prácticas de manejo de datos.",
-      "documentTitle": "Política de Privacidad - Inglés y Español",
-      "documentSubtitle": "Documento de política de privacidad bilingüe integral",
-      "buttonText": "Ver Política Completa"
-    },
+    "summary": "En Flowtify AI respetamos y protegemos la privacidad de nuestros usuarios y clientes. Toda la información personal recopilada a través de nuestro sitio web (https://flowtifyai.com) se utiliza exclusivamente para fines internos, mejora del servicio y comunicación con el usuario.",
+    "lastUpdated": "Agosto 2025",
     "sections": {
-      "information-collection": {
-        "title": "Información que Recopilamos",
-        "content": "Recopilamos información que nos proporcionas directamente, como cuando creas una cuenta, usas nuestros servicios o nos contactas para soporte. Esto puede incluir tu nombre, dirección de correo electrónico, información de la empresa y datos de uso."
+      "data-collection": {
+        "title": "¿Qué datos recopilamos?",
+        "content": "Nombre completo, Dirección de correo electrónico, Mensajes enviados a través de nuestros formularios de contacto, Datos de navegación (a través de cookies o herramientas de análisis, si están habilitadas)"
       },
-      "how-we-use": {
-        "title": "Cómo Usamos tu Información",
-        "content": "Usamos la información que recopilamos para proporcionar, mantener y mejorar nuestros servicios, comunicarnos contigo, asegurar la seguridad y cumplir con obligaciones legales. Nunca vendemos tu información personal a terceros."
+      "data-usage": {
+        "title": "¿Cómo usamos tus datos?",
+        "content": "Para brindar soporte y responder consultas, Para mejorar la experiencia del usuario y optimizar nuestros servicios, Para cumplir con obligaciones legales y de seguridad, Para enviar actualizaciones relevantes solo cuando hayas dado tu consentimiento"
       },
-      "information-sharing": {
-        "title": "Compartir Información",
-        "content": "Podemos compartir tu información con proveedores de servicios que nos ayudan a operar nuestra plataforma, con tu consentimiento, o cuando lo requiera la ley. Mantenemos estándares estrictos de protección de datos con todos los socios."
+      "data-protection": {
+        "title": "Protección de datos:",
+        "content": "Utilizamos medidas de seguridad técnicas y organizativas para proteger tus datos contra el acceso no autorizado. No compartimos datos personales con terceros, excepto: Cuando lo requiera la ley o regulación, Con proveedores de servicios de confianza (hosting, plataformas de automatización, APIs) que respaldan nuestras operaciones bajo estrictos estándares de confidencialidad y seguridad."
       },
-      "data-security": {
-        "title": "Seguridad de Datos",
-        "content": "Implementamos medidas de seguridad de nivel empresarial para proteger tu información personal, incluyendo encriptación, controles de acceso y auditorías de seguridad regulares. Tus datos se almacenan de forma segura y solo son accedidos por personal autorizado."
+      "user-rights": {
+        "title": "Derechos del usuario:",
+        "content": "Puedes solicitar acceso, rectificación, eliminación, restricción, portabilidad u objeción al procesamiento de tus datos en cualquier momento escribiendo a info@flowtifyai.com."
       },
-      "your-rights": {
-        "title": "Tus Derechos",
-        "content": "Tienes derecho a acceder, corregir o eliminar tu información personal. También puedes optar por no recibir ciertas comunicaciones y solicitar portabilidad de datos. Contáctanos para ejercer estos derechos."
+      "international-transfers": {
+        "title": "Transferencias internacionales:",
+        "content": "Los datos pueden almacenarse o procesarse en servidores ubicados fuera de tu país de residencia, aplicando siempre protecciones legales apropiadas."
+      },
+      "responsible-entity": {
+        "title": "Entidad responsable:",
+        "content": "Flowtify AI LLC — Condado de Morris, Nueva Jersey, EE.UU., Email: info@flowtifyai.com"
+      },
+      "updates": {
+        "title": "Actualizaciones:",
+        "content": "Esta política puede actualizarse periódicamente. Te recomendamos revisar esta página regularmente."
       }
-    },
-    "contactInfo": {
-      "title": "Información de Contacto de Privacidad",
-      "email": "privacy@flowtify.com",
-      "address": "123 Innovation Drive, Tech City, TC 12345",
-      "phone": "+1 (555) 123-4567"
     }
   },
   "terms": {
-    "title": "Términos de Servicio",
-    "summary": "Por favor lee estos términos cuidadosamente antes de usar nuestros servicios.",
-    "lastUpdated": "Diciembre 2024",
-    "version": "2.1",
-    "pdfUrl": "/documents/terms-of-service-bilingual.pdf",
-    "pdfEmbed": {
-      "title": "Términos de Servicio Completos (Bilingüe)",
-      "description": "Ver nuestros términos de servicio completos en inglés y español. El documento PDF contiene todos los términos legales detallados y condiciones.",
-      "documentTitle": "Términos de Servicio - Inglés y Español",
-      "documentSubtitle": "Documento de términos legales bilingüe integral",
-      "buttonText": "Ver Términos Completos"
-    },
+    "title": "Términos y Condiciones",
+    "summary": "El acceso y uso del sitio web de Flowtify AI https://flowtifyai.com implica la aceptación completa de estos Términos y Condiciones.",
     "sections": {
-      "acceptance": {
-        "title": "Aceptación de Términos",
-        "content": "Al acceder y usar los servicios de Flowtify, aceptas y acuerdas estar sujeto a los términos y disposiciones de este acuerdo."
+      "permitted-use": {
+        "title": "1. Uso permitido",
+        "content": "Los usuarios acuerdan usar este sitio de manera legal y apropiada, evitando cualquier actividad ilegal, fraudulenta o dañina que pueda afectar la seguridad o disponibilidad del servicio."
       },
-      "use-of-services": {
-        "title": "Uso de Servicios",
-        "content": "Puedes usar nuestros servicios solo para propósitos legales y de acuerdo con estos Términos. Acuerdas no usar los servicios de ninguna manera que viole cualquier ley o regulación federal, estatal, local o internacional aplicable."
+      "intellectual": {
+        "title": "2. Propiedad intelectual",
+        "content": "Todo el contenido, texto, gráficos, logotipos, marcas comerciales y materiales en este sitio son propiedad de Flowtify AI LLC. El uso, reproducción o distribución no autorizada está estrictamente prohibida."
       },
-      "user-accounts": {
-        "title": "Cuentas de Usuario",
-        "content": "Cuando creas una cuenta con nosotros, debes proporcionar información que sea precisa, completa y actual en todo momento. Eres responsable de proteger la contraseña y de todas las actividades que ocurran bajo tu cuenta."
+      "services": {
+        "title": "3. Servicios y limitaciones",
+        "content": "Flowtify AI proporciona soluciones de automatización e IA que pueden integrarse con aplicaciones de terceros (como WhatsApp, Meta, Make, n8n, entre otras). No somos responsables por interrupciones, fallas o cambios en la funcionalidad de estas plataformas externas."
       },
-      "intellectual-property": {
-        "title": "Derechos de Propiedad Intelectual",
-        "content": "El Servicio y su contenido original, características y funcionalidad son y seguirán siendo la propiedad exclusiva de Flowtify y sus licenciantes. El Servicio está protegido por derechos de autor, marcas comerciales y otras leyes."
+      "liability": {
+        "title": "4. Responsabilidad",
+        "content": "Flowtify AI no será responsable por daños directos o indirectos que surjan del uso de este sitio o de su indisponibilidad temporal."
       },
-      "limitation-of-liability": {
-        "title": "Limitación de Responsabilidad",
-        "content": "En ningún caso Flowtify, ni sus directores, empleados, socios, agentes, proveedores o afiliados, será responsable por daños indirectos, incidentales, especiales, consecuentes o punitivos."
+      "payments": {
+        "title": "5. Pagos y acuerdos comerciales",
+        "content": "Los términos de pago, precios y servicios se rigen por acuerdos individuales firmados con cada cliente."
       },
-      "termination": {
-        "title": "Terminación",
-        "content": "Podemos terminar o suspender tu cuenta y prohibir el acceso al Servicio inmediatamente, sin previo aviso o responsabilidad, bajo nuestra discreción exclusiva, por cualquier razón."
+      "data-privacy": {
+        "title": "6. Privacidad de datos",
+        "content": "El procesamiento de datos personales se regula por nuestra Política de Privacidad, disponible en este sitio."
+      },
+      "modifications": {
+        "title": "7. Modificaciones",
+        "content": "Flowtify AI se reserva el derecho de actualizar o modificar estos Términos y Condiciones en cualquier momento. Alentamos a los usuarios a revisarlos regularmente."
+      },
+      "jurisdiction": {
+        "title": "8. Jurisdicción",
+        "content": "Estos Términos se rigen por las leyes del Estado de Nueva Jersey, EE.UU., y cualquier disputa se resolverá ante sus tribunales competentes."
+      },
+      "contact": {
+        "title": "9. Contacto",
+        "content": "Para consultas sobre estos Términos, por favor escribe a: info@flowtifyai.com"
       }
-    },
-    "contactInfo": {
-      "title": "Información de Contacto",
-      "email": "legal@flowtify.com",
-      "address": "123 Innovation Drive, Tech City, TC 12345",
-      "phone": "+1 (555) 123-4567"
     }
   },
   "testimonials": {

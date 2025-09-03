@@ -13,7 +13,12 @@
     "getStarted": "Get Started",
     "learnMore": "Learn More",
     "contactUs": "Contact Us",
-    "login": "Login"
+    "login": "Login",
+    "copyright": "© 2024 Flowtify. All rights reserved.",
+    "location": "Morris County, New Jersey, USA",
+    "download": "Download",
+    "viewMore": "View More",
+    "readMore": "Read More"
   },
   "demo": {
     "title": "Request a Demo",
