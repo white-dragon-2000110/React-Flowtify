@@ -86,18 +86,45 @@ const Navigation: React.FC = () => {
   ];
 
   const scrollToSection = (sectionId: string) => {
+    console.log('scrollToSection called with:', sectionId);
+    console.log('Current pathname:', location.pathname);
+    
     if (location.pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const headerHeight = 64; // h-16 = 64px
-        const elementPosition = element.offsetTop - headerHeight;
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
+      // Add a small delay to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        console.log('Element found:', element);
+        if (element) {
+          const headerHeight = 64; // h-16 = 64px
+          const elementPosition = element.offsetTop - headerHeight;
+          console.log('Scrolling to position:', elementPosition);
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        } else {
+          console.log('Element not found for sectionId:', sectionId);
+          // Try to find the element again after a longer delay
+          setTimeout(() => {
+            const retryElement = document.getElementById(sectionId);
+            if (retryElement) {
+              console.log('Element found on retry:', retryElement);
+              const headerHeight = 64;
+              const elementPosition = retryElement.offsetTop - headerHeight;
+              console.log('Scrolling to position (retry):', elementPosition);
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            } else {
+              console.log('Element still not found after retry');
+            }
+          }, 500);
+        }
+      }, 100);
     } else {
       // If not on home page, navigate to home and then scroll
+      console.log('Not on home page, navigating to:', `/#${sectionId}`);
       window.location.href = `/#${sectionId}`;
     }
   };
@@ -160,7 +187,7 @@ const Navigation: React.FC = () => {
     >
       {/* Animated Background Glow */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"
+        className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         animate={{
           scale: [1, 1.1, 1],
           opacity: [0, 0.1, 0]
@@ -176,15 +203,18 @@ const Navigation: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo - Clickable to Home */}
           <button
-            onClick={() => scrollToSection('home')}
-            className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
+            onClick={() => {
+              console.log('Logo clicked!');
+              scrollToSection('home');
+            }}
+            className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200 cursor-pointer relative z-10"
           >
             <img
               src="/logo.png"
               alt="Flowtify"
-              className="h-8 w-8 sm:h-[35px] sm:w-[35px] object-contain"
+              className="h-8 w-8 sm:h-[35px] sm:w-[35px] object-contain pointer-events-none"
             />
-            <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent pointer-events-none">
               Flowtify
             </span>
           </button>
@@ -307,7 +337,7 @@ const Navigation: React.FC = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="md:hidden py-4 border-t border-gray-800/50 bg-gray-900/95 backdrop-blur-xl overflow-hidden"
+              className="md:hidden py-4 border-t border-gray-800/50 bg-gray-900/95 backdrop-blur-xl overflow-visible"
             >
               <div className="flex flex-col space-y-3 sm:space-y-4">
                 {navigationItems.map((item, index) => (
@@ -320,6 +350,7 @@ const Navigation: React.FC = () => {
                     {item.isHomeSection && item.sectionId ? (
                       <motion.button
                         onClick={() => {
+                          console.log('Mobile nav clicked:', item.sectionId, item.label);
                           scrollToSection(item.sectionId!);
                           setIsMobileMenuOpen(false);
                         }}

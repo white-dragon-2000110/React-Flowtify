@@ -887,7 +887,7 @@ const Home: React.FC = () => {
                 </div>
 
                 {/* Central Logo */}
-                <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none">
                   <div className="relative">
                     <img
                       src="/video/logo.gif"
@@ -1607,7 +1607,7 @@ const Home: React.FC = () => {
                 </p>
 
                 {/* Globe Component */}
-                <div className="mt-4 sm:mt-4 md:mt-6 lg:mt-8 relative h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full max-w-6xl mx-auto overflow-visible">
+                <div className="mt-4 sm:mt-4 md:mt-6 lg:mt-8 relative h-[350px] sm:h-[400px] md:h-[600px] lg:h-[600px] w-full max-w-6xl mx-auto overflow-visible">
                   <Globe className="w-full h-full" />
                 </div>
               </motion.div>

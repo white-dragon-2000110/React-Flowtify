@@ -66,7 +66,7 @@ const LanguageSwitcher: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full right-0 mt-2 w-48 bg-gradient-to-br from-gray-800/95 via-gray-800/90 to-gray-900/95 backdrop-blur-xl border border-gray-700/30 rounded-2xl shadow-2xl shadow-purple-500/20 overflow-hidden z-50"
+            className="absolute top-full right-0 mt-2 w-48 bg-gradient-to-br from-gray-800/95 via-gray-800/90 to-gray-900/95 backdrop-blur-xl border border-gray-700/30 rounded-2xl shadow-2xl shadow-purple-500/20 overflow-hidden z-[9999]"
           >
             {/* Dropdown Background Glow */}
             <motion.div
