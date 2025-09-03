@@ -147,7 +147,7 @@ function WorldMap({
 
   const svgMap = useMemo(() => map.getSVG({
     radius: 0.18,
-    color: "#FFFFFF40",
+    color: "#bec1c7",
     shape: "circle",
     backgroundColor: "black",
   }), [map]);
@@ -336,7 +336,7 @@ const Home: React.FC = () => {
 
       <div className="min-h-screen bg-[#000008]">
         {/* Hero Section */}
-        <section id="home" className="relative bg-[#000008] h-[853px] flex items-center justify-center overflow-hidden">
+        <section id="home" className="relative bg-[#000008] h-[1000px] flex items-center justify-center overflow-hidden">
           {/* Vortex Background Animation */}
           <Vortex
             backgroundColor="rgb(0, 0, 12)"
@@ -348,7 +348,7 @@ const Home: React.FC = () => {
 
           <div className="relative z-10 text-center text-white px-4">
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white mt-[200px]"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -357,7 +357,7 @@ const Home: React.FC = () => {
             </motion.h1>
 
             <motion.h2
-              className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-gray-200"
+              className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-white"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -366,7 +366,7 @@ const Home: React.FC = () => {
             </motion.h2>
 
             <motion.p
-              className="text-lg md:text-xl mb-14 max-w-3xl mx-auto text-gray-300"
+              className="text-lg md:text-xl mb-14 max-w-3xl mx-auto text-white"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -376,7 +376,7 @@ const Home: React.FC = () => {
 
                          {/* Hero Video */}
              <motion.div
-               className="mb-[120px] w-full max-w-4xl mx-auto px-4"
+               className="mb-[120px] w-full max-w-2xl mx-auto px-4"
                initial={{ opacity: 0, scale: 0.8 }}
                animate={{ opacity: 1, scale: 1 }}
                transition={{ duration: 0.8, delay: 0.5 }}
@@ -387,14 +387,14 @@ const Home: React.FC = () => {
                  loop
                  muted
                  playsInline
-                 className="w-full h-auto max-h-[60vh] object-cover rounded-2xl shadow-2xl"
+                 className="w-full h-auto max-h-[40vh] object-cover rounded-2xl shadow-2xl"
                >
                  Your browser does not support the video tag.
                </video>
              </motion.div>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-5"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
@@ -416,38 +416,38 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-                             {/* Superpowers Video */}
-               <motion.div
-                 initial={{ opacity: 0, scale: 0.8 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 transition={{ duration: 0.6 }}
-                 viewport={{ once: true }}
-                 className="mb-8 w-full max-w-sm mx-auto px-4"
-               >
-                 <video
-                   ref={(el) => {
-                     if (el) {
-                       setTimeout(() => {
-                         el.play().catch(console.error);
-                       }, 3000);
-                     }
-                   }}
-                   src="/video/superpower.webm"
-                   loop
-                   muted
-                   playsInline
-                   className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-cover rounded-lg shadow-2xl"
-                 >
-                   Your browser does not support the video tag.
-                 </video>
-               </motion.div>
-
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-300">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.superpowers.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="text-xl text-white max-w-3xl mx-auto mb-12">
                 {homeData.superpowers.subtitle}
               </p>
+
+              {/* Superpowers Video - Positioned between title and cards */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="my-24 w-full max-w-2xl mx-auto px-4"
+              >
+                <video
+                  ref={(el) => {
+                    if (el) {
+                      setTimeout(() => {
+                        el.play().catch(console.error);
+                      }, 3000);
+                    }
+                  }}
+                  src="/video/superpower.webm"
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto max-h-[80vh] sm:max-h-[100vh] object-cover rounded-lg shadow-2xl"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </motion.div>
             </motion.div>
 
             {/* Interactive Network Visualization */}
@@ -456,7 +456,7 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
               viewport={{ once: true }}
-              className="relative w-full h-96 mb-16 overflow-hidden"
+              className="relative w-full mb-16 overflow-hidden px-10"
             >
               {/* Background Grid */}
               <div className="absolute inset-0 opacity-20">
@@ -557,12 +557,38 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-300">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.scale.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+              <p className="text-xl text-white max-w-3xl mx-auto mb-12">
                 {homeData.scale.subtitle}
               </p>
+
+              {/* Scale Video - Positioned between subtitle and feature cards */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="mb-16 w-full max-w-2xl mx-auto px-4"
+              >
+                <video
+                  ref={(el) => {
+                    if (el) {
+                      setTimeout(() => {
+                        el.play().catch(console.error);
+                      }, 3000);
+                    }
+                  }}
+                  src="/video/scale.webm"
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto max-h-[60vh] sm:max-h-[80vh] object-cover rounded-lg shadow-2xl"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </motion.div>
 
               <FeatureSection
                 features={[
@@ -592,15 +618,6 @@ const Home: React.FC = () => {
                     ),
                     title: homeData.scale.features[2],
                     description: "Dedicated support team available 24/7"
-                  },
-                  {
-                    icon: (
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    ),
-                    title: "Performance Optimization",
-                    description: "Advanced algorithms for maximum efficiency"
                   }
                 ]}
               />
@@ -620,10 +637,10 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-300">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.integrations.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              <p className="text-xl text-white max-w-3xl mx-auto mb-8">
                 {homeData.integrations.subtitle}
               </p>
 
@@ -676,7 +693,7 @@ const Home: React.FC = () => {
                             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Google Drive</span>
+                        <span className="text-xs text-white">Google Drive</span>
                       </div>
                       {/* Gmail */}
                       <div className="text-center">
@@ -685,7 +702,7 @@ const Home: React.FC = () => {
                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Gmail</span>
+                        <span className="text-xs text-white">Gmail</span>
                       </div>
                       {/* Slack */}
                       <div className="text-center">
@@ -694,7 +711,7 @@ const Home: React.FC = () => {
                             <path d="M6 15a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-6 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Slack</span>
+                        <span className="text-xs text-white">Slack</span>
                       </div>
                       {/* Notion */}
                       <div className="text-center">
@@ -703,7 +720,7 @@ const Home: React.FC = () => {
                             <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v12h12V6H6z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Notion</span>
+                        <span className="text-xs text-white">Notion</span>
                       </div>
                       {/* Discord */}
                       <div className="text-center">
@@ -712,7 +729,7 @@ const Home: React.FC = () => {
                             <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Discord</span>
+                        <span className="text-xs text-white">Discord</span>
                       </div>
                     </div>
                   </motion.div>
@@ -733,14 +750,14 @@ const Home: React.FC = () => {
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Make</span>
+                        <span className="text-xs text-white">Make</span>
                       </div>
                       {/* n8n */}
                       <div className="text-center">
                         <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <span className="text-white font-bold text-xs">n8n</span>
                         </div>
-                        <span className="text-xs text-gray-300">n8n</span>
+                        <span className="text-xs text-white">n8n</span>
                       </div>
                       {/* HubSpot */}
                       <div className="text-center">
@@ -749,7 +766,7 @@ const Home: React.FC = () => {
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">HubSpot</span>
+                        <span className="text-xs text-white">HubSpot</span>
                       </div>
                       {/* Airtable */}
                       <div className="text-center">
@@ -758,7 +775,7 @@ const Home: React.FC = () => {
                             <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Airtable</span>
+                        <span className="text-xs text-white">Airtable</span>
                       </div>
                       {/* Trello */}
                       <div className="text-center">
@@ -767,7 +784,7 @@ const Home: React.FC = () => {
                             <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h12V5H6z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Trello</span>
+                        <span className="text-xs text-white">Trello</span>
                       </div>
                     </div>
                   </motion.div>
@@ -788,7 +805,7 @@ const Home: React.FC = () => {
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">WhatsApp</span>
+                        <span className="text-xs text-white">WhatsApp</span>
                       </div>
                       {/* Instagram */}
                       <div className="text-center">
@@ -797,7 +814,7 @@ const Home: React.FC = () => {
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Instagram</span>
+                        <span className="text-xs text-white">Instagram</span>
                       </div>
                       {/* Facebook */}
                       <div className="text-center">
@@ -806,7 +823,7 @@ const Home: React.FC = () => {
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-gray-300">Facebook</span>
+                        <span className="text-xs text-white">Facebook</span>
                       </div>
                     </div>
                   </motion.div>
@@ -825,7 +842,7 @@ const Home: React.FC = () => {
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
                       </div>
-                      <span className="text-xs text-gray-300">Calendly</span>
+                                              <span className="text-xs text-white">Calendly</span>
                     </div>
                   </motion.div>
                 </div>
@@ -886,10 +903,10 @@ const Home: React.FC = () => {
                    </video>
                  </motion.div>
 
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                   {homeData.dataProtection.title}
                 </h2>
-                <p className="text-xl text-gray-300 mb-8">
+                <p className="text-xl text-white mb-8">
                   {homeData.dataProtection.subtitle}
                 </p>
 
@@ -916,7 +933,7 @@ const Home: React.FC = () => {
                         </svg>
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-left">
                       <h3 className="text-lg font-semibold mb-2 text-white">
                         {homeData.dataProtection.features[0]}
                       </h3>
@@ -946,7 +963,7 @@ const Home: React.FC = () => {
                         </svg>
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-left">
                       <h3 className="text-lg font-semibold mb-2 text-white">
                         {homeData.dataProtection.features[1]}
                       </h3>
@@ -963,12 +980,38 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-green-300">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                   {homeData.security.title}
                 </h2>
-                <p className="text-xl text-gray-300 mb-8">
+                <p className="text-xl text-white mb-8">
                   {homeData.security.subtitle}
                 </p>
+
+                {/* Security Video - Positioned between title and feature cards */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="mb-16 w-full max-w-2xl mx-auto px-4"
+                >
+                  <video
+                    ref={(el) => {
+                      if (el) {
+                        setTimeout(() => {
+                          el.play().catch(console.error);
+                        }, 3000);
+                      }
+                    }}
+                    src="/video/security.webm"
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto max-h-[60vh] sm:max-h-[80vh] object-cover rounded-lg shadow-2xl"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </motion.div>
 
                 <FeatureSection
                   features={[
@@ -1005,17 +1048,7 @@ const Home: React.FC = () => {
                       title: homeData.security.features[2],
                       description: "Secure cloud infrastructure"
                     },
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path d="M9 12l2 2 4-4" strokeWidth="2" />
-                          <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z" strokeWidth="2" />
-                          <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z" strokeWidth="2" />
-                        </svg>
-                      ),
-                      title: "Advanced Monitoring",
-                      description: "Real-time security monitoring and alerts"
-                    }
+
                   ]}
                 />
               </motion.div>
@@ -1035,10 +1068,10 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orange-300">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.results.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+              <p className="text-xl text-white max-w-3xl mx-auto mb-12">
                 {homeData.results.subtitle}
               </p>
 
@@ -1071,15 +1104,6 @@ const Home: React.FC = () => {
                     ),
                     title: homeData.results.metrics[2],
                     description: "Lead conversion increase and revenue growth"
-                  },
-                  {
-                    icon: (
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                      </svg>
-                    ),
-                    title: "ROI Improvement",
-                    description: "Significant return on investment and cost savings"
                   }
                 ]}
               />
@@ -1099,10 +1123,10 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-purple-300">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.pricing.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              <p className="text-xl text-white max-w-3xl mx-auto mb-8">
                 {homeData.pricing.subtitle}
               </p>
 
@@ -1128,25 +1152,18 @@ const Home: React.FC = () => {
 
                 {/* Text Overlay */}
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8" style={{ transform: 'translateY(-250px)' }}>
-                  {/* Pricing */}
-                  <div className="mb-8">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <span className="text-6xl font-bold text-purple-300">$10</span>
-                      <span className="text-2xl text-gray-300">/month</span>
-                    </div>
-                    <p className="text-lg text-gray-400">(billed annually)</p>
-                  </div>
+
 
                   {/* Features */}
                   <div className="grid gap-6 mb-8 text-center w-full items-center justify-center">
                     <div className="flex items-center gap-1">
-                      <span className="text-gray-300 text-md">{homeData.pricing.description}</span>
+                      <span className="text-white text-md">{homeData.pricing.description}</span>
                     </div>
                     <div className="space-y-2 w-full">
-                      {homeData.pricing.factors.map((factor) => (
-                        <div className="flex items-center gap-3">
-                          <span className="text-gray-400 text-sm">•</span>
-                          <span className="text-gray-300 text-sm">{factor}</span>
+                      {homeData.pricing.factors.map((factor, index) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <span className="text-white text-sm">•</span>
+                          <span className="text-white text-sm">{factor}</span>
                         </div>
                       ))}
                     </div>
@@ -1176,10 +1193,10 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-blue-300">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                   {homeData.mission.title}
                 </h2>
-                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-lg text-white max-w-4xl mx-auto leading-relaxed">
                   {homeData.mission.description}
                 </p>
 
@@ -1197,70 +1214,15 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-green-300">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                   {homeData.vision.title}
                 </h2>
-                <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-lg text-white max-w-4xl mx-auto leading-relaxed">
                   {homeData.vision.description}
                 </p>
               </motion.div>
 
-              {/* Team */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-purple-300">
-                  {homeData.team.title}
-                </h2>
-                <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
-                  {homeData.team.subtitle}
-                </p>
 
-                <FeatureSection
-                  features={[
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      ),
-                      title: homeData.team.members[0] || "Team Member 1",
-                      description: "Expert in automation and workflow optimization"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      ),
-                      title: homeData.team.members[1] || "Team Member 2",
-                      description: "Specialist in AI and machine learning"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      ),
-                      title: homeData.team.members[2] || "Team Member 3",
-                      description: "Lead developer and system architect"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      ),
-                      title: homeData.team.members[3] || "Team Member 4",
-                      description: "Customer success and support specialist"
-                    }
-                  ]}
-                />
-              </motion.div>
             </div>
           </div>
         </section>
@@ -1277,26 +1239,160 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-yellow-300">
+                            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.testimonials.title}
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {homeData.testimonials.items.map((testimonial, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 }}
-                    viewport={{ once: true }}
-                    className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300"
-                  >
-                    <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                      💬 "{testimonial.quote}"
-                    </p>
-                    <p className="text-yellow-300 font-medium">— {testimonial.author}</p>
-                  </motion.div>
-                ))}
+              <div className="flex flex-col gap-10 max-w-7xl mx-auto mt-20">
+                {/* First Row - 3 cards centered */}
+                <div className="flex justify-center">
+                  <div className="flex gap-10">
+                    {/* Gabriela Méndez */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-4 w-80"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left min-w-0">
+                        <h3 className="text-lg font-semibold mb-1 text-white">
+                          Gabriela Méndez
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-2">
+                          @gabymendezcoaching
+                        </p>
+                        <p className="text-xs text-gray-300 leading-relaxed">
+                          "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed."
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    {/* Jonathan Blake */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-4 w-80"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left min-w-0">
+                        <h3 className="text-lg font-semibold mb-1 text-white">
+                          Jonathan Blake
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-2">
+                          @jonblake_ops
+                        </p>
+                        <p className="text-xs text-gray-300 leading-relaxed">
+                          "I've worked with dozens of automation tools — but Flowtify? It's different. Sleek, intuitive, and actually built for humans. Top-notch support too."
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    {/* Laura Fernández */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-4 w-80"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left min-w-0">
+                        <h3 className="text-lg font-semibold mb-1 text-white">
+                          Laura Fernández
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-2">
+                          @laura.fer.ux
+                        </p>
+                        <p className="text-xs text-gray-300 leading-relaxed">
+                          "I run a small branding studio and Flowtify helps me handle DMs, appointment reminders, and follow-ups. It's like having a digital assistant that never sleeps."
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Second Row - 2 cards centered */}
+                <div className="flex justify-center">
+                  <div className="flex gap-10">
+                    {/* Michael Harris */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-4 w-80"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left min-w-0">
+                        <h3 className="text-lg font-semibold mb-1 text-white">
+                          Michael Harris
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-2">
+                          @mikeharris_mkt
+                        </p>
+                        <p className="text-xs text-gray-300 leading-relaxed">
+                          "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress."
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    {/* Daniela Rivas */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-4 w-80"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left min-w-0">
+                        <h3 className="text-lg font-semibold mb-1 text-white">
+                          Daniela Rivas
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-2">
+                          @daniwritescontent
+                        </p>
+                        <p className="text-xs text-gray-300 leading-relaxed">
+                          "At first I thought Flowtify was just another bot. But wow. It's smart, human-like, and so easy to train. My clients love how responsive I've become."
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -1314,13 +1410,13 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-300">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 {homeData.contact.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-4">
+              <p className="text-xl text-white max-w-3xl mx-auto mb-4">
                 {homeData.contact.subtitle}
               </p>
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
+              <p className="text-lg text-white max-w-3xl mx-auto mb-8">
                 {homeData.contact.description}
               </p>
 
@@ -1339,19 +1435,48 @@ const Home: React.FC = () => {
               <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 max-w-2xl mx-auto">
                 <div className="flex items-center justify-center gap-2 mb-6">
                   <span className="text-2xl">📩</span>
-                  <a href={`mailto:${homeData.contact.email}`} className="text-xl text-green-300 hover:text-green-200 transition-colors">
+                  <a href={`mailto:${homeData.contact.email}`} className="text-xl text-green-400 underline hover:text-green-300 transition-colors cursor-pointer">
                     {homeData.contact.email}
                   </a>
                 </div>
 
                 <div className="flex items-center justify-center gap-6">
-                  <span className="text-lg text-gray-300">🌐</span>
                   <div className="flex gap-4">
-                    <span className="text-gray-300">{homeData.contact.social.instagram}</span>
-                    <span className="text-gray-400">|</span>
-                    <span className="text-gray-300">{homeData.contact.social.linkedin}</span>
-                    <span className="text-gray-400">|</span>
-                    <span className="text-gray-300">{homeData.contact.social.facebook}</span>
+                    <a 
+                      href="https://www.instagram.com/flowtify.ai/reels/?next=%2F" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                    >
+                      {homeData.contact.social.instagram}
+                    </a>
+                    <span className="text-white">|</span>
+                    <a 
+                      href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                    >
+                      {homeData.contact.social.linkedin}
+                    </a>
+                    <span className="text-white">|</span>
+                    <a 
+                      href="https://www.facebook.com/share/1Kws4Vzbxt/?mibextid=wwXIfr" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                    >
+                      {homeData.contact.social.facebook}
+                    </a>
+                    <span className="text-white">|</span>
+                    <a 
+                      href="https://wa.me/19738869963" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                    >
+                      WhatsApp
+                    </a>
                   </div>
                 </div>
               </div>

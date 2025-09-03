@@ -24,22 +24,14 @@ const RequestDemoButton: React.FC<RequestDemoButtonProps> = ({
     if (onClick) {
       onClick();
     } else {
-      // Default behavior - scroll to contact section
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        const headerHeight = 64;
-        const elementPosition = contactSection.offsetTop - headerHeight;
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
+      // Navigate to Calendly meeting
+      window.open('https://calendly.com/flowtifyai-info/meeting-1-1', '_blank');
     }
   };
 
   return (
     <motion.button
-      className={`relative ${sizeClasses[size]} bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-2xl hover:from-purple-700 hover:to-blue-700 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-purple-500/25 overflow-hidden group ${className}`}
+      className={`relative ${sizeClasses[size]} bg-transparent border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-white/25 overflow-hidden group ${className}`}
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -51,7 +43,7 @@ const RequestDemoButton: React.FC<RequestDemoButtonProps> = ({
     >
       {/* Animated Background Glow */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         animate={{
           scale: [1, 1.1, 1],
           opacity: [0, 0.1, 0]
@@ -65,7 +57,7 @@ const RequestDemoButton: React.FC<RequestDemoButtonProps> = ({
 
       {/* Button Glow Effect */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         animate={{
           x: ['-100%', '100%']
         }}
@@ -112,7 +104,7 @@ const RequestDemoButton: React.FC<RequestDemoButtonProps> = ({
 
       {/* Bottom Glow Line */}
       <motion.div
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 group-hover:w-3/4 transition-all duration-500"
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-white group-hover:w-3/4 transition-all duration-500"
         whileHover={{ width: '75%' }}
       />
     </motion.button>

@@ -81,7 +81,7 @@ const Navigation: React.FC = () => {
   const navigationItems = [
     { path: '/', label: t('common.home'), isHomeSection: true, sectionId: 'home' },
     { path: '/integrations', label: t('common.integrations'), isHomeSection: true, sectionId: 'integrations' },
-    { path: '/', label: 'Price', isHomeSection: true, sectionId: 'pricing' },
+    { path: '/pricing', label: 'Price', isHomeSection: true, sectionId: 'pricing' },
     { path: '/contact', label: t('common.contact'), isHomeSection: true, sectionId: 'contact' },
   ];
 
