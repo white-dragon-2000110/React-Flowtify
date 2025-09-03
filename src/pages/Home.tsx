@@ -1489,7 +1489,7 @@ const Home: React.FC = () => {
               </h2>
 
               {/* Marquee Reviews Section */}
-              <div>
+              <div className="px-[250px]">
                 <MarqueeDemo />
               </div>
             </motion.div>
