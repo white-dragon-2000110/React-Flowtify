@@ -1471,17 +1471,13 @@ const Home: React.FC = () => {
                   {/* Additional Pricing Information */}
                   <div className="max-w-2xl mx-auto relative z-40">
                     <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3 mt-[160px]">
-                      At Flowtify, we believe in transparency and simplicity.
-                    </p>
-                    <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3 px-[100px]">
-                      After your demo, you'll receive a tailored proposal with clear phases, costs, and ROI expectations.
+                      {homeData.pricing.commitment}
                     </p>
                     <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3">
-                      You only pay for what you truly need — and nothing more.
+                      {homeData.pricing.promise}
                     </p>
                     <p className="text-white text-sm sm:text-base leading-relaxed px-[100px]">
-                      ✨ Bonus: Schedule your demo today and receive our free eBook on "The Future of Business
-                      Automation", packed with practical insights to start optimizing immediately.
+                      {homeData.pricing.bonus}
                     </p>
 
                     {/* Price Image */}
@@ -1520,17 +1516,13 @@ const Home: React.FC = () => {
                   {/* Additional Pricing Information */}
                   <div className="max-w-2xl mx-auto">
                     <p className="text-white text-base leading-relaxed mb-3">
-                      At Flowtify, we believe in transparency and simplicity.
-                    </p>
-                    <p className="text-white text-base leading-relaxed mb-3 px-4">
-                      After your demo, you'll receive a tailored proposal with clear phases, costs, and ROI expectations.
+                      {homeData.pricing.commitment}
                     </p>
                     <p className="text-white text-base leading-relaxed mb-3">
-                      You only pay for what you truly need — and nothing more.
+                      {homeData.pricing.promise}
                     </p>
                     <p className="text-white text-base leading-relaxed px-4 mb-6">
-                      ✨ Bonus: Schedule your demo today and receive our free eBook on "The Future of Business
-                      Automation", packed with practical insights to start optimizing immediately.
+                      {homeData.pricing.bonus}
                     </p>
 
                     {/* Price Image */}
