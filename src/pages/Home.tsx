@@ -870,18 +870,19 @@ const Home: React.FC = () => {
                   }}></div>
                 </div>
 
-                {/* Central Orb */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 mt-4">
+                {/* Central Logo */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none">
                   <div className="relative">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shadow-2xl shadow-purple-500/50 flex items-center justify-center">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                        <img
-                          src="/logo.png"
-                          alt="Flowtify Logo"
-                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain"
-                        />
-                      </div>
-                    </div>
+                    <img
+                      src="/video/logo.gif"
+                      alt="Flowtify Logo Background"
+                      className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
+                    />
+                    <img
+                      src="/logo.png"
+                      alt="Flowtify Logo"
+                                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
+                    />
                   </div>
                 </div>
 
@@ -893,7 +894,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="p-4 sm:p-6"
                   >
                     <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-3 sm:mb-4">
                       {/* Google Drive */}
@@ -950,7 +951,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="p-4 sm:p-6"
                   >
                     <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-3 sm:mb-4">
                       {/* Make */}
@@ -1005,7 +1006,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="p-4 sm:p-6"
                   >
                     <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-3 sm:mb-4">
                       {/* WhatsApp */}
@@ -1044,7 +1045,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="p-4 sm:p-6"
                   >
                     <div className="flex flex-col items-center justify-center mb-4">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 border-2 border-white rounded-lg flex items-center justify-center mb-2">
@@ -1055,12 +1056,15 @@ const Home: React.FC = () => {
                       <span className="text-xs text-white">Calendly</span>
                     </div>
                   </motion.div>
-                </div>
+                                </div>
               </div>
 
-              <p className="text-base sm:text-lg text-gray-300 mb-4 px-4">
-                {homeData.integrations.note}
-              </p>
+              {/* Note Text - Positioned outside grid container */}
+              <div className="relative z-40 mt-8 text-center">
+                <p className="text-base sm:text-lg text-gray-300 mb-4 px-4">
+                  {homeData.integrations.note}
+                </p>
+              </div>
 
               <motion.button
                 className="relative px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-white/25 overflow-hidden group"
