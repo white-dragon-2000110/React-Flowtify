@@ -858,6 +858,22 @@ const Home: React.FC = () => {
                 {homeData.integrations.subtitle}
               </p>
 
+              {/* Mobile Logos - Visible only on Mobile */}
+              <div className="md:hidden mb-6 flex justify-center">
+                <div className="relative">
+                  <img
+                    src="/video/logo.gif"
+                    alt="Flowtify Logo Background"
+                    className="w-32 h-32 object-contain"
+                  />
+                  <img
+                    src="/logo.png"
+                    alt="Flowtify Logo"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 object-contain"
+                  />
+                </div>
+              </div>
+
               {/* Integrations Grid - 2x2 with Central Orb */}
               <div className="relative w-full max-w-3xl sm:max-w-4xl mx-auto mb-6 sm:mb-8">
                 {/* Background Grid */}
@@ -871,7 +887,7 @@ const Home: React.FC = () => {
                 </div>
 
                 {/* Central Logo */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none">
+                <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none">
                   <div className="relative">
                     <img
                       src="/video/logo.gif"
@@ -881,7 +897,7 @@ const Home: React.FC = () => {
                     <img
                       src="/logo.png"
                       alt="Flowtify Logo"
-                                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
                     />
                   </div>
                 </div>
@@ -1056,7 +1072,7 @@ const Home: React.FC = () => {
                       <span className="text-xs text-white">Calendly</span>
                     </div>
                   </motion.div>
-                                </div>
+                </div>
               </div>
 
               {/* Note Text - Positioned outside grid container */}
@@ -1068,7 +1084,7 @@ const Home: React.FC = () => {
 
               <motion.button
                 className="relative px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-white/25 overflow-hidden group"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   y: -2
                 }}
@@ -1433,7 +1449,7 @@ const Home: React.FC = () => {
               {/* Spacer for more distance between title and video */}
               <div className="h-8 sm:h-12 md:h-16 lg:h-20"></div>
 
-              {/* Pricing Video */}
+              {/* Pricing Video with Overlay */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -1466,49 +1482,104 @@ const Home: React.FC = () => {
                 >
                   Your browser does not support the video tag.
                 </video>
-              </motion.div>
 
-              {/* Features Below Video */}
-              <div className="mb-8 sm:mb-12 text-center w-full max-w-3xl mx-auto px-4">
-                <div className="flex items-center justify-center gap-1 mb-4 sm:mb-6">
-                  <span className="text-white text-sm sm:text-base md:text-lg">{homeData.pricing.description}</span>
-                </div>
-                <div className="space-y-2 sm:space-y-3 w-full text-left max-w-2xl mx-auto">
-                  {homeData.pricing.factors.map((factor, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <span className="text-white text-sm sm:text-base mt-1">•</span>
-                      <span className="text-white text-sm sm:text-base leading-relaxed">{factor}</span>
+                {/* Text Overlay on Video - Hidden on Mobile */}
+                <div className="hidden md:flex absolute inset-0 flex-col items-center text-center px-4 z-10">
+                  {/* Investment Factors */}
+                  <div className="mb-6 sm:mb-8">
+                    <div className="flex items-center justify-start gap-1 mb-4 sm:mb-6">
+                      <span className="text-white text-sm sm:text-base md:text-lg font-semibold">{homeData.pricing.description}</span>
                     </div>
-                  ))}
+                    <div className="space-y-2 sm:space-y-3 w-full text-left max-w-2xl mx-auto">
+                      {homeData.pricing.factors.map((factor, index) => (
+                        <div key={index} className="flex items-start gap-3">
+                          <span className="text-white text-sm sm:text-base mt-1">•</span>
+                          <span className="text-white text-sm sm:text-base leading-relaxed">{factor}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA Button */}
+                  <button className="border border-purple-400 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base bg-black/50 backdrop-blur-sm mb-4 sm:mb-6">
+                    Start your 14-day trial
+                  </button>
+
+                  {/* Additional Pricing Information */}
+                  <div className="max-w-2xl mx-auto relative z-40">
+                    <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3 mt-[160px]">
+                      At Flowtify, we believe in transparency and simplicity.
+                    </p>
+                    <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3 px-[100px]">
+                      After your demo, you'll receive a tailored proposal with clear phases, costs, and ROI expectations.
+                    </p>
+                    <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3">
+                      You only pay for what you truly need — and nothing more.
+                    </p>
+                    <p className="text-white text-sm sm:text-base leading-relaxed px-[100px]">
+                      ✨ Bonus: Schedule your demo today and receive our free eBook on "The Future of Business
+                      Automation", packed with practical insights to start optimizing immediately.
+                    </p>
+
+                    {/* Price Image */}
+                    <div className="mt-4 sm:mt-6 flex justify-center">
+                      <img
+                        src="/picture/price.png"
+                        alt="Flowtify Pricing"
+                        className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-48 object-contain rounded-lg relative z-10"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              {/* CTA Button */}
-              <div className="text-center mb-8 sm:mb-12">
-                <button className="border border-purple-400 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
-                  Start your 14-day trial
-                </button>
-              </div>
+                {/* Mobile Text Below Video - Visible only on Mobile */}
+                <div className="md:hidden mt-4 px-4 text-center">
+                  {/* Investment Factors */}
+                  <div className="mb-6">
+                    <div className="flex items-center justify-start gap-1 mb-4">
+                      <span className="text-white text-base font-semibold">{homeData.pricing.description}</span>
+                    </div>
+                    <div className="space-y-2 w-full text-left max-w-2xl mx-auto">
+                      {homeData.pricing.factors.map((factor, index) => (
+                        <div key={index} className="flex items-start gap-3">
+                          <span className="text-white text-sm mt-1">•</span>
+                          <span className="text-white text-sm leading-relaxed">{factor}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* Additional Pricing Information - Below Video */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="mt-8 text-center w-full max-w-3xl mx-auto"
-              >
-                <p className="text-white text-base leading-relaxed mb-4">
-                  At Flowtify, we believe in transparency and simplicity. After your demo, you'll receive a
-                  tailored proposal with clear phases, costs, and ROI expectations.
-                </p>
-                <p className="text-white text-base leading-relaxed mb-4">
-                  You only pay for what you truly need — and nothing more.
-                </p>
-                <p className="text-white text-base leading-relaxed mb-4">
-                  ✨ Bonus: Schedule your demo today and receive our free eBook on "The Future of Business
-                  Automation", packed with practical insights to start optimizing immediately.
-                </p>
+                  {/* CTA Button */}
+                  <button className="border border-purple-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-base bg-black/50 backdrop-blur-sm mb-6">
+                    Start your 14-day trial
+                  </button>
+
+                  {/* Additional Pricing Information */}
+                  <div className="max-w-2xl mx-auto">
+                    <p className="text-white text-base leading-relaxed mb-3">
+                      At Flowtify, we believe in transparency and simplicity.
+                    </p>
+                    <p className="text-white text-base leading-relaxed mb-3 px-4">
+                      After your demo, you'll receive a tailored proposal with clear phases, costs, and ROI expectations.
+                    </p>
+                    <p className="text-white text-base leading-relaxed mb-3">
+                      You only pay for what you truly need — and nothing more.
+                    </p>
+                    <p className="text-white text-base leading-relaxed px-4 mb-6">
+                      ✨ Bonus: Schedule your demo today and receive our free eBook on "The Future of Business
+                      Automation", packed with practical insights to start optimizing immediately.
+                    </p>
+
+                    {/* Price Image */}
+                    <div className="flex justify-center">
+                      <img
+                        src="/picture/price.png"
+                        alt="Flowtify Pricing"
+                        className="w-48 h-48 object-contain rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -1536,7 +1607,7 @@ const Home: React.FC = () => {
                 </p>
 
                 {/* Globe Component */}
-                <div className="mt-2 sm:mt-4 md:mt-6 lg:mt-8 relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full max-w-6xl mx-auto overflow-visible">
+                <div className="mt-4 sm:mt-4 md:mt-6 lg:mt-8 relative h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full max-w-6xl mx-auto overflow-visible">
                   <Globe className="w-full h-full" />
                 </div>
               </motion.div>
@@ -1593,10 +1664,10 @@ const Home: React.FC = () => {
                 {homeData.testimonials.title}
               </h2>
 
-                              {/* Marquee Reviews Section */}
-                <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px]">
-                  <MarqueeDemo />
-                </div>
+              {/* Marquee Reviews Section */}
+              <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px]">
+                <MarqueeDemo />
+              </div>
             </motion.div>
           </div>
         </section>
@@ -1613,7 +1684,7 @@ const Home: React.FC = () => {
               viewport={{ once: true, amount: 0.3 }}
               className="text-center mb-8 sm:mb-12 md:mb-16"
             >
-              <motion.h2 
+              <motion.h2
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white px-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1622,8 +1693,8 @@ const Home: React.FC = () => {
               >
                 {homeData.contact.title}
               </motion.h2>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-base sm:text-lg md:text-xl text-white max-w-2xl sm:max-w-3xl mx-auto mb-3 sm:mb-4 px-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1632,8 +1703,8 @@ const Home: React.FC = () => {
               >
                 {homeData.contact.subtitle}
               </motion.p>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-sm sm:text-base md:text-lg text-white max-w-2xl sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -1644,7 +1715,7 @@ const Home: React.FC = () => {
               </motion.p>
 
               {/* World Map Component */}
-              <motion.div 
+              <motion.div
                 className="mb-8 sm:mb-10 md:mb-12 max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-2 sm:px-4 md:px-8 lg:px-16 xl:px-[100px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -1661,14 +1732,14 @@ const Home: React.FC = () => {
                 />
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
                 viewport={{ once: true }}
               >
-                <motion.div 
+                <motion.div
                   className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4 sm:mb-6 text-center"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -1681,7 +1752,7 @@ const Home: React.FC = () => {
                   </a>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}

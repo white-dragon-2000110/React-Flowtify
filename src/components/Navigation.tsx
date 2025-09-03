@@ -182,7 +182,7 @@ const Navigation: React.FC = () => {
             <img
               src="/logo.png"
               alt="Flowtify"
-              className="h-8 w-8 sm:h-[50px] sm:w-[50px] object-contain"
+              className="h-8 w-8 sm:h-[35px] sm:w-[35px] object-contain"
             />
             <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               Flowtify
