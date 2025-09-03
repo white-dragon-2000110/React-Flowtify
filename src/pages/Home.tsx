@@ -839,7 +839,7 @@ const Home: React.FC = () => {
         </section>
 
         {/* Integrations Section */}
-        <section id="integrations" className="section-padding bg-gray-900 relative overflow-hidden">
+        <section id="integrations" className="section-padding bg-gray-900/50 relative overflow-hidden">
           <div className="absolute inset-0 bg-[#000008]" />
 
           <div className="container-custom relative z-10">
@@ -848,37 +848,36 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-12 md:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
                 {homeData.integrations.title}
               </h2>
-              <p className="text-xl text-white max-w-3xl mx-auto mb-8">
+              <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
                 {homeData.integrations.subtitle}
               </p>
 
               {/* Integrations Grid - 2x2 with Central Orb */}
-              <div className="relative w-full max-w-4xl mx-auto mb-8">
+              <div className="relative w-full max-w-3xl sm:max-w-4xl mx-auto mb-6 sm:mb-8">
                 {/* Background Grid */}
                 <div className="absolute inset-0 opacity-20">
                   <div className="w-full h-full" style={{
                     backgroundImage: `
-                      linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px)
+                      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)
                     `,
                     backgroundSize: '40px 40px'
                   }}></div>
                 </div>
 
-                {/* Central Glowing Purple Orb */}
+                {/* Central Orb */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 mt-4">
                   <div className="relative">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shadow-2xl shadow-purple-500/50 flex items-center justify-center">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 shadow-2xl shadow-purple-500/50 flex items-center justify-center">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
                         <img
                           src="/logo.png"
                           alt="Flowtify Logo"
-                          className="w-12 h-12 object-contain"
+                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain"
                         />
                       </div>
                     </div>
@@ -886,32 +885,29 @@ const Home: React.FC = () => {
                 </div>
 
                 {/* 2x2 Grid Layout */}
-                <div className="grid grid-cols-2 gap-8 relative z-30">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 relative z-30">
                   {/* Top-Left: Productivity & Communication */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
                   >
-                    <div className="grid grid-cols-5 gap-3 mb-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-3 sm:mb-4">
                       {/* Google Drive */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
-                        <span className="text-xs text-white">Google Drive</span>
+                        <span className="text-xs text-white">Drive</span>
                       </div>
                       {/* Gmail */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                           </svg>
                         </div>
@@ -919,8 +915,8 @@ const Home: React.FC = () => {
                       </div>
                       {/* Slack */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6 15a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-6 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
                           </svg>
                         </div>
@@ -928,17 +924,17 @@ const Home: React.FC = () => {
                       </div>
                       {/* Notion */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm2 4v12h12V6H6z" />
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 19h16V5H4v14zm2-2h12V7H6v10zm-1-9h2v2H5V8zm0 4h2v2H5v-2zm4-4h2v2H9V8zm0 4h2v2H9v-2zm4-4h2v2h-2V8zm0 4h2v2h-2v-2z" />
                           </svg>
                         </div>
                         <span className="text-xs text-white">Notion</span>
                       </div>
                       {/* Discord */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z" />
                           </svg>
                         </div>
@@ -953,13 +949,13 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
                   >
-                    <div className="grid grid-cols-5 gap-3 mb-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-3 sm:mb-4">
                       {/* Make */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
@@ -967,15 +963,15 @@ const Home: React.FC = () => {
                       </div>
                       {/* n8n */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
                           <span className="text-white font-bold text-xs">n8n</span>
                         </div>
                         <span className="text-xs text-white">n8n</span>
                       </div>
                       {/* HubSpot */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
                         </div>
@@ -983,8 +979,8 @@ const Home: React.FC = () => {
                       </div>
                       {/* Airtable */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
                           </svg>
                         </div>
@@ -992,8 +988,8 @@ const Home: React.FC = () => {
                       </div>
                       {/* Trello */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h12V5H6z" />
                           </svg>
                         </div>
@@ -1008,13 +1004,13 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
                   >
-                    <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-3 sm:mb-4">
                       {/* WhatsApp */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                           </svg>
                         </div>
@@ -1022,8 +1018,8 @@ const Home: React.FC = () => {
                       </div>
                       {/* Instagram */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                           </svg>
                         </div>
@@ -1031,8 +1027,8 @@ const Home: React.FC = () => {
                       </div>
                       {/* Facebook */}
                       <div className="text-center">
-                        <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                           </svg>
                         </div>
@@ -1047,11 +1043,11 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     viewport={{ once: true }}
-                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300"
+                    className="bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:border-purple-500/50 transition-all duration-300"
                   >
                     <div className="flex flex-col items-center justify-center mb-4">
-                      <div className="w-12 h-12 border-2 border-white rounded-lg flex items-center justify-center mb-2">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 border-2 border-white rounded-lg flex items-center justify-center mb-2">
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
                       </div>
@@ -1061,7 +1057,7 @@ const Home: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-lg text-gray-300 mb-4">
+              <p className="text-base sm:text-lg text-gray-300 mb-4 px-4">
                 {homeData.integrations.note}
               </p>
 
@@ -1119,8 +1115,8 @@ const Home: React.FC = () => {
         <section id="security" className="section-padding bg-gray-800/50 relative overflow-hidden">
           <div className="absolute inset-0 bg-[#000008]" />
 
-          <div className="container-custom relative z-10 px-[220px]">
-            <div className="space-y-16">
+          <div className="container-custom relative z-10">
+            <div className="space-y-8 sm:space-y-12 md:space-y-16">
               {/* Never Lose Information */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -1129,10 +1125,10 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
                   {homeData.dataProtection.title}
                 </h2>
-                <p className="text-xl text-white mb-8">
+                <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 px-4 sm:px-6 md:px-8">
                   {homeData.dataProtection.subtitle}
                 </p>
 
@@ -1142,7 +1138,7 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="mb-8 w-full max-w-sm mx-auto px-4"
+                  className="mb-6 sm:mb-8 w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto px-2 sm:px-4"
                 >
                   <video
                     ref={(el) => {
@@ -1164,25 +1160,25 @@ const Home: React.FC = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] object-cover rounded-lg shadow-2xl"
+                    className="w-full h-auto max-h-[30vh] sm:max-h-[35vh] md:max-h-[40vh] lg:max-h-[45vh] xl:max-h-[50vh] object-cover rounded-lg shadow-2xl"
                   >
                     Your browser does not support the video tag.
                   </video>
                 </motion.div>
 
                 {/* Two-Column Feature Layout */}
-                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 px-[50px]">
+                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8 px-4 sm:px-6 md:px-8 lg:px-12">
                   {/* Left Column - Integrated with your devices */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="flex items-start space-x-4"
+                    className="flex items-start space-x-3 sm:space-x-4"
                   >
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {/* Desktop monitor */}
                           <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
                           <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
@@ -1194,7 +1190,7 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex-1 text-left">
-                      <h3 className="text-lg font-semibold mb-2 text-white">
+                      <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-white leading-tight">
                         {homeData.dataProtection.features[0]}
                       </h3>
                     </div>
@@ -1211,11 +1207,11 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-start space-x-4"
+                    className="flex items-start space-x-3 sm:space-x-4"
                   >
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
+                        <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           {/* Shield with padlock */}
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
                           <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
@@ -1224,7 +1220,7 @@ const Home: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex-1 text-left">
-                      <h3 className="text-lg font-semibold mb-2 text-white">
+                      <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-white leading-tight">
                         {homeData.dataProtection.features[1]}
                       </h3>
                     </div>
@@ -1233,7 +1229,7 @@ const Home: React.FC = () => {
               </motion.div>
 
               {/* Spacer for more distance between sections */}
-              <div className="h-[50px]"></div>
+              <div className="h-6 sm:h-8 md:h-12 lg:h-[50px]"></div>
 
               {/* Enterprise Security */}
               <motion.div
@@ -1243,87 +1239,113 @@ const Home: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white">
                   {homeData.security.title}
                 </h2>
-                <p className="text-xl text-white mb-8">
+                <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 px-4 sm:px-6 md:px-8 max-w-2xl mx-auto">
                   {homeData.security.subtitle}
                 </p>
 
-                {/* Security Video - Positioned between title and feature cards */}
+                {/* Security Image - Positioned between title and feature cards */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="mb-16 w-full max-w-2xl mx-auto px-4"
+                  className="mb-8 sm:mb-12 md:mb-16 w-full max-w-lg sm:max-w-xl md:max-w-2xl mx-auto px-2 sm:px-4"
                 >
-                  <video
-                    ref={(el) => {
-                      if (el) {
-                        const observer = new IntersectionObserver((entries) => {
-                          entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                              el.play().catch(console.error);
-                            } else {
-                              el.pause();
-                            }
-                          });
-                        }, { threshold: 0.3 });
-                        observer.observe(el);
-                        return () => observer.disconnect();
-                      }
-                    }}
-                    src="/video/security.webm"
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-auto max-h-[60vh] sm:max-h-[80vh] object-cover rounded-lg shadow-2xl"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                  <img
+                    src="/video/security.gif"
+                    alt="Enterprise Security"
+                    className="w-full h-auto max-h-[30vh] sm:max-h-[35vh] md:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[60vh] object-cover rounded-lg shadow-2xl"
+                  />
                 </motion.div>
 
-                <FeatureSection
-                  gridCols={2}
-                  className="!px-[50px]"
-                  features={[
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
-                          <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
-                          <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
-                        </svg>
-                      ),
-                      title: homeData.security.features[0],
-                      description: "Official APIs with end-to-end encryption"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path d="M9 12l2 2 4-4" strokeWidth="2" />
-                          <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z" strokeWidth="2" />
-                          <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z" strokeWidth="2" />
-                        </svg>
-                      ),
-                      title: homeData.security.features[1],
-                      description: "GDPR & CCPA compliance guaranteed"
-                    },
-                    {
-                      icon: (
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" strokeWidth="2" />
-                          <path d="M12 16l-2-2 2-2" strokeWidth="2" />
-                          <path d="M12 12l2 2-2 2" strokeWidth="2" />
-                        </svg>
-                      ),
-                      title: homeData.security.features[2],
-                      description: "Secure cloud infrastructure"
-                    },
+                {/* Enhanced Security Features Grid with Proper Centering */}
+                <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
+                    {/* Card 1 - Official APIs */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-3 sm:space-x-4"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
+                            <rect x="9" y="11" width="6" height="5" rx="1" strokeWidth="2" />
+                            <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left">
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-white leading-tight">
+                          {homeData.security.features[0]}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                          Official APIs with end-to-end encryption
+                        </p>
+                      </div>
+                    </motion.div>
 
-                  ]}
-                />
+                    {/* Card 2 - GDPR & CCPA */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-3 sm:space-x-4"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4" strokeWidth="2" />
+                            <path d="M21 12c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z" strokeWidth="2" />
+                            <path d="M3 12c1 0 2-1 2-2s-1-2-2-2-2 1-2 2 1 2 2 2z" strokeWidth="2" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left">
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-white leading-tight">
+                          {homeData.security.features[1]}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                          GDPR & CCPA compliance guaranteed
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    {/* Card 3 - Secure Cloud Infrastructure (Centered on mobile, spans full width on small screens) */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-3 sm:space-x-4 sm:col-span-2 sm:justify-self-center sm:max-w-md"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                          <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" strokeWidth="2" />
+                            <path d="M12 16l-2-2 2-2" strokeWidth="2" />
+                            <path d="M12 12l2 2-2 2" strokeWidth="2" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 text-left">
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-2 text-white leading-tight">
+                          {homeData.security.features[2]}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                          Secure cloud infrastructure
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -1404,15 +1426,15 @@ const Home: React.FC = () => {
               </p>
 
               {/* Spacer for more distance between title and video */}
-              <div className="h-20"></div>
+              <div className="h-8 sm:h-12 md:h-16 lg:h-20"></div>
 
-              {/* Pricing Image with Text Overlay */}
+              {/* Pricing Video */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="mb-8 relative w-full max-w-4xl mx-auto"
+                className="mb-8 sm:mb-12 relative w-full max-w-2xl sm:max-w-3xl md:max-w-4xl mx-auto px-4"
               >
                 {/* Background Video */}
                 <video
@@ -1435,36 +1457,33 @@ const Home: React.FC = () => {
                   loop
                   muted
                   playsInline
-                  className="w-full h-auto max-h-[70vh] object-cover rounded-2xl shadow-2xl"
+                  className="w-full h-auto max-h-[40vh] sm:max-h-[50vh] md:max-h-[60vh] lg:max-h-[70vh] object-cover rounded-lg sm:rounded-2xl shadow-2xl"
                 >
                   Your browser does not support the video tag.
                 </video>
-
-                {/* Text Overlay */}
-                <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8" style={{ transform: 'translateY(-250px)' }}>
-
-
-                  {/* Features */}
-                  <div className="grid gap-6 mb-8 text-center w-full items-center justify-center mt-[100px]">
-                    <div className="flex items-center gap-1">
-                      <span className="text-white text-md">{homeData.pricing.description}</span>
-                    </div>
-                    <div className="space-y-2 w-full">
-                      {homeData.pricing.factors.map((factor, index) => (
-                        <div key={index} className="flex items-center gap-3">
-                          <span className="text-white text-sm">•</span>
-                          <span className="text-white text-sm">{factor}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <button className="border border-purple-400 text-white font-semibold py-1 px-3 rounded-xl transition-all duration-300 transform hover:scale-105 text-md">
-                    Start your 14-day trial
-                  </button>
-                </div>
               </motion.div>
+
+              {/* Features Below Video */}
+              <div className="mb-8 sm:mb-12 text-center w-full max-w-3xl mx-auto px-4">
+                <div className="flex items-center justify-center gap-1 mb-4 sm:mb-6">
+                  <span className="text-white text-sm sm:text-base md:text-lg">{homeData.pricing.description}</span>
+                </div>
+                <div className="space-y-2 sm:space-y-3 w-full text-left max-w-2xl mx-auto">
+                  {homeData.pricing.factors.map((factor, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <span className="text-white text-sm sm:text-base mt-1">•</span>
+                      <span className="text-white text-sm sm:text-base leading-relaxed">{factor}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="text-center mb-8 sm:mb-12">
+                <button className="border border-purple-400 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
+                  Start your 14-day trial
+                </button>
+              </div>
 
               {/* Additional Pricing Information - Below Video */}
               <motion.div
@@ -1531,6 +1550,21 @@ const Home: React.FC = () => {
                 <p className="text-lg text-white max-w-4xl mx-auto leading-relaxed">
                   {homeData.vision.description}
                 </p>
+
+                {/* Vision Image */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="mt-8 w-full max-w-4xl mx-auto px-4"
+                >
+                  <img
+                    src="/video/end.gif"
+                    alt="Our Vision"
+                    className="w-1/2 h-auto max-h-[25.5vh] sm:max-h-[15vh] md:max-h-[25.5vh] object-cover rounded-lg shadow-2xl mx-auto mt-20"
+                  />
+                </motion.div>
               </motion.div>
 
 
@@ -1554,10 +1588,10 @@ const Home: React.FC = () => {
                 {homeData.testimonials.title}
               </h2>
 
-              {/* Marquee Reviews Section */}
-              <div className="px-[250px]">
-                <MarqueeDemo />
-              </div>
+                              {/* Marquee Reviews Section */}
+                <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px]">
+                  <MarqueeDemo />
+                </div>
             </motion.div>
           </div>
         </section>
@@ -1572,10 +1606,10 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-12 md:mb-16"
             >
               <motion.h2 
-                className="text-4xl md:text-5xl font-bold mb-6 text-white"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-white px-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -1585,7 +1619,7 @@ const Home: React.FC = () => {
               </motion.h2>
               
               <motion.p 
-                className="text-xl text-white max-w-3xl mx-auto mb-4"
+                className="text-base sm:text-lg md:text-xl text-white max-w-2xl sm:max-w-3xl mx-auto mb-3 sm:mb-4 px-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -1595,7 +1629,7 @@ const Home: React.FC = () => {
               </motion.p>
               
               <motion.p 
-                className="text-lg text-white max-w-3xl mx-auto mb-8"
+                className="text-sm sm:text-base md:text-lg text-white max-w-2xl sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -1606,7 +1640,7 @@ const Home: React.FC = () => {
 
               {/* World Map Component */}
               <motion.div 
-                className="mb-12 max-w-6xl mx-auto px-[100px]"
+                className="mb-8 sm:mb-10 md:mb-12 max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-2 sm:px-4 md:px-8 lg:px-16 xl:px-[100px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -1623,65 +1657,66 @@ const Home: React.FC = () => {
               </motion.div>
 
               <motion.div 
-                className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 max-w-2xl mx-auto"
+                className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
                 viewport={{ once: true }}
               >
                 <motion.div 
-                  className="flex items-center justify-center gap-2 mb-6"
+                  className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4 sm:mb-6 text-center"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <span className="text-2xl">📩</span>
-                  <a href={`mailto:${homeData.contact.email}`} className="text-xl text-green-400 underline hover:text-green-300 transition-colors cursor-pointer">
+                  <span className="text-xl sm:text-2xl mb-2 sm:mb-0">📩</span>
+                  <a href={`mailto:${homeData.contact.email}`} className="text-base sm:text-lg md:text-xl text-green-400 underline hover:text-green-300 transition-colors cursor-pointer break-all">
                     {homeData.contact.email}
                   </a>
                 </motion.div>
 
                 <motion.div 
-                  className="flex items-center justify-center gap-6"
+                  className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex gap-4">
+                  {/* Social Media Links - Stacked on mobile for better mobile experience */}
+                  <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 md:gap-6 text-center">
                     <a
                       href="https://www.instagram.com/flowtify.ai/reels/?next=%2F"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                      className="text-sm sm:text-base text-green-400 underline hover:text-green-300 transition-colors cursor-pointer whitespace-nowrap"
                     >
                       {homeData.contact.social.instagram}
                     </a>
-                    <span className="text-white">|</span>
+                    <span className="text-white hidden sm:inline">|</span>
                     <a
                       href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                      className="text-sm sm:text-base text-green-400 underline hover:text-green-300 transition-colors cursor-pointer whitespace-nowrap"
                     >
                       {homeData.contact.social.linkedin}
                     </a>
-                    <span className="text-white">|</span>
+                    <span className="text-white hidden sm:inline">|</span>
                     <a
                       href="https://www.facebook.com/share/1Kws4Vzbxt/?mibextid=wwXIfr"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                      className="text-sm sm:text-base text-green-400 underline hover:text-green-300 transition-colors cursor-pointer whitespace-nowrap"
                     >
                       {homeData.contact.social.facebook}
                     </a>
-                    <span className="text-white">|</span>
+                    <span className="text-white hidden sm:inline">|</span>
                     <a
                       href="https://wa.me/19738869963"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-400 underline hover:text-green-300 transition-colors cursor-pointer"
+                      className="text-sm sm:text-base text-green-400 underline hover:text-green-300 transition-colors cursor-pointer whitespace-nowrap"
                     >
                       WhatsApp
                     </a>
