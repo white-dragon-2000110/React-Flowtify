@@ -589,7 +589,7 @@ const Home: React.FC = () => {
             </motion.div>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 sm:mb-12 md:mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
@@ -696,6 +696,7 @@ const Home: React.FC = () => {
               </div>
               <FeatureSection
                 gridCols={2}
+                className="!px-2 sm:!px-6 md:!px-8 lg:!px-12"
                 features={[
                   {
                     icon: (
@@ -1270,7 +1271,7 @@ const Home: React.FC = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 }}
                       viewport={{ once: true }}
-                      className="flex items-start space-x-3 sm:space-x-4"
+                      className="flex items-start space-x-3 sm:space-x-4 pl-4 sm:pl-10 md:pl-12 lg:pl-16"
                     >
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
@@ -1297,7 +1298,7 @@ const Home: React.FC = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                       viewport={{ once: true }}
-                      className="flex items-start space-x-3 sm:space-x-4 ml-[150px] sm:ml-8 md:ml-12"
+                      className="flex items-start space-x-3 sm:space-x-4 ml-4 sm:ml-8 md:ml-12"
                     >
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
@@ -1324,7 +1325,7 @@ const Home: React.FC = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                       viewport={{ once: true }}
-                      className="flex items-start space-x-3 sm:space-x-4 sm:col-span-2 sm:justify-self-center sm:max-w-md"
+                      className="flex items-start space-x-3 sm:space-x-4 mt-6 sm:mt-0 pl-4 sm:pl-10 md:pl-12 lg:pl-16 sm:col-span-2 sm:justify-self-center sm:max-w-md"
                     >
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
