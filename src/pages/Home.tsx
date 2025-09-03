@@ -513,7 +513,7 @@ const Home: React.FC = () => {
 
       <div className="min-h-screen bg-[#000008]">
         {/* Hero Section */}
-        <section id="home" className="relative bg-[#000008] h-[1000px] flex items-center justify-center overflow-hidden">
+        <section id="home" className="relative bg-[#000008] pb-16 pt-10 flex items-start justify-center overflow-hidden">
           {/* Vortex Background Animation */}
           <Vortex
             backgroundColor="rgb(0, 0, 12)"
@@ -523,7 +523,7 @@ const Home: React.FC = () => {
             className="absolute inset-0"
           />
 
-          <div className="relative z-10 text-center text-white px-4">
+          <div className="relative z-10 text-center text-white px-4 pt-5 sm:pt-10 md:pt-16 lg:pt-20 xl:pt-24">
             <motion.h1
               className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 30 }}
@@ -1139,7 +1139,7 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="mb-6 sm:mb-8 w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto px-2 sm:px-4"
+                  className="mb-6 sm:mb-8 w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] mx-auto px-2 sm:px-4"
                 >
                   <video
                     ref={(el) => {
@@ -1161,7 +1161,7 @@ const Home: React.FC = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-auto max-h-[30vh] sm:max-h-[35vh] md:max-h-[40vh] lg:max-h-[45vh] xl:max-h-[50vh] object-cover rounded-lg shadow-2xl"
+                    className="w-full h-auto max-h-[20vh] sm:max-h-[25vh] md:max-h-[30vh] lg:max-h-[35vh] xl:max-h-[40vh] object-cover rounded-lg shadow-2xl"
                   >
                     Your browser does not support the video tag.
                   </video>
