@@ -1174,7 +1174,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="flex items-start space-x-3 sm:space-x-4"
+                    className="flex items-start space-x-3 sm:space-x-4 px-4 sm:px-20 md:px-24 lg:px-32"
                   >
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
@@ -1207,7 +1207,7 @@ const Home: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-start space-x-3 sm:space-x-4"
+                    className="flex items-start space-x-3 sm:space-x-4 px-4 sm:px-20 md:px-24 lg:px-32"
                   >
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center">
@@ -1257,7 +1257,7 @@ const Home: React.FC = () => {
                   <img
                     src="/video/security.gif"
                     alt="Enterprise Security"
-                    className="w-full h-auto max-h-[30vh] sm:max-h-[35vh] md:max-h-[40vh] lg:max-h-[50vh] xl:max-h-[60vh] object-cover rounded-lg shadow-2xl"
+                    className="w-2/3 h-auto max-h-[20vh] sm:max-h-[25vh] md:max-h-[30vh] lg:max-h-[35vh] xl:max-h-[40vh] object-cover rounded-lg shadow-2xl mx-auto"
                   />
                 </motion.div>
 
@@ -1297,7 +1297,7 @@ const Home: React.FC = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                       viewport={{ once: true }}
-                      className="flex items-start space-x-3 sm:space-x-4"
+                      className="flex items-start space-x-3 sm:space-x-4 ml-[150px] sm:ml-8 md:ml-12"
                     >
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
@@ -1531,7 +1531,7 @@ const Home: React.FC = () => {
                 </p>
 
                 {/* Globe Component */}
-                <div className="mt-12 relative h-[600px] w-full max-w-6xl mx-auto overflow-visible">
+                <div className="mt-2 sm:mt-4 md:mt-6 lg:mt-8 relative h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full max-w-6xl mx-auto overflow-visible">
                   <Globe className="w-full h-full" />
                 </div>
               </motion.div>
