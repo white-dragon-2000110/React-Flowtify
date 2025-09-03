@@ -527,8 +527,9 @@ const Home: React.FC = () => {
             <motion.h1
               className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white mt-[200px]"
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               {homeData.hero.title}
             </motion.h1>
@@ -536,8 +537,9 @@ const Home: React.FC = () => {
             <motion.h2
               className="text-xl md:text-2xl lg:text-3xl font-semibold mb-4 text-white"
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               {homeData.hero.subtitle}
             </motion.h2>
@@ -545,8 +547,9 @@ const Home: React.FC = () => {
             <motion.p
               className="text-lg md:text-xl mb-14 max-w-3xl mx-auto text-white"
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               {homeData.hero.description}
             </motion.p>
@@ -555,12 +558,27 @@ const Home: React.FC = () => {
             <motion.div
               className="mb-[120px] w-full max-w-2xl mx-auto px-4"
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               <video
+                ref={(el) => {
+                  if (el) {
+                    const observer = new IntersectionObserver((entries) => {
+                      entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                          el.play().catch(console.error);
+                        } else {
+                          el.pause();
+                        }
+                      });
+                    }, { threshold: 0.3 });
+                    observer.observe(el);
+                    return () => observer.disconnect();
+                  }
+                }}
                 src="/video/home.webm"
-                autoPlay
                 loop
                 muted
                 playsInline
@@ -573,8 +591,9 @@ const Home: React.FC = () => {
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               <RequestDemoButton size="lg" />
             </motion.div>
@@ -611,9 +630,17 @@ const Home: React.FC = () => {
                 <video
                   ref={(el) => {
                     if (el) {
-                      setTimeout(() => {
-                        el.play().catch(console.error);
-                      }, 3000);
+                      const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                          if (entry.isIntersecting) {
+                            el.play().catch(console.error);
+                          } else {
+                            el.pause();
+                          }
+                        });
+                      }, { threshold: 0.3 });
+                      observer.observe(el);
+                      return () => observer.disconnect();
                     }
                   }}
                   src="/video/superpower.webm"
@@ -668,6 +695,7 @@ const Home: React.FC = () => {
                 ))}
               </div>
               <FeatureSection
+                gridCols={2}
                 features={[
                   {
                     icon: (
@@ -710,7 +738,7 @@ const Home: React.FC = () => {
                     icon: (
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" />
-                        <path d="M12 11v-2a2 2 0 1 0-4 0v2" strokeWidth="2" />
+                        <path d="M12 11v-2a2 0 1 0-4 0v2" strokeWidth="2" />
                       </svg>
                     ),
                     title: homeData.superpowers.items[3].title,
@@ -752,9 +780,17 @@ const Home: React.FC = () => {
                 <video
                   ref={(el) => {
                     if (el) {
-                      setTimeout(() => {
-                        el.play().catch(console.error);
-                      }, 3000);
+                      const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                          if (entry.isIntersecting) {
+                            el.play().catch(console.error);
+                          } else {
+                            el.pause();
+                          }
+                        });
+                      }, { threshold: 0.3 });
+                      observer.observe(el);
+                      return () => observer.disconnect();
                     }
                   }}
                   src="/video/scalable.webm"
@@ -1044,7 +1080,7 @@ const Home: React.FC = () => {
         <section id="security" className="section-padding bg-gray-800/50 relative overflow-hidden">
           <div className="absolute inset-0 bg-[#000008]" />
 
-          <div className="container-custom relative z-10">
+          <div className="container-custom relative z-10 px-[220px]">
             <div className="space-y-16">
               {/* Never Lose Information */}
               <motion.div
@@ -1065,9 +1101,17 @@ const Home: React.FC = () => {
                   <video
                     ref={(el) => {
                       if (el) {
-                        setTimeout(() => {
-                          el.play().catch(console.error);
-                        }, 3000);
+                        const observer = new IntersectionObserver((entries) => {
+                          entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                              el.play().catch(console.error);
+                            } else {
+                              el.pause();
+                            }
+                          });
+                        }, { threshold: 0.3 });
+                        observer.observe(el);
+                        return () => observer.disconnect();
                       }
                     }}
                     src="/video/nolose.webm"
@@ -1175,9 +1219,17 @@ const Home: React.FC = () => {
                   <video
                     ref={(el) => {
                       if (el) {
-                        setTimeout(() => {
-                          el.play().catch(console.error);
-                        }, 3000);
+                        const observer = new IntersectionObserver((entries) => {
+                          entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                              el.play().catch(console.error);
+                            } else {
+                              el.pause();
+                            }
+                          });
+                        }, { threshold: 0.3 });
+                        observer.observe(el);
+                        return () => observer.disconnect();
                       }
                     }}
                     src="/video/security.webm"
@@ -1191,6 +1243,8 @@ const Home: React.FC = () => {
                 </motion.div>
 
                 <FeatureSection
+                  gridCols={2}
+                  className="!px-[50px]"
                   features={[
                     {
                       icon: (
@@ -1317,8 +1371,22 @@ const Home: React.FC = () => {
               >
                 {/* Background Video */}
                 <video
+                  ref={(el) => {
+                    if (el) {
+                      const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                          if (entry.isIntersecting) {
+                            el.play().catch(console.error);
+                          } else {
+                            el.pause();
+                          }
+                        });
+                      }, { threshold: 0.3 });
+                      observer.observe(el);
+                      return () => observer.disconnect();
+                    }
+                  }}
                   src="/video/price.webm"
-                  autoPlay
                   loop
                   muted
                   playsInline
@@ -1437,21 +1505,47 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.3 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold mb-6 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
                 {homeData.contact.title}
-              </h2>
-              <p className="text-xl text-white max-w-3xl mx-auto mb-4">
+              </motion.h2>
+              
+              <motion.p 
+                className="text-xl text-white max-w-3xl mx-auto mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
                 {homeData.contact.subtitle}
-              </p>
-              <p className="text-lg text-white max-w-3xl mx-auto mb-8">
+              </motion.p>
+              
+              <motion.p 
+                className="text-lg text-white max-w-3xl mx-auto mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
                 {homeData.contact.description}
-              </p>
+              </motion.p>
 
               {/* World Map Component */}
-              <div className="mb-12 max-w-6xl mx-auto">
+              <motion.div 
+                className="mb-12 max-w-6xl mx-auto"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
                 <WorldMap
                   dots={[
                     { start: { lat: 40.7128, lng: -74.006 }, end: { lat: 51.5074, lng: -0.1278 } },
@@ -1460,17 +1554,35 @@ const Home: React.FC = () => {
                   ]}
                   lineColor="#0ea5e9"
                 />
-              </div>
+              </motion.div>
 
-              <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 max-w-2xl mx-auto">
-                <div className="flex items-center justify-center gap-2 mb-6">
+              <motion.div 
+                className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="flex items-center justify-center gap-2 mb-6"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true }}
+                >
                   <span className="text-2xl">📩</span>
                   <a href={`mailto:${homeData.contact.email}`} className="text-xl text-green-400 underline hover:text-green-300 transition-colors cursor-pointer">
                     {homeData.contact.email}
                   </a>
-                </div>
+                </motion.div>
 
-                <div className="flex items-center justify-center gap-6">
+                <motion.div 
+                  className="flex items-center justify-center gap-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  viewport={{ once: true }}
+                >
                   <div className="flex gap-4">
                     <a
                       href="https://www.instagram.com/flowtify.ai/reels/?next=%2F"
@@ -1508,8 +1620,8 @@ const Home: React.FC = () => {
                       WhatsApp
                     </a>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
           </div>
         </section>
