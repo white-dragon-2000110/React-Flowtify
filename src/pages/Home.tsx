@@ -1406,7 +1406,7 @@ const Home: React.FC = () => {
 
 
                   {/* Features */}
-                  <div className="grid gap-6 mb-8 text-center w-full items-center justify-center">
+                  <div className="grid gap-6 mb-8 text-center w-full items-center justify-center mt-[100px]">
                     <div className="flex items-center gap-1">
                       <span className="text-white text-md">{homeData.pricing.description}</span>
                     </div>
@@ -1425,6 +1425,27 @@ const Home: React.FC = () => {
                     Start your 14-day trial
                   </button>
                 </div>
+              </motion.div>
+
+              {/* Additional Pricing Information - Below Video */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="mt-8 text-center w-full max-w-3xl mx-auto"
+              >
+                <p className="text-white text-base leading-relaxed mb-4">
+                  At Flowtify, we believe in transparency and simplicity. After your demo, you'll receive a
+                  tailored proposal with clear phases, costs, and ROI expectations.
+                </p>
+                <p className="text-white text-base leading-relaxed mb-4">
+                  You only pay for what you truly need — and nothing more.
+                </p>
+                <p className="text-white text-base leading-relaxed mb-4">
+                  ✨ Bonus: Schedule your demo today and receive our free eBook on "The Future of Business
+                  Automation", packed with practical insights to start optimizing immediately.
+                </p>
               </motion.div>
             </motion.div>
           </div>
