@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 interface RequestDemoButtonProps {
   size?: 'sm' | 'md' | 'lg';
@@ -12,6 +13,7 @@ const RequestDemoButton: React.FC<RequestDemoButtonProps> = ({
   className = "",
   onClick 
 }) => {
+  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
 
   const sizeClasses = {
@@ -99,7 +101,7 @@ const RequestDemoButton: React.FC<RequestDemoButtonProps> = ({
 
       {/* Button Text */}
       <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
-        Request Demo
+        {t('demo.title')}
       </span>
 
       {/* Bottom Glow Line */}

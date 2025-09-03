@@ -131,180 +131,9 @@ function Globe({
   );
 }
 
-// Marquee Reviews Component
-const reviews = [
-  {
-    name: "JaGabriela Méndezck",
-    username: "@gabymendezcoaching",
-    body: "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed.",
-    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-      <path d="M12 18v-3" strokeWidth="2" />
-      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-      <path d="M6 14v2" strokeWidth="1" />
-    </svg>,
-  },
-  {
-    name: "Michael Harris",
-    username: "@mikeharris_mkt",
-    body: "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress.",
-    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-      <path d="M12 18v-3" strokeWidth="2" />
-      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-      <path d="M6 14v2" strokeWidth="1" />
-    </svg>,
-  },
-  {
-    name: "Jonathan Blake",
-    username: "@jonblake_ops",
-    body: "I've worked with dozens of automation tools — but Flowtify? It's different. Sleek, intuitive, and actually built for humans. Top-notch support too.",
-    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-      <path d="M12 18v-3" strokeWidth="2" />
-      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-      <path d="M6 14v2" strokeWidth="1" />
-    </svg>,
-  },
-  {
-    name: "Laura Fernández",
-    username: "@laura.fer.ux",
-    body: "I run a small branding studio and Flowtify helps me handle DMs, appointment reminders, and follow-ups. It's like having a digital assistant that never sleeps.",
-    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-      <path d="M12 18v-3" strokeWidth="2" />
-      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-      <path d="M6 14v2" strokeWidth="1" />
-    </svg>,
-  },
-  {
-    name: "Michael Harris",
-    username: "@mikeharris_mkt",
-    body: "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress.",
-    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-      <path d="M12 18v-3" strokeWidth="2" />
-      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-      <path d="M6 14v2" strokeWidth="1" />
-    </svg>,
-  },
-  {
-    name: "Daniela Rivas",
-    username: "@daniwritescontent",
-    body: "At first I thought Flowtify was just another bot. But wow. It's smart, human-like, and so easy to train. My clients love how responsive I've become.",
-    img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-      <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-      <path d="M12 18v-3" strokeWidth="2" />
-      <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-      <path d="M6 14v2" strokeWidth="1" />
-    </svg>,
-  },
-  // {
-  //   name: "JaGabriela Méndezck",
-  //   username: "@gabymendezcoaching",
-  //   body: "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed.",
-  //   img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-  //     <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
-  //     <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
-  //     <path d="M12 18v-3" strokeWidth="2" />
-  //     <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
-  //     <path d="M6 14v2" strokeWidth="1" />
-  //   </svg>,
-  // },
-];
+// Marquee Reviews Component - will be defined inside Home component
 
-const firstRow = reviews.slice(0, reviews.length / 2);
-const secondRow = reviews.slice(reviews.length / 2);
 
-const ReviewCard = ({
-  img,
-  name,
-  username,
-  body,
-}: {
-  img: string | React.ReactElement;
-  name: string;
-  username: string;
-  body: string;
-}) => {
-  return (
-    <figure
-      className={cn(
-        "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
-        // light styles
-        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-        // dark styles
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
-      )}
-    >
-      <div className="flex flex-row items-center gap-3 mb-3">
-        <div className="flex-shrink-0">
-          {typeof img === 'string' ? (
-            <>
-              <img
-                className="w-12 h-12 rounded-full border-2 border-gray-600/30 object-cover"
-                alt={`${name}'s avatar`}
-                src={img}
-                onError={(e) => {
-                  // Fallback to initials if image fails to load
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
-              />
-              {/* Fallback initials if image fails */}
-              <div
-                className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg hidden"
-                style={{ display: 'none' }}
-              >
-                {name.charAt(0).toUpperCase()}
-              </div>
-            </>
-          ) : (
-            <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-          )}
-        </div>
-        <div className="flex flex-col min-w-0">
-          <figcaption className="text-sm font-semibold text-white truncate">
-            {name}
-          </figcaption>
-          <p className="text-xs text-white truncate">{username}</p>
-        </div>
-      </div>
-      <blockquote className="text-sm text-gray-200 leading-relaxed">{body}</blockquote>
-    </figure>
-  );
-};
-
-export function MarqueeDemo() {
-  return (
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:40s]">
-        {firstRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:40s]">
-        {secondRow.map((review) => (
-          <ReviewCard key={review.username} {...review} />
-        ))}
-      </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-r from-background"></div>
-    </div>
-  );
-}
 
 // World Map Component
 interface MapProps {
@@ -472,9 +301,143 @@ function WorldMap({
 import homeDataRaw from '../data/home.json';
 
 const Home: React.FC = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const currentLang = i18n.language === 'es' ? 'es' : 'en';
   const homeData = homeDataRaw[currentLang as keyof typeof homeDataRaw];
+
+  // Marquee Reviews Component with translations
+  const reviews = [
+    {
+      name: t('testimonials.testimonial1.name'),
+      username: t('testimonials.testimonial1.username'),
+      body: t('testimonials.testimonial1.quote'),
+      img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+        <path d="M12 18v-3" strokeWidth="2" />
+        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+        <path d="M6 14v2" strokeWidth="1" />
+      </svg>,
+    },
+    {
+      name: t('testimonials.testimonial2.name'),
+      username: t('testimonials.testimonial2.username'),
+      body: t('testimonials.testimonial2.quote'),
+      img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+        <path d="M12 18v-3" strokeWidth="2" />
+        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+        <path d="M6 14v2" strokeWidth="1" />
+      </svg>,
+    },
+    {
+      name: t('testimonials.testimonial3.name'),
+      username: t('testimonials.testimonial3.username'),
+      body: t('testimonials.testimonial3.quote'),
+      img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+        <path d="M12 18v-3" strokeWidth="2" />
+        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+        <path d="M6 14v2" strokeWidth="1" />
+      </svg>,
+    },
+    {
+      name: t('testimonials.testimonial4.name'),
+      username: t('testimonials.testimonial4.username'),
+      body: t('testimonials.testimonial4.quote'),
+      img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+        <path d="M12 18v-3" strokeWidth="2" />
+        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+        <path d="M6 14v2" strokeWidth="1" />
+      </svg>,
+    },
+    {
+      name: t('testimonials.testimonial5.name'),
+      username: t('testimonials.testimonial5.username'),
+      body: t('testimonials.testimonial5.quote'),
+      img: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="2" y="3" width="20" height="15" rx="2" strokeWidth="2" />
+        <path d="M8 21v-3M16 21v-3" strokeWidth="2" />
+        <path d="M12 18v-3" strokeWidth="2" />
+        <rect x="4" y="12" width="6" height="10" rx="1" strokeWidth="2" />
+        <path d="M6 14v2" strokeWidth="1" />
+      </svg>,
+    },
+  ];
+
+  // Split reviews into two rows for marquee
+  const firstRow = reviews.slice(0, reviews.length / 2);
+  const secondRow = reviews.slice(reviews.length / 2);
+
+  // ReviewCard component
+  const ReviewCard = ({
+    img,
+    name,
+    username,
+    body,
+  }: {
+    img: string | React.ReactElement;
+    name: string;
+    username: string;
+    body: string;
+  }) => {
+    return (
+      <figure
+        className={cn(
+          "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+          // light styles
+          "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+          // dark styles
+          "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+        )}
+      >
+        <div className="flex flex-row items-center gap-3 mb-3">
+          <div className="flex-shrink-0">
+            {typeof img === 'string' ? (
+              <>
+                <img
+                  className="w-12 h-12 rounded-full border-2 border-gray-600/30 object-cover"
+                  alt={`${name}'s avatar`}
+                  src={img}
+                  onError={(e) => {
+                    // Fallback to initials if image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const fallback = target.nextElementSibling as HTMLElement;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
+                />
+                {/* Fallback initials if image fails */}
+                <div
+                  className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white font-bold text-lg hidden"
+                  style={{ display: 'none' }}
+                >
+                  {name.charAt(0).toUpperCase()}
+                </div>
+              </>
+            ) : (
+              <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col min-w-0">
+            <figcaption className="text-sm font-semibold text-white truncate">
+              {name}
+            </figcaption>
+            <p className="text-xs text-white truncate">{username}</p>
+          </div>
+        </div>
+        <blockquote className="text-sm text-gray-200 leading-relaxed">{body}</blockquote>
+      </figure>
+    );
+  };
 
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
@@ -1666,7 +1629,20 @@ const Home: React.FC = () => {
 
               {/* Marquee Reviews Section */}
               <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-[250px]">
-                <MarqueeDemo />
+                <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+                  <Marquee pauseOnHover className="[--duration:40s]">
+                    {firstRow.map((review) => (
+                      <ReviewCard key={review.username} {...review} />
+                    ))}
+                  </Marquee>
+                  <Marquee reverse pauseOnHover className="[--duration:40s]">
+                    {secondRow.map((review) => (
+                      <ReviewCard key={review.username} {...review} />
+                    ))}
+                  </Marquee>
+                  <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-r from-background"></div>
+                </div>
               </div>
             </motion.div>
           </div>

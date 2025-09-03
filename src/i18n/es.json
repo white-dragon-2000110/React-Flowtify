@@ -481,27 +481,33 @@
     "title": "Lo que Dicen Nuestros Clientes",
     "subtitle": "Únete a miles de empresas satisfechas usando Flowtify",
     "testimonial1": {
-      "name": "Sarah Johnson",
-      "role": "Directora de Operaciones",
-      "company": "TechCorp Solutions",
-      "avatar": "👩‍💼",
-      "quote": "Flowtify ha transformado nuestra eficiencia de flujo de trabajo. Hemos reducido los procesos manuales en un 80% y nuestro equipo puede enfocarse en lo que realmente importa.",
+      "name": "Gabriela Méndez",
+      "username": "@gabymendezcoaching",
+      "quote": "Flowtify me devolvió el tiempo. Mi negocio se ve más profesional y dejé de perder clientes potenciales. El bot responde, agenda y hasta da seguimiento. Estoy obsesionada.",
       "rating": 5
     },
     "testimonial2": {
-      "name": "Michael Chen",
-      "role": "CTO",
-      "company": "InnovateLab",
-      "avatar": "👨‍💻",
-      "quote": "La automatización impulsada por IA es increíble. Flowtify aprende de nuestros procesos y mejora continuamente nuestros flujos de trabajo.",
+      "name": "Michael Harris",
+      "username": "@mikeharris_mkt",
+      "quote": "Integramos Flowtify con nuestro CRM e Instagram — ahora todo fluye mucho mejor. Cero código, cero estrés.",
       "rating": 5
     },
     "testimonial3": {
-      "name": "Emily Rodriguez",
-      "role": "Gerente de Proyectos",
-      "company": "Growth Dynamics",
-      "avatar": "👩‍🎯",
-      "quote": "Configurar las integraciones fue perfecto. Conectamos todas nuestras herramientas en un día y vimos ganancias inmediatas de productividad.",
+      "name": "Jonathan Blake",
+      "username": "@jonblake_ops",
+      "quote": "He probado docenas de herramientas de automatización — pero Flowtify es diferente. Elegante, intuitivo y realmente pensado para humanos. El soporte es de primera.",
+      "rating": 5
+    },
+    "testimonial4": {
+      "name": "Laura Fernández",
+      "username": "@laura.fer.ux",
+      "quote": "Tengo un pequeño estudio de branding y Flowtify me ayuda a gestionar los mensajes, los recordatorios y los seguimientos. Es como tener una asistente digital que nunca duerme.",
+      "rating": 5
+    },
+    "testimonial5": {
+      "name": "Daniela Rivas",
+      "username": "@daniwritescontent",
+      "quote": "Al principio pensé que Flowtify era solo otro bot. Pero wow. Es inteligente, natural, y súper fácil de entrenar. A mis clientes les encanta lo rápido que respondo ahora.",
       "rating": 5
     }
   }

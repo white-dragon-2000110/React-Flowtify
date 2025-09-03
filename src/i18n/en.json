@@ -518,30 +518,36 @@
     }
   },
   "testimonials": {
-    "title": "Integrations without limits",
-    "subtitle": "Flowtify AI works seamlessly with 50+ leading apps:",
+    "title": "What Our Clients Say",
+    "subtitle": "Join thousands of satisfied businesses using Flowtify",
     "testimonial1": {
-      "name": "Sarah Johnson",
-      "role": "Operations Director",
-      "company": "TechCorp Solutions",
-      "avatar": "👩‍💼",
-      "quote": "Flowtify has transformed our workflow efficiency. We've reduced manual processes by 80% and our team can focus on what really matters.",
+      "name": "Gabriela Méndez",
+      "username": "@gabymendezcoaching",
+      "quote": "Flowtify gave me my time back. My business looks more professional, and I stopped losing leads. The bot answers, books and even follows up. I'm obsessed.",
       "rating": 5
     },
     "testimonial2": {
-      "name": "Michael Chen",
-      "role": "CTO",
-      "company": "InnovateLab",
-      "avatar": "👨‍💻",
-      "quote": "The AI-powered automation is incredible. Flowtify learns from our processes and continuously improves our workflows.",
+      "name": "Michael Harris",
+      "username": "@mikeharris_mkt",
+      "quote": "We integrated Flowtify with our CRM and Instagram — now our pipeline runs smoother than ever. Zero-code, zero stress.",
       "rating": 5
     },
     "testimonial3": {
-      "name": "Emily Rodriguez",
-      "role": "Project Manager",
-      "company": "Growth Dynamics",
-      "avatar": "👩‍🎯",
-      "quote": "Setting up integrations was seamless. We connected all our tools in one day and saw immediate productivity gains.",
+      "name": "Jonathan Blake",
+      "username": "@jonblake_ops",
+      "quote": "I've worked with dozens of automation tools — but Flowtify? It's different. Sleek, intuitive, and actually built for humans. Top-notch support too.",
+      "rating": 5
+    },
+    "testimonial4": {
+      "name": "Laura Fernández",
+      "username": "@laura.fer.ux",
+      "quote": "I run a small branding studio and Flowtify helps me handle DMs, appointment reminders, and follow-ups. It's like having a digital assistant that never sleeps.",
+      "rating": 5
+    },
+    "testimonial5": {
+      "name": "Daniela Rivas",
+      "username": "@daniwritescontent",
+      "quote": "At first I thought Flowtify was just another bot. But wow. It's smart, human-like, and so easy to train. My clients love how responsive I've become.",
       "rating": 5
     }
   }
