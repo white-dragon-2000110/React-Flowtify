@@ -1,0 +1,380 @@
+/* Responsive Utilities for Flowtify */
+
+/* Mobile-first responsive containers */
+.responsive-container {
+  @apply w-full mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+}
+
+.responsive-container-sm {
+  @apply w-full mx-auto px-2 sm:px-4 md:px-6 lg:px-8;
+}
+
+.responsive-container-lg {
+  @apply w-full mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20;
+}
+
+/* Responsive text sizing */
+.responsive-text-hero {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl;
+}
+
+.responsive-text-title {
+  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
+}
+
+.responsive-text-subtitle {
+  @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+}
+
+.responsive-text-body {
+  @apply text-sm sm:text-base md:text-lg;
+}
+
+.responsive-text-caption {
+  @apply text-xs sm:text-sm md:text-base;
+}
+
+/* Responsive spacing */
+.responsive-section {
+  @apply py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24;
+}
+
+.responsive-section-sm {
+  @apply py-6 sm:py-8 md:py-12 lg:py-16;
+}
+
+.responsive-section-lg {
+  @apply py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32;
+}
+
+/* Responsive margins */
+.responsive-margin {
+  @apply m-4 sm:m-6 md:m-8 lg:m-10 xl:m-12;
+}
+
+.responsive-margin-sm {
+  @apply m-2 sm:m-4 md:m-6 lg:m-8;
+}
+
+.responsive-margin-lg {
+  @apply m-6 sm:m-8 md:m-12 lg:m-16 xl:m-20;
+}
+
+/* Responsive padding */
+.responsive-padding {
+  @apply p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12;
+}
+
+.responsive-padding-sm {
+  @apply p-2 sm:p-4 md:p-6 lg:p-8;
+}
+
+.responsive-padding-lg {
+  @apply p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20;
+}
+
+/* Responsive grids */
+.responsive-grid-1 {
+  @apply grid-cols-1;
+}
+
+.responsive-grid-2 {
+  @apply grid-cols-1 sm:grid-cols-2;
+}
+
+.responsive-grid-3 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.responsive-grid-4 {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.responsive-grid-6 {
+  @apply grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6;
+}
+
+/* Responsive flexbox */
+.responsive-flex-col {
+  @apply flex-col sm:flex-row;
+}
+
+.responsive-flex-row {
+  @apply flex-row sm:flex-col;
+}
+
+.responsive-flex-wrap {
+  @apply flex-wrap sm:flex-nowrap;
+}
+
+/* Responsive gaps */
+.responsive-gap-2 {
+  @apply gap-2 sm:gap-3 md:gap-4 lg:gap-6;
+}
+
+.responsive-gap-4 {
+  @apply gap-4 sm:gap-6 md:gap-8 lg:gap-10;
+}
+
+.responsive-gap-6 {
+  @apply gap-6 sm:gap-8 md:gap-10 lg:gap-12;
+}
+
+.responsive-gap-8 {
+  @apply gap-8 sm:gap-10 md:gap-12 lg:gap-16;
+}
+
+/* Responsive positioning */
+.responsive-absolute {
+  @apply absolute;
+}
+
+.responsive-relative {
+  @apply relative;
+}
+
+.responsive-fixed {
+  @apply fixed;
+}
+
+/* Responsive visibility */
+.responsive-hidden {
+  @apply hidden sm:block;
+}
+
+.responsive-visible {
+  @apply block sm:hidden;
+}
+
+.responsive-hidden-md {
+  @apply hidden md:block;
+}
+
+.responsive-visible-md {
+  @apply block md:hidden;
+}
+
+/* Responsive sizing */
+.responsive-w-full {
+  @apply w-full;
+}
+
+.responsive-w-auto {
+  @apply w-auto;
+}
+
+.responsive-w-screen {
+  @apply w-screen;
+}
+
+.responsive-h-full {
+  @apply h-full;
+}
+
+.responsive-h-auto {
+  @apply h-auto;
+}
+
+.responsive-h-screen {
+  @apply h-screen;
+}
+
+/* Responsive overflow */
+.responsive-overflow-hidden {
+  @apply overflow-hidden;
+}
+
+.responsive-overflow-auto {
+  @apply overflow-auto;
+}
+
+.responsive-overflow-scroll {
+  @apply overflow-scroll;
+}
+
+/* Responsive z-index */
+.responsive-z-0 {
+  @apply z-0;
+}
+
+.responsive-z-10 {
+  @apply z-10;
+}
+
+.responsive-z-20 {
+  @apply z-20;
+}
+
+.responsive-z-30 {
+  @apply z-30;
+}
+
+.responsive-z-40 {
+  @apply z-40;
+}
+
+.responsive-z-50 {
+  @apply z-50;
+}
+
+/* Responsive shadows */
+.responsive-shadow {
+  @apply shadow-sm sm:shadow-md md:shadow-lg lg:shadow-xl;
+}
+
+.responsive-shadow-lg {
+  @apply shadow-md sm:shadow-lg md:shadow-xl lg:shadow-2xl;
+}
+
+/* Responsive borders */
+.responsive-border {
+  @apply border border-gray-300 dark:border-gray-600;
+}
+
+.responsive-border-2 {
+  @apply border-2 border-gray-300 dark:border-gray-600;
+}
+
+.responsive-border-0 {
+  @apply border-0;
+}
+
+/* Responsive rounded corners */
+.responsive-rounded {
+  @apply rounded sm:rounded-md md:rounded-lg lg:rounded-xl;
+}
+
+.responsive-rounded-lg {
+  @apply rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl;
+}
+
+.responsive-rounded-full {
+  @apply rounded-full;
+}
+
+/* Responsive transitions */
+.responsive-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.responsive-transition-fast {
+  @apply transition-all duration-150 ease-in-out;
+}
+
+.responsive-transition-slow {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+/* Responsive transforms */
+.responsive-transform {
+  @apply transform;
+}
+
+.responsive-scale {
+  @apply scale-95 sm:scale-100 md:scale-105;
+}
+
+.responsive-rotate {
+  @apply rotate-0 sm:rotate-1 md:rotate-2;
+}
+
+/* Responsive animations */
+.responsive-animate-pulse {
+  @apply animate-pulse;
+}
+
+.responsive-animate-bounce {
+  @apply animate-bounce;
+}
+
+.responsive-animate-spin {
+  @apply animate-spin;
+}
+
+/* Responsive backdrop filters */
+.responsive-backdrop-blur {
+  @apply backdrop-blur-sm sm:backdrop-blur-md md:backdrop-blur-lg;
+}
+
+.responsive-backdrop-blur-lg {
+  @apply backdrop-blur-md sm:backdrop-blur-lg md:backdrop-blur-xl;
+}
+
+/* Responsive gradients */
+.responsive-gradient {
+  @apply bg-gradient-to-r from-purple-500 to-blue-500;
+}
+
+.responsive-gradient-dark {
+  @apply bg-gradient-to-r from-purple-600 to-blue-600;
+}
+
+/* Responsive text gradients */
+.responsive-text-gradient {
+  @apply bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent;
+}
+
+.responsive-text-gradient-dark {
+  @apply bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent;
+}
+
+/* Responsive hover effects */
+.responsive-hover-scale {
+  @apply hover:scale-95 sm:hover:scale-100 md:hover:scale-105;
+}
+
+.responsive-hover-shadow {
+  @apply hover:shadow-sm sm:hover:shadow-md md:hover:shadow-lg;
+}
+
+.responsive-hover-opacity {
+  @apply hover:opacity-75 sm:hover:opacity-80 md:hover:opacity-90;
+}
+
+/* Responsive focus effects */
+.responsive-focus-ring {
+  @apply focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50;
+}
+
+.responsive-focus-outline {
+  @apply focus:outline-none focus:ring-2 focus:ring-purple-500;
+}
+
+/* Responsive active effects */
+.responsive-active-scale {
+  @apply active:scale-95;
+}
+
+.responsive-active-opacity {
+  @apply active:opacity-80;
+}
+
+/* Responsive disabled states */
+.responsive-disabled {
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Responsive loading states */
+.responsive-loading {
+  @apply animate-pulse cursor-wait;
+}
+
+/* Responsive error states */
+.responsive-error {
+  @apply border-red-500 text-red-600 bg-red-50 dark:bg-red-900/20;
+}
+
+/* Responsive success states */
+.responsive-success {
+  @apply border-green-500 text-green-600 bg-green-50 dark:bg-green-900/20;
+}
+
+/* Responsive warning states */
+.responsive-warning {
+  @apply border-yellow-500 text-yellow-600 bg-yellow-50 dark:bg-yellow-900/20;
+}
+
+/* Responsive info states */
+.responsive-info {
+  @apply border-blue-500 text-blue-600 bg-blue-50 dark:bg-blue-900/20;
+} 

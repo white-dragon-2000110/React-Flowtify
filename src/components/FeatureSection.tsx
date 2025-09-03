@@ -18,19 +18,33 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({ features, className = "
     return null;
   }
 
-  const gridClass = gridCols === 2 
-    ? "grid-cols-1 md:grid-cols-2" 
-    : "grid-cols-1 md:grid-cols-3";
+  // Responsive grid classes based on gridCols
+  const getGridClass = () => {
+    switch (gridCols) {
+      case 1:
+        return "grid-cols-1";
+      case 2:
+        return "grid-cols-1 sm:grid-cols-2";
+      case 3:
+        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+      case 4:
+        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+      default:
+        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+    }
+  };
+
+  const gridClass = getGridClass();
 
   // Check if we need to center the last card in a 2-column grid
   const shouldCenterLastCard = gridCols === 2 && features.length % 2 === 1;
 
   return (
-    <div className={`px-[150px] relative grid ${gridClass} gap-8 mb-8 ${className}`}>
+    <div className={`responsive-px relative grid ${gridClass} responsive-gap-6 mb-8 ${className}`}>
       {features.map((feature, index) => {
         const isLastCard = index === features.length - 1;
         const cardClassName = shouldCenterLastCard && isLastCard 
-          ? "md:col-span-2 md:justify-self-center md:w-fit" 
+          ? "sm:col-span-2 sm:justify-self-center sm:w-fit" 
           : "";
 
         return (

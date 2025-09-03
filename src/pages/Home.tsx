@@ -525,7 +525,7 @@ const Home: React.FC = () => {
 
           <div className="relative z-10 text-center text-white px-4">
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white mt-[200px]"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -660,7 +660,7 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
               viewport={{ once: true }}
-              className="relative w-full mb-16 overflow-hidden px-10"
+              className="relative w-full overflow-hidden px-10"
             >
               {/* Background Grid */}
               <div className="absolute inset-0 opacity-20">
@@ -1066,11 +1066,50 @@ const Home: React.FC = () => {
               </p>
 
               <motion.button
-                className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-blue-600 transform hover:scale-105 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="relative px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transform transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-white/25 overflow-hidden group"
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -2
+                }}
+                whileTap={{ scale: 0.98 }}
               >
-                {homeData.integrations.cta}
+                {/* Animated Background Glow */}
+                <motion.div
+                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0, 0.1, 0]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+
+                {/* Button Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  animate={{
+                    x: ['-100%', '100%']
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                />
+
+                {/* Button Text */}
+                <span className="relative z-10 font-semibold group-hover:text-white transition-colors duration-300">
+                  {homeData.integrations.cta}
+                </span>
+
+                {/* Bottom Glow Line */}
+                <motion.div
+                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-white group-hover:w-3/4 transition-all duration-500"
+                  whileHover={{ width: '75%' }}
+                />
               </motion.button>
             </motion.div>
           </div>

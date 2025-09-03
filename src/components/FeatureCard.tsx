@@ -15,18 +15,20 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, del
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay }}
       viewport={{ once: true }}
-      className="flex items-start space-x-4 w-full"
+      className="flex items-start space-x-3 sm:space-x-4 w-full"
     >
       <div className="flex-shrink-0">
-        <div className="w-12 h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
-          {icon}
+        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800/60 rounded-lg flex items-center justify-center border border-gray-700/30">
+          <div className="w-6 h-6 sm:w-8 sm:h-8">
+            {icon}
+          </div>
         </div>
       </div>
       <div className="flex-1 text-left min-w-0">
-        <h3 className="text-lg font-semibold mb-2 text-white">
+        <h3 className="text-base sm:text-lg font-semibold mb-2 text-white">
           {title}
         </h3>
-        <p className="text-sm text-gray-300 leading-relaxed">
+        <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
           {description}
         </p>
       </div>

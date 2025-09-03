@@ -23,14 +23,14 @@ const LanguageSwitcher: React.FC = () => {
     <div className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 text-gray-300 hover:text-purple-400 hover:bg-purple-500/20 rounded-xl transition-all duration-300 group"
+        className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1.5 sm:py-2 text-gray-300 hover:text-purple-400 hover:bg-purple-500/20 rounded-xl transition-all duration-300 group"
         whileHover={{ scale: 1.05, y: -2 }}
         whileTap={{ scale: 0.95 }}
       >
         {/* Globe Icon with Glow */}
         <div className="relative">
           <motion.div
-            className="absolute inset-0 w-6 h-6 bg-purple-500/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 bg-purple-500/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0, 0.3, 0]
@@ -41,11 +41,11 @@ const LanguageSwitcher: React.FC = () => {
               ease: "easeInOut"
             }}
           />
-          <GlobeAltIcon className="relative z-10 w-5 h-5 group-hover:text-purple-300 transition-colors duration-300" />
+          <GlobeAltIcon className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 group-hover:text-purple-300 transition-colors duration-300" />
         </div>
 
         {/* Current Language */}
-        <span className="text-sm font-medium group-hover:text-purple-300 transition-colors duration-300">
+        <span className="text-xs sm:text-sm font-medium group-hover:text-purple-300 transition-colors duration-300">
           {currentLanguage.flag} {currentLanguage.code.toUpperCase()}
         </span>
 
@@ -54,7 +54,7 @@ const LanguageSwitcher: React.FC = () => {
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ChevronDownIcon className="w-4 h-4 group-hover:text-purple-300 transition-colors duration-300" />
+          <ChevronDownIcon className="w-3 h-3 sm:w-4 sm:h-4 group-hover:text-purple-300 transition-colors duration-300" />
         </motion.div>
       </motion.button>
 

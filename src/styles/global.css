@@ -1,3 +1,4 @@
+@import './responsive.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,57 +28,90 @@
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
   }
 
   h4 {
-    @apply text-xl md:text-2xl lg:text-3xl;
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl;
   }
 
   h5 {
-    @apply text-lg md:text-xl lg:text-2xl;
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl;
   }
 
   h6 {
-    @apply text-base md:text-lg lg:text-xl;
+    @apply text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-flowtify-gradient hover:bg-flowtify-gradient-dark text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+    @apply bg-flowtify-gradient hover:bg-flowtify-gradient-dark text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm sm:text-base;
   }
 
   .btn-secondary {
-    @apply bg-white text-flowtify-600 border-2 border-flowtify-600 hover:bg-flowtify-600 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+    @apply bg-white text-flowtify-600 border-2 border-flowtify-600 hover:bg-flowtify-600 hover:text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-300 text-sm sm:text-base;
   }
 
   .btn-outline {
-    @apply border-2 border-flowtify-500 text-flowtify-500 hover:bg-flowtify-500 hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+    @apply border-2 border-flowtify-500 text-flowtify-500 hover:bg-flowtify-500 hover:text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-300 text-sm sm:text-base;
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6;
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 sm:p-6;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-flowtify-500 focus:border-transparent transition-all duration-300;
+    @apply w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-flowtify-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base;
   }
 
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24;
   }
 
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  /* Mobile-first responsive utilities */
+  .mobile-container {
+    @apply px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+  }
+
+  .mobile-text {
+    @apply text-sm sm:text-base md:text-lg lg:text-xl;
+  }
+
+  .mobile-heading {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
+  }
+
+  .mobile-grid {
+    @apply grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+  }
+
+  .mobile-flex {
+    @apply flex-col sm:flex-row;
+  }
+
+  .mobile-spacing {
+    @apply space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10;
+  }
+
+  .mobile-padding {
+    @apply p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12;
+  }
+
+  .mobile-margin {
+    @apply m-4 sm:m-6 md:m-8 lg:m-10 xl:m-12;
   }
 }
 
@@ -92,5 +126,86 @@
 
   .shadow-soft {
     @apply shadow-[0_8px_30px_rgb(0,0,0,0.12)];
+  }
+
+  /* Responsive spacing utilities */
+  .responsive-px {
+    @apply px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+  }
+
+  .responsive-py {
+    @apply py-4 sm:py-6 md:py-8 lg:py-12 xl:py-16;
+  }
+
+  .responsive-mx {
+    @apply mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-16;
+  }
+
+  .responsive-my {
+    @apply my-4 sm:my-6 md:my-8 lg:my-12 xl:my-16;
+  }
+
+  /* Responsive text utilities */
+  .responsive-text-xs {
+    @apply text-xs sm:text-sm md:text-base lg:text-lg;
+  }
+
+  .responsive-text-sm {
+    @apply text-sm sm:text-base md:text-lg lg:text-xl;
+  }
+
+  .responsive-text-base {
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl;
+  }
+
+  .responsive-text-lg {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+
+  .responsive-text-xl {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  /* Responsive grid utilities */
+  .responsive-grid-1 {
+    @apply grid-cols-1;
+  }
+
+  .responsive-grid-2 {
+    @apply grid-cols-1 sm:grid-cols-2;
+  }
+
+  .responsive-grid-3 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .responsive-grid-4 {
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  /* Responsive flex utilities */
+  .responsive-flex-col {
+    @apply flex-col sm:flex-row;
+  }
+
+  .responsive-flex-row {
+    @apply flex-row sm:flex-col;
+  }
+
+  /* Responsive gap utilities */
+  .responsive-gap-2 {
+    @apply gap-2 sm:gap-3 md:gap-4 lg:gap-6;
+  }
+
+  .responsive-gap-4 {
+    @apply gap-4 sm:gap-6 md:gap-8 lg:gap-10;
+  }
+
+  .responsive-gap-6 {
+    @apply gap-6 sm:gap-8 md:gap-10 lg:gap-12;
+  }
+
+  .responsive-gap-8 {
+    @apply gap-8 sm:gap-10 md:gap-12 lg:gap-16;
   }
 } 

@@ -177,20 +177,20 @@ const Navigation: React.FC = () => {
           {/* Logo - Clickable to Home */}
           <button
             onClick={() => scrollToSection('home')}
-            className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200"
+            className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
           >
             <img
               src="/logo.png"
               alt="Flowtify"
-              className="h-[50px] w-[50px] object-contain"
+              className="h-8 w-8 sm:h-[50px] sm:w-[50px] object-contain"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               Flowtify
             </span>
           </button>
 
           {/* Desktop Navigation with Dock Effects */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
             {navigationItems.map((item, index) => (
               <DockIcon key={item.path} tooltip={item.label} delay={index * 0.1}>
                 {item.isHomeSection && item.sectionId ? (
@@ -271,10 +271,10 @@ const Navigation: React.FC = () => {
           <DockIcon tooltip="Toggle Menu" delay={0.2}>
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative p-3 rounded-xl text-gray-300 hover:text-purple-400 hover:bg-purple-500/20 transition-all duration-300 group"
+              className="md:hidden relative p-2 sm:p-3 rounded-xl text-gray-300 hover:text-purple-400 hover:bg-purple-500/20 transition-all duration-300 group"
             >
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5 sm:w-6 sm:h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -309,7 +309,7 @@ const Navigation: React.FC = () => {
               transition={{ duration: 0.4, ease: "easeInOut" }}
               className="md:hidden py-4 border-t border-gray-800/50 bg-gray-900/95 backdrop-blur-xl overflow-hidden"
             >
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-3 sm:space-y-4">
                 {navigationItems.map((item, index) => (
                   <motion.div
                     key={item.path}
@@ -323,7 +323,7 @@ const Navigation: React.FC = () => {
                           scrollToSection(item.sectionId!);
                           setIsMobileMenuOpen(false);
                         }}
-                        className={`relative w-full text-left text-sm font-medium transition-all duration-300 px-4 py-3 rounded-xl ${activeSection === item.sectionId
+                        className={`relative w-full text-left text-sm sm:text-base font-medium transition-all duration-300 px-3 py-2 sm:px-4 sm:py-3 rounded-xl ${activeSection === item.sectionId
                             ? 'text-purple-400 bg-purple-500/20 border border-purple-500/30'
                             : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10 border border-transparent'
                           }`}
@@ -356,7 +356,7 @@ const Navigation: React.FC = () => {
                         <Link
                           to={item.path}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className={`relative block w-full text-left text-sm font-medium transition-all duration-300 px-4 py-3 rounded-xl ${isActive(item.path)
+                          className={`relative block w-full text-left text-sm sm:text-base font-medium transition-all duration-300 px-3 py-2 sm:px-4 sm:py-3 rounded-xl ${isActive(item.path)
                               ? 'text-purple-400 bg-purple-500/20 border border-purple-500/30'
                               : 'text-gray-300 hover:text-purple-400 hover:bg-purple-500/10 border border-transparent'
                             }`}
@@ -384,11 +384,11 @@ const Navigation: React.FC = () => {
                   </motion.div>
                 ))}
 
-                <div className="pt-4 border-t border-gray-800/50 px-4">
+                <div className="pt-4 border-t border-gray-800/50 px-3 sm:px-4">
                   <LanguageSwitcher />
                 </div>
 
-                <div className="px-4">
+                <div className="px-3 sm:px-4">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -396,7 +396,7 @@ const Navigation: React.FC = () => {
                     <Link
                       to="/login"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="relative w-full px-4 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium rounded-xl hover:from-purple-600 hover:to-blue-600 transition-all duration-300 text-center overflow-hidden group"
+                      className="relative w-full px-3 py-2 sm:px-4 sm:py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm sm:text-base font-medium rounded-xl hover:from-purple-600 hover:to-blue-600 transition-all duration-300 text-center overflow-hidden group"
                     >
                       {/* Button Glow Effect */}
 
