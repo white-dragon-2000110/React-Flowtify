@@ -357,14 +357,14 @@ const Home: React.FC = () => {
             </motion.p>
 
             {/* Floating Sparkles between title and video */}
-            <div className="relative h-20 w-full mb-8">
+            <div className="relative h-20 w-2/3 mx-auto mb-8">
               <FloatingSparkles
                 id="hero-floating-sparkles"
-                particleColor="#8B5CF6"
-                particleCount={80}
+                particleColor="#FFFFFF"
+                particleCount={60}
                 speed={0.3}
-                size={1.2}
-                className="opacity-60"
+                size={1.8}
+                className="opacity-80"
               />
             </div>
 
@@ -434,14 +434,14 @@ const Home: React.FC = () => {
               </p>
 
               {/* Floating Sparkles between title and video */}
-              <div className="relative h-16 w-full mb-8">
+              <div className="relative h-16 w-2/3 mx-auto mb-8">
                 <FloatingSparkles
                   id="superpowers-floating-sparkles"
-                  particleColor="#06B6D4"
-                  particleCount={60}
+                  particleColor="#FFFFFF"
+                  particleCount={50}
                   speed={0.4}
-                  size={1.0}
-                  className="opacity-50"
+                  size={1.6}
+                  className="opacity-75"
                 />
               </div>
 
@@ -596,6 +596,18 @@ const Home: React.FC = () => {
                 {homeData.scale.subtitle}
               </p>
 
+              {/* Floating Sparkles between title and video */}
+              <div className="relative h-16 w-2/3 mx-auto mb-8">
+                <FloatingSparkles
+                  id="scale-floating-sparkles"
+                  particleColor="#FFFFFF"
+                  particleCount={55}
+                  speed={0.35}
+                  size={1.7}
+                  className="opacity-75"
+                />
+              </div>
+
               {/* Scale Video - Positioned between subtitle and feature cards */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -685,14 +697,14 @@ const Home: React.FC = () => {
               </p>
 
               {/* Floating Sparkles between title and content */}
-              <div className="relative h-12 w-full mb-6">
+              <div className="relative h-12 w-2/3 mx-auto mb-6">
                 <FloatingSparkles
                   id="integrations-floating-sparkles"
-                  particleColor="#10B981"
-                  particleCount={40}
+                  particleColor="#FFFFFF"
+                  particleCount={35}
                   speed={0.2}
-                  size={0.8}
-                  className="opacity-40"
+                  size={1.5}
+                  className="opacity-70"
                 />
               </div>
 
@@ -1082,6 +1094,18 @@ const Home: React.FC = () => {
                   {homeData.dataProtection.subtitle}
                 </p>
 
+                {/* Floating Sparkles between title and nolose video */}
+                <div className="relative h-12 w-2/3 mx-auto mb-6">
+                  <FloatingSparkles
+                    id="nolose-floating-sparkles"
+                    particleColor="#FFFFFF"
+                    particleCount={35}
+                    speed={0.3}
+                    size={1.6}
+                    className="opacity-70"
+                  />
+                </div>
+
                 {/* Never Lose Information Video */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -1195,6 +1219,18 @@ const Home: React.FC = () => {
                 <p className="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 px-4 sm:px-6 md:px-8 max-w-2xl mx-auto">
                   {homeData.security.subtitle}
                 </p>
+
+                {/* Floating Sparkles between title and security image */}
+                <div className="relative h-12 w-2/3 mx-auto mb-6">
+                  <FloatingSparkles
+                    id="security-floating-sparkles"
+                    particleColor="#FFFFFF"
+                    particleCount={40}
+                    speed={0.3}
+                    size={1.7}
+                    className="opacity-75"
+                  />
+                </div>
 
                 {/* Security Image - Positioned between title and feature cards */}
                 <motion.div
@@ -1321,14 +1357,14 @@ const Home: React.FC = () => {
               </p>
 
               {/* Floating Sparkles between title and video */}
-              <div className="relative h-16 w-full mb-8">
+              <div className="relative h-16 w-2/3 mx-auto mb-8">
                 <FloatingSparkles
                   id="results-floating-sparkles"
-                  particleColor="#F59E0B"
-                  particleCount={70}
+                  particleColor="#FFFFFF"
+                  particleCount={60}
                   speed={0.3}
-                  size={1.1}
-                  className="opacity-55"
+                  size={1.8}
+                  className="opacity-75"
                 />
               </div>
 
@@ -1406,14 +1442,14 @@ const Home: React.FC = () => {
               </p>
 
               {/* Floating Sparkles between title and content */}
-              <div className="relative h-14 w-full mb-8">
+              <div className="relative h-14 w-2/3 mx-auto mb-8">
                 <FloatingSparkles
                   id="pricing-floating-sparkles"
-                  particleColor="#EC4899"
-                  particleCount={50}
+                  particleColor="#FFFFFF"
+                  particleCount={45}
                   speed={0.25}
-                  size={0.9}
-                  className="opacity-45"
+                  size={1.6}
+                  className="opacity-70"
                 />
               </div>
 
@@ -1590,6 +1626,18 @@ const Home: React.FC = () => {
                   {homeData.vision.description}
                 </p>
 
+                {/* Floating Sparkles between title and world video */}
+                <div className="relative h-16 w-2/3 mx-auto mb-8">
+                  <FloatingSparkles
+                    id="vision-floating-sparkles"
+                    particleColor="#FFFFFF"
+                    particleCount={60}
+                    speed={0.4}
+                    size={1.8}
+                    className="opacity-80"
+                  />
+                </div>
+
                 {/* Vision Image */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -1694,14 +1742,14 @@ const Home: React.FC = () => {
               </motion.p>
 
               {/* Floating Sparkles between title and video */}
-              <div className="relative h-12 w-full mb-6">
+              <div className="relative h-12 w-2/3 mx-auto mb-6">
                 <FloatingSparkles
                   id="contact-floating-sparkles"
-                  particleColor="#8B5CF6"
-                  particleCount={35}
+                  particleColor="#FFFFFF"
+                  particleCount={30}
                   speed={0.2}
-                  size={0.7}
-                  className="opacity-35"
+                  size={1.5}
+                  className="opacity-70"
                 />
               </div>
 

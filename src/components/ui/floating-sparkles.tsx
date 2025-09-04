@@ -86,19 +86,19 @@ export const FloatingSparkles: React.FC<FloatingSparklesProps> = ({
 
         // Draw particle with glow effect
         ctx.save();
-        ctx.globalAlpha = finalOpacity * 0.3;
+        ctx.globalAlpha = finalOpacity * 0.4;
         ctx.fillStyle = particleColor;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 15;
         ctx.shadowColor = particleColor;
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, particle.size * 3, 0, Math.PI * 2);
         ctx.fill();
         
         // Draw main particle
         ctx.globalAlpha = finalOpacity;
         ctx.shadowBlur = 0;
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, particle.size * 1.5, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       });
