@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import createGlobe from "cobe";
 import type { COBEOptions } from "cobe";
 import { useMotionValue, useSpring } from "motion/react";
 import { useRef } from "react";
-import DottedMap from "dotted-map";
 
 import RequestDemoButton from '../components/RequestDemoButton';
 import { Vortex } from '../components/Vortex';
@@ -13,6 +12,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import FeatureSection from '../components/FeatureSection';
 import { cn } from "../lib/utils";
 import { Marquee } from "../components/magicui/marquee";
+import { FloatingSparkles } from "../components/ui/floating-sparkles";
 
 // Globe Component
 const MOVEMENT_DAMPING = 1400;
@@ -135,167 +135,6 @@ function Globe({
 
 
 
-// World Map Component
-interface MapProps {
-  dots?: Array<{
-    start: { lat: number; lng: number; label?: string };
-    end: { lat: number; lng: number; label?: string };
-  }>;
-  lineColor?: string;
-}
-
-function WorldMap({
-  dots = [],
-  lineColor = "#0ea5e9",
-}: MapProps) {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const map = useMemo(() => new DottedMap({ height: 80, grid: "diagonal" }), []);
-
-  const svgMap = useMemo(() => map.getSVG({
-    radius: 0.18,
-    color: "#bec1c7",
-    shape: "circle",
-    backgroundColor: "black",
-  }), [map]);
-
-  const projectPoint = (lat: number, lng: number) => {
-    const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
-    return { x, y };
-  };
-
-  const createCurvedPath = (
-    start: { x: number; y: number },
-    end: { x: number; y: number }
-  ) => {
-    const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
-    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
-  };
-
-  return (
-    <div className="w-full aspect-[2/1] bg-black rounded-lg relative font-sans">
-      <img
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
-        alt="world map"
-        height="495"
-        width="1056"
-        draggable={false}
-      />
-      <svg
-        ref={svgRef}
-        viewBox="0 0 800 400"
-        className="w-full h-full absolute inset-0 pointer-events-none select-none"
-      >
-        {dots.map((dot, i) => {
-          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
-          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
-          return (
-            <g key={`path-group-${i}`}>
-              <motion.path
-                d={createCurvedPath(startPoint, endPoint)}
-                fill="none"
-                stroke="url(#path-gradient)"
-                strokeWidth="1"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.3 * i,
-                  ease: "easeOut",
-                }}
-                key={`start-upper-${i}`}
-              ></motion.path>
-            </g>
-          );
-        })}
-
-        <defs>
-          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-
-        {dots.map((dot, i) => (
-          <g key={`points-group-${i}`}>
-            <g key={`start-${i}`}>
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
-              />
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="6"
-                  dur="2s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="2s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
-            <g key={`end-${i}`}>
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
-              />
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="6"
-                  dur="2s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="2s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </g>
-          </g>
-        ))}
-      </svg>
-    </div>
-  );
-}
 
 // Import data
 import homeDataRaw from '../data/home.json';
@@ -479,11 +318,11 @@ const Home: React.FC = () => {
         <section id="home" className="relative bg-[#000008] pb-16 pt-10 flex items-start justify-center overflow-hidden">
           {/* Vortex Background Animation */}
           <Vortex
-            backgroundColor="rgb(0, 0, 12)"
+            backgroundColor="transparent"
             rangeY={800}
             particleCount={500}
             baseHue={270}
-            className="absolute inset-0"
+            className="absolute inset-0 opacity-100"
           />
 
           <div className="relative z-10 text-center text-white px-4 pt-5 sm:pt-10 md:pt-16 lg:pt-20 xl:pt-24">
@@ -516,6 +355,18 @@ const Home: React.FC = () => {
             >
               {homeData.hero.description}
             </motion.p>
+
+            {/* Floating Sparkles between title and video */}
+            <div className="relative h-20 w-full mb-8">
+              <FloatingSparkles
+                id="hero-floating-sparkles"
+                particleColor="#8B5CF6"
+                particleCount={80}
+                speed={0.3}
+                size={1.2}
+                className="opacity-60"
+              />
+            </div>
 
             {/* Hero Video */}
             <motion.div
@@ -581,6 +432,18 @@ const Home: React.FC = () => {
               <p className="text-xl text-white max-w-3xl mx-auto mb-12">
                 {homeData.superpowers.subtitle}
               </p>
+
+              {/* Floating Sparkles between title and video */}
+              <div className="relative h-16 w-full mb-8">
+                <FloatingSparkles
+                  id="superpowers-floating-sparkles"
+                  particleColor="#06B6D4"
+                  particleCount={60}
+                  speed={0.4}
+                  size={1.0}
+                  className="opacity-50"
+                />
+              </div>
 
               {/* Superpowers Video - Positioned between title and cards */}
               <motion.div
@@ -820,6 +683,18 @@ const Home: React.FC = () => {
               <p className="text-base sm:text-lg md:text-xl text-white max-w-2xl sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
                 {homeData.integrations.subtitle}
               </p>
+
+              {/* Floating Sparkles between title and content */}
+              <div className="relative h-12 w-full mb-6">
+                <FloatingSparkles
+                  id="integrations-floating-sparkles"
+                  particleColor="#10B981"
+                  particleCount={40}
+                  speed={0.2}
+                  size={0.8}
+                  className="opacity-40"
+                />
+              </div>
 
               {/* Mobile Logos - Visible only on Mobile */}
               <div className="md:hidden mb-6 flex justify-center">
@@ -1445,6 +1320,18 @@ const Home: React.FC = () => {
                 {homeData.results.subtitle}
               </p>
 
+              {/* Floating Sparkles between title and video */}
+              <div className="relative h-16 w-full mb-8">
+                <FloatingSparkles
+                  id="results-floating-sparkles"
+                  particleColor="#F59E0B"
+                  particleCount={70}
+                  speed={0.3}
+                  size={1.1}
+                  className="opacity-55"
+                />
+              </div>
+
               {/* Flow Video */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -1517,6 +1404,18 @@ const Home: React.FC = () => {
               <p className="text-xl text-white max-w-3xl mx-auto mb-8">
                 {homeData.pricing.subtitle}
               </p>
+
+              {/* Floating Sparkles between title and content */}
+              <div className="relative h-14 w-full mb-8">
+                <FloatingSparkles
+                  id="pricing-floating-sparkles"
+                  particleColor="#EC4899"
+                  particleCount={50}
+                  speed={0.25}
+                  size={0.9}
+                  className="opacity-45"
+                />
+              </div>
 
               {/* Spacer for more distance between title and video */}
               <div className="h-8 sm:h-12 md:h-16 lg:h-20"></div>
@@ -1793,6 +1692,18 @@ const Home: React.FC = () => {
               >
                 {homeData.contact.description}
               </motion.p>
+
+              {/* Floating Sparkles between title and video */}
+              <div className="relative h-12 w-full mb-6">
+                <FloatingSparkles
+                  id="contact-floating-sparkles"
+                  particleColor="#8B5CF6"
+                  particleCount={35}
+                  speed={0.2}
+                  size={0.7}
+                  className="opacity-35"
+                />
+              </div>
 
               {/* Connect Video Component */}
               <motion.div
