@@ -209,10 +209,13 @@ const Navigation: React.FC = () => {
             }}
             className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200 cursor-pointer relative z-10"
           >
-            <img
-              src="/logo.png"
-              alt="Flowtify"
-              className="h-8 w-8 sm:h-[35px] sm:w-[35px] object-contain pointer-events-none"
+            <video
+              src="/LOGOV2.webm"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-14 w-14 sm:h-[70px] sm:w-[70px] object-contain pointer-events-none"
             />
             <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent pointer-events-none">
               Flowtify

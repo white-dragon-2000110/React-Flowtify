@@ -824,15 +824,13 @@ const Home: React.FC = () => {
               {/* Mobile Logos - Visible only on Mobile */}
               <div className="md:hidden mb-6 flex justify-center">
                 <div className="relative">
-                  <img
-                    src="/video/logo.gif"
-                    alt="Flowtify Logo Background"
+                  <video
+                    src="/LOGOV3.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className="w-32 h-32 object-contain"
-                  />
-                  <img
-                    src="/logo.png"
-                    alt="Flowtify Logo"
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 object-contain"
                   />
                 </div>
               </div>
@@ -850,17 +848,15 @@ const Home: React.FC = () => {
                 </div>
 
                 {/* Central Logo */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 mt-4 pointer-events-none hidden sm:block">
                   <div className="relative">
-                    <img
-                      src="/video/logo.gif"
-                      alt="Flowtify Logo Background"
+                    <video
+                      src="/LOGOV3.webm"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
                       className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
-                    />
-                    <img
-                      src="/logo.png"
-                      alt="Flowtify Logo"
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
                     />
                   </div>
                 </div>
@@ -897,8 +893,15 @@ const Home: React.FC = () => {
                       {/* Slack */}
                       <div className="text-center">
                         <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6 15a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-6 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm6 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 2447.6 2452.5">
+                            <title>Slack Logo</title>
+                            <desc>Slack-style hashtag logo with four bars in white.</desc>
+                            <g>
+                              <path fill="white" d="M630.2 0C491.6 0 379 112.6 379 251.2s112.6 251.2 251.2 251.2h251.2V251.2C881.4 112.6 768.8 0 630.2 0zM630.2 629.2H251.2C112.6 629.2 0 741.8 0 880.4s112.6 251.2 251.2 251.2h379c138.6 0 251.2-112.6 251.2-251.2s-112.6-251.2-251.2-251.2z"/>
+                              <path fill="white" d="M2447.6 880.4c0-138.6-112.6-251.2-251.2-251.2s-251.2 112.6-251.2 251.2v251.2h251.2c138.6 0 251.2-112.6 251.2-251.2zM1818.6 880.4V251.2c0-138.6-112.6-251.2-251.2-251.2s-251.2 112.6-251.2 251.2v629.2c0 138.6 112.6 251.2 251.2 251.2s251.2-112.6 251.2-251.2z"/>
+                              <path fill="white" d="M1818.6 2452.5c138.6 0 251.2-112.6 251.2-251.2s-112.6-251.2-251.2-251.2h-251.2v251.2c0 138.6 112.6 251.2 251.2 251.2zM1818.6 1823.5h379c138.6 0 251.2-112.6 251.2-251.2s-112.6-251.2-251.2-251.2h-379c-138.6 0-251.2 112.6-251.2 251.2s112.6 251.2 251.2 251.2z"/>
+                              <path fill="white" d="M0 1602.3c0 138.6 112.6 251.2 251.2 251.2s251.2-112.6 251.2-251.2v-251.2H251.2C112.6 1351.1 0 1463.7 0 1602.3zM629 1602.3v629c0 138.6 112.6 251.2 251.2 251.2s251.2-112.6 251.2-251.2v-629c0-138.6-112.6-251.2-251.2-251.2s-251.2 112.6-251.2 251.2z"/>
+                            </g>
                           </svg>
                         </div>
                         <span className="text-xs text-white">Slack</span>
@@ -906,8 +909,14 @@ const Home: React.FC = () => {
                       {/* Notion */}
                       <div className="text-center">
                         <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 19h16V5H4v14zm2-2h12V7H6v10zm-1-9h2v2H5V8zm0 4h2v2H5v-2zm4-4h2v2H9V8zm0 4h2v2H9v-2zm4-4h2v2h-2V8zm0 4h2v2h-2v-2z" />
+                          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 256 256" role="img" aria-label="Notion logo - flat">
+                            {/* Outer square with thick border */}
+                            <rect x="20" y="20" width="216" height="216" rx="20" fill="#000" stroke="#fff" strokeWidth="18"/>
+                            {/* Inner border for that Notion double-line feel */}
+                            <rect x="36" y="36" width="184" height="184" rx="14" fill="#000" stroke="#fff" strokeWidth="10"/>
+
+                            {/* Stylized 'N' (paths, no fonts) */}
+                            <path d="M80 188V68h24l48 72V68h24v120h-24l-48-72v72H80z" fill="#fff"/>
                           </svg>
                         </div>
                         <span className="text-xs text-white">Notion</span>
@@ -936,8 +945,19 @@ const Home: React.FC = () => {
                       {/* Make */}
                       <div className="text-center">
                         <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+                            <title id="title">Make logo</title>
+                            <desc id="desc">Official Make automation platform logo — three vertical rounded bars in magenta to purple gradient, leaning forward.</desc>
+
+                            {/* Three bars */}
+                            <g fill="white" transform="skewX(-10)">
+                              {/* Left bar */}
+                              <rect x="80" y="80" width="80" height="352" rx="20"/>
+                              {/* Middle bar */}
+                              <rect x="216" y="80" width="80" height="352" rx="20"/>
+                              {/* Right bar */}
+                              <rect x="352" y="80" width="80" height="352" rx="20"/>
+                            </g>
                           </svg>
                         </div>
                         <span className="text-xs text-white">Make</span>
@@ -970,8 +990,12 @@ const Home: React.FC = () => {
                       {/* Trello */}
                       <div className="text-center">
                         <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h12V5H6z" />
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 512 512" role="img" aria-label="Trello logo">
+                            {/* Left card (shorter) */}
+                            <rect x="112" y="96" width="112" height="240" rx="24" fill="#fff"/>
+                            
+                            {/* Right card (taller) */}
+                            <rect x="288" y="96" width="112" height="336" rx="24" fill="#fff"/>
                           </svg>
                         </div>
                         <span className="text-xs text-white">Trello</span>
@@ -1354,6 +1378,24 @@ const Home: React.FC = () => {
                 {homeData.results.subtitle}
               </p>
 
+              {/* Flow Video */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="mb-8 sm:mb-12 relative w-full max-w-2xl sm:max-w-3xl md:max-w-4xl mx-auto px-4"
+              >
+                <video
+                  src="/video/flow.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto rounded-lg shadow-2xl"
+                />
+              </motion.div>
+
               <FeatureSection
                 features={[
                   {
@@ -1470,7 +1512,7 @@ const Home: React.FC = () => {
 
                   {/* Additional Pricing Information */}
                   <div className="max-w-2xl mx-auto relative z-40">
-                    <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3 mt-[160px]">
+                    <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3 mt-[160px] px-[130px]">
                       {homeData.pricing.commitment}
                     </p>
                     <p className="text-white text-sm sm:text-base leading-relaxed mb-2 sm:mb-3">
@@ -1590,9 +1632,12 @@ const Home: React.FC = () => {
                   viewport={{ once: true }}
                   className="mt-8 w-full max-w-4xl mx-auto px-4"
                 >
-                  <img
-                    src="/video/end.gif"
-                    alt="Our Vision"
+                  <video
+                    src="/video/world.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className="w-1/2 h-auto max-h-[25.5vh] sm:max-h-[15vh] md:max-h-[25.5vh] object-cover rounded-lg shadow-2xl mx-auto mt-20"
                   />
                 </motion.div>
@@ -1682,7 +1727,7 @@ const Home: React.FC = () => {
                 {homeData.contact.description}
               </motion.p>
 
-              {/* World Map Component */}
+              {/* Connect Video Component */}
               <motion.div
                 className="mb-8 sm:mb-10 md:mb-12 max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-2 sm:px-4 md:px-8 lg:px-16 xl:px-[100px]"
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -1690,13 +1735,13 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <WorldMap
-                  dots={[
-                    { start: { lat: 40.7128, lng: -74.006 }, end: { lat: 51.5074, lng: -0.1278 } },
-                    { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 35.6762, lng: 139.6503 } },
-                    { start: { lat: 35.6762, lng: 139.6503 }, end: { lat: 19.076, lng: 72.8777 } }
-                  ]}
-                  lineColor="#0ea5e9"
+                <video
+                  src="/video/connect.webm"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto rounded-lg"
                 />
               </motion.div>
 
