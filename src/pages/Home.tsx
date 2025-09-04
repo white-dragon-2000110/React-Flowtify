@@ -972,8 +972,22 @@ const Home: React.FC = () => {
                       {/* HubSpot */}
                       <div className="text-center">
                         <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-white rounded-lg flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                          <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 32 32">
+                            {/* central hub */}
+                            <circle cx="16" cy="16" r="5" fill="white"/>
+                            {/* spokes */}
+                            <g stroke="white" strokeWidth="3" strokeLinecap="round" fill="none">
+                              {/* up */}
+                              <line x1="16" y1="11" x2="16" y2="4"/>
+                              {/* right */}
+                              <line x1="21" y1="16" x2="28" y2="16"/>
+                              {/* up-left */}
+                              <line x1="13" y1="13" x2="7" y2="8"/>
+                            </g>
+                            {/* terminal nodes */}
+                            <circle cx="16" cy="4" r="2" fill="white"/>
+                            <circle cx="28" cy="16" r="2" fill="white"/>
+                            <circle cx="7" cy="8" r="2" fill="white"/>
                           </svg>
                         </div>
                         <span className="text-xs text-white">HubSpot</span>
@@ -1052,8 +1066,61 @@ const Home: React.FC = () => {
                   >
                     <div className="flex flex-col items-center justify-center mb-4">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 border-2 border-white rounded-lg flex items-center justify-center mb-2">
-                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        <svg className="w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 512 512" aria-labelledby="title desc" role="img">
+                          <title id="title">Calendly-style calendar icon</title>
+                          <desc id="desc">Rounded calendar square with two tabs and a bold letter C in the center, blue gradient with subtle shadow.</desc>
+
+                          {/* Drop shadow filter */}
+                          <defs>
+                            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                              <stop offset="0" stopColor="#2DA2FF"/>
+                              <stop offset="1" stopColor="#1877D1"/>
+                            </linearGradient>
+
+                            <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+                              <feDropShadow dx="0" dy="10" stdDeviation="18" floodColor="#0b2540" floodOpacity="0.35"/>
+                            </filter>
+
+                            {/* subtle inner glow */}
+                            <filter id="innerGlow">
+                              <feGaussianBlur stdDeviation="6" result="blur"/>
+                              <feComposite in="SourceGraphic" in2="blur" operator="arithmetic" k2="-1" k3="1" result="inner"/>
+                              <feMerge><feMergeNode in="inner"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+
+                            {/* Rounded rectangle path for reuse */}
+                            <path id="tilePath" d="M64 128c0-22.091 17.909-40 40-40h304c22.091 0 40 17.909 40 40v240c0 22.091-17.909 40-40 40H104c-22.091 0-40-17.909-40-40V128z"/>
+                          </defs>
+
+                          {/* Outer container (no background) */}
+                          <g>
+                            <use href="#tilePath" fill="none"/>
+                          </g>
+
+                          {/* Inner white cut / border */}
+                          <use href="#tilePath" fill="none" stroke="#FFFFFF" strokeOpacity="0.06" strokeWidth="2"/>
+
+                          {/* Top tabs */}
+                          <g transform="translate(0,-8)">
+                            <rect x="132" y="64" rx="18" ry="18" width="48" height="28" fill="#ffffff" fillOpacity="0.12"/>
+                            <rect x="332" y="64" rx="18" ry="18" width="48" height="28" fill="#ffffff" fillOpacity="0.12"/>
+                          </g>
+
+                          {/* Inner lighter panel for depth */}
+                          <path d="M84 154c0-6.627 5.373-12 12-12h320c6.627 0 12 5.373 12 12v208c0 6.627-5.373 12-12 12H96c-6.627 0-12-5.373-12-12V154z"
+                                fill="rgba(255,255,255,0.06)" />
+
+                          {/* Big C letter */}
+                          <g transform="translate(0,6)">
+                            <path d="M256 196c-36.44 0-66 29.56-66 66s29.56 66 66 66c20.87 0 39.53-9.39 51.94-24.23 4.06-4.79 3.12-12.01-1.67-16.08-4.79-4.06-12.01-3.12-16.08 1.67-9.5 11.22-23.78 18.64-38.19 18.64-27.62 0-50-22.38-50-50s22.38-50 50-50c12.68 0 24.18 4.65 33.01 12.62 4.69 4.03 11.75 3.48 15.78-1.2 4.03-4.69 3.48-11.75-1.2-15.78C300.95 202.09 279.37 196 256 196z"
+                                  fill="#FFFFFF" filter="url(#innerGlow)" opacity="0.98"/>
+                          </g>
+
+                          {/* Tiny overlay highlight (subtle) */}
+                          <path d="M96 142h320v6H96z" fill="#ffffff" fillOpacity="0.02"/>
+
+                          {/* Accessibility: invisible background for hit area if used as button */}
+                          <rect x="0" y="0" width="512" height="512" fill="transparent" />
                         </svg>
                       </div>
                       <span className="text-xs text-white">Calendly</span>
